@@ -10,21 +10,23 @@ LATEX=pdflatex
 # The BibTeX compiler
 BIBTEX=biber
 # Dependencies of the main
-DEPS := $(wildcard chapters/*.tex) \
-		$(wildcard FrontPage/*.tex)
+DEPS := $(wildcard Chapters/*.tex) \
+		$(wildcard FrontPage/*.tex) \
+		preamble.tex \
+		Bibliography.bib
+
 # Default target
 all: $(PDF)
 
 # Rule to make the PDF
-$(PDF): $(MAIN).tex
+$(PDF): $(MAIN).tex $(DEPS)
 	$(LATEX) $(MAIN)
 	$(BIBTEX) $(MAIN)
 	$(LATEX) $(MAIN)
-	$(LATEX) $(MAIN)
 
-# Clean up auxiliary files
+# Clean up auxiliary files and the pdf
 clean:
-	rm -f *.aux *.bbl *.blg *.log *.toc $(MAIN).out $(MAIN).lof $(MAIN).lot
-
+	rm -f *.aux *.bbl *.blg *.bcf *.run.xml *.log *.toc $(MAIN).out $(MAIN).lof $(MAIN).lot \
+	main.pdf
 # Phony targets
 .PHONY: all clean

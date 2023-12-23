@@ -3,6 +3,7 @@
 
 \usepackage[ansinew]{inputenc}
 % \usepackage[spanish]{babel} &I am not actually writing in spanish
+\usepackage[T1]{fontenc}
 \usepackage{fancyhdr}
 \usepackage{epsfig}
 \usepackage{epic}
@@ -16,13 +17,22 @@
 \usepackage{tabularx}
 \usepackage{subfigure}
 \usepackage{epigraph}
+\usepackage{braket} %Dirac Notation
 \usepackage{longtable}
 %Configure the bibliography
-\usepackage[backend=biber, style=nature]{biblatex}
+\usepackage[backend=biber, style=numeric,eprint=false, isbn=false, doi=false, clearlang=true, url=false]{biblatex}
+%Prevent the note in the bib from printing
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldset=note, null]
+    }
+  }
+}
+%% Print the bibliography with the desired fields and order:
 \addbibresource{Bibliography.bib}
 \nocite{*}
 % \bibliographystyle{plaindin_esp}
-
 
 \usepackage{rotating} %Para rotar texto, objetos y tablas seite. No se ve en DVI solo en PS. Seite 328 Hundebuch
                         %se usa junto con \rotate, \sidewidestable ....
@@ -31,6 +41,11 @@
 \renewcommand{\theequation}{\thechapter-\arabic{equation}}
 \renewcommand{\thefigure}{\textbf{\thechapter-\arabic{figure}}}
 \renewcommand{\thetable}{\textbf{\thechapter-\arabic{table}}}
+%Define theorem environments
+\newtheorem{definition}{Definition}
+%%%%%%%%%%%%%%%%%%%%%%%%Useful for writing Dirac Notation more efficiently
+\newcommand{\ketbra}[1]{\ket{#1}\hspace{-0.1cm}\bra{#1}}
+\newcommand{\expectation}[2]{\bra{#1}\hspace{-0.05cm}#2\hspace{-0.05cm}\ket{#1}}
 
 
 \pagestyle{fancyplain}%\addtolength{\headwidth}{\marginparwidth}
