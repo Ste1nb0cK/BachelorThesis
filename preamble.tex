@@ -1,5 +1,5 @@
 % THIS IS THE FILE WITH THE PREAMBLE
-\documentclass[12pt, fleqn,openany,letterpaper,pagesize]{scrbook}
+\documentclass[12pt,openany,letterpaper,pagesize]{scrbook}
 
 \usepackage[ansinew]{inputenc}
 % \usepackage[spanish]{babel} &I am not actually writing in spanish
@@ -19,6 +19,7 @@
 \usepackage{epigraph}
 \usepackage{braket} %Dirac Notation
 \usepackage{longtable}
+\usepackage{hyperref} %Hyperlinks in the document
 %Configure the bibliography
 \usepackage[backend=biber, style=numeric,eprint=false, isbn=false, doi=false, clearlang=true, url=false]{biblatex}
 %Prevent the note in the bib from printing
@@ -31,22 +32,23 @@
 }
 %% Print the bibliography with the desired fields and order:
 \addbibresource{Bibliography.bib}
-\nocite{*}
+% \nocite{*}
 % \bibliographystyle{plaindin_esp}
 
 \usepackage{rotating} %Para rotar texto, objetos y tablas seite. No se ve en DVI solo en PS. Seite 328 Hundebuch
                         %se usa junto con \rotate, \sidewidestable ....
 
 
-\renewcommand{\theequation}{\thechapter-\arabic{equation}}
-\renewcommand{\thefigure}{\textbf{\thechapter-\arabic{figure}}}
-\renewcommand{\thetable}{\textbf{\thechapter-\arabic{table}}}
+%\renewcommand{\theequation}{\thechapter-\arabic{equation}}
+%\renewcommand{\thefigure}{\textbf{\thechapter-\arabic{figure}}}
+%\renewcommand{\thetable}{\textbf{\thechapter-\arabic{table}}}
 %Define theorem environments
 \newtheorem{definition}{Definition}
 %%%%%%%%%%%%%%%%%%%%%%%%Useful for writing Dirac Notation more efficiently
 \newcommand{\ketbra}[1]{\ket{#1}\hspace{-0.1cm}\bra{#1}}
 \newcommand{\expectation}[2]{\bra{#1}\hspace{-0.05cm}#2\hspace{-0.05cm}\ket{#1}}
-
+%%%%% Define the trace
+\newcommand{\Tr}[1]{\mathrm{Tr}[#1]}
 
 \pagestyle{fancyplain}%\addtolength{\headwidth}{\marginparwidth}
 \textheight22.5cm \topmargin0cm \textwidth16.5cm
@@ -61,7 +63,7 @@
 
 \addtolength{\headwidth}{0cm}
 \unitlength1mm %Define la unidad LE para Figuras
-\mathindent0cm %Define la distancia de las formulas al texto,  fleqn las descentra
+% \mathindent0cm %Define la distancia de las formulas al texto,  fleqn las descentra
 \marginparwidth0cm
 \parindent0cm %Define la distancia de la primera linea de un parrafo a la margen
 

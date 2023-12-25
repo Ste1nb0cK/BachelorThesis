@@ -1,13 +1,15 @@
 \chapter{The Language of Quantum Information Theory}
-% \bibliography{~/Documents/Research/ThesisCode/Bibliography.bib}
+% Section on density operator
 \section{Density Operators}
+%%%%%%%%%%Postulates of Quantum Mechanics
+\subsection{Postulates of Quantum Mechanics}
 We begin by stating the a common axiomatization of Quantum Mechanics (QM) based on Hilbert Spaces following \cite{ballentine_quantum_2014}, we choose it for mathematical simplicity; for alternatives see e.g. \cite{reyes-lega_aspects_2015}.
 \begin{enumerate}
-        \item To each physical system $\mathcal{S}$ there corresponds a Hilbert Space $\mathcal{H}$ and states of the system are described by positive and unit trace operators. The Hilbert Space of a composite system made up of $\mathcal{S}$ and $\mathcal{S}'$
-        is given by the tensor product of the Hilbert spaces i.e. $\mathcal{H}\otimes\mathcal{H}'$.
+        \item To each physical system $\mathcal{S}$ there corresponds a separable Hilbert Space $\mathcal{H}$ such that states of the system are described by positive and unit trace operators on it. The Hilbert Space of a composite system made up of $\mathcal{S}$ and $\mathcal{S}'$
+        is given by the tensor product of the Hilbert spaces $\mathcal{H}\otimes\mathcal{H}'$.
         \item To each dynamical variable there corresponds a self-adjoint operator on $\mathcal{H}$, called an observable, whose possible
         values are given by its eigenvalues.
-        \item Given a system in a state $\rho$ and some observable $A$ of it, the probability of measuring $A$ and obtaining the result
+        \item Given a system in  state $\rho$ and some observable $A$ of it, the probability of measuring $A$ and obtaining the result
         $\lambda$ is given by $\mathrm{Tr}[\rho P_{\lambda}]$ where $P_{\lambda}$ is the eigen-projector into the subspace associated with
         $\lambda$. Furthermore the expectation value is $\mathrm{Tr}[\rho A]$.
         \item After a measurement with result $\lambda$ the state of the system becomes $\frac{P_{\lambda}\rho P_{\lambda}}{\mathrm{Tr}[P_{\lambda}\rho
@@ -29,6 +31,80 @@ This \textbf{\textit{Ensemble Interpretation}} has serious conceptual challenges
 fixed preparation procedure due to the non-uniqueness of the decomposition into pure states \cite{nielsen_quantum_2010},
 but is good enough for the porposes of the present work, for a comprehensive discussion of this
 topic the reader is refered to \cite{schlosshauer_decoherence_2007}.
+%%%%%%%%%%%%%%Time evolution
+\subsection{Time Evolution}
+Assuming the evolution to be differentiable in time, we have that there exists a self-adjoint operator $H$ such that $U_{t} = \mathrm{exp}(-itH)$
+\footnote{Unless otherwise stated, from here on we assume $\hbar=1$}, called the \textbf{\textit{Hamiltonian}} of the systems and which
+acts as the generator of the dynamics. It is straightforward now to construct a differential equation for $\rho_{t}$ by taking the derivative
+of it:
+
+\begin{align}
+  \rho_{t}=& e^{-itH}\rho_{t}  e^{itH}\\
+  \partial_{t}\rho_{t} =& -iH\rho_{t} + \rho_{t}iH\\
+  \partial_{t}\rho_{t} =& -i[H, \rho_{t}]\label{eq:Liouville-VonNeumann}.
+\end{align}
+Equation \eqref{eq:Liouville-VonNeumann} is called the Liouville-Von Neumann equation, it generalizes the time-dependent Schr\"{o}dinger equation
+to mixed states and can be interpreted as the quantum analog of the Liouville equation in classical mechanics (with the Poisson braket) through
+the quantization rule $\{\bullet,\bullet\} \to -i[\bullet,\bullet]$. As will be seen in later chapters, this type of evolution is characteristic
+of closed quantum systems.
+%%%%%%%%%%Purity
+\subsection{Purity}
+Say we got a particular state production processes whose product $\rho$ we characterize via say tomography \cite{nielsen_quantum_2010}, it
+becomes immedeatley important to quantify to which extent we can regard the product as being composed of only one pure states
+(hopefully the one we wanted to prepare) i.e. we want to define the purity of the state, with this motivation one look for a map
+$\mathcal{E}$ from the space of density operators to the reals such that:
+\begin{itemize}
+        \item $\mathcal{E}(\rho)$ is maximal if and only if $\rho$ is pure.
+        \item it is conserved under unitary evolution.
+\end{itemize}
+The first one makes this map a figure of merit one can try to maximize and the second one is imposed to assure that it doesn't changes in a
+closed system unless a measurement is made, as allowing the free evolution of the system should not improve the knowledge of the
+experimenter about the system. The standard choiche (altough not the only one) is the \textit{\textbf{Purity}},
+defined as \cite{nielsen_quantum_2010, ballentine_quantum_2014}:
+\begin{definition}
+The purity $\gamma$ of a state $\rho$ is:
+  \begin{equation}
+    \gamma = \Tr{\rho^{2}}.\label{eq:definition_purity}
+  \end{equation}
+\end{definition}
+The requirements are quickly checked:
+\begin{align}
+  \Tr{\rho^{2}_{t}} =& \Tr{(U_{t}\rho_{0}U_{t}^{\dagger})(U_{t}\rho_{0}U_{t}^{\dagger})} = \Tr{\rho_{0}^{2}}\\
+  \Tr{\rho^{2}} =& \sum_{n}p_{n}^{2} \leq 1
+\end{align}
+in the second line the inequality is saturated if and only if $\rho=\ketbra{\psi}$.
+\section{Entanglement}
+One of the key differences between the structure of the state space of classical and quantum systems is the existance
+of non-separable states when considering multipartite systems \cite{reyes-lega_aspects_2015,diosi_short_2011,nielsen_quantum_2010} which allows
+the latter to have new a new type of correlations. Here we define entanglement for mixed states following \cite{diosi_short_2011}:
+
+\begin{definition}
+  Given a state $\rho$ in a system composed of two subsystems $A$ and $B$ with total Hilbert space $\mathcal{H}_{A}\otimes \mathcal{H}_{B}\}$, we say it is
+  an \textbf{\textit{entangled}} or \textit{\textbf{non-separable}} if there doesn't exists a set states $\{\rho_{j}\otimes \sigma_{k}\}_{jk}$ and of coefficients
+  $\{p_{jk}\}_{jk},  \sum_{jk}p_{jk}=1, \hspace{0.1cm} p_{jk}\geq 0$ such that:
+  \begin{equation}
+    \rho = \sum_{jk}p_{jk}\rho_{j}\otimes \sigma_{k}
+  \end{equation}
+  if it does exists, the state is called \textbf{\textit{separable}}.
+\end{definition}
+For the case of pure state this definition coincides with the usually given one \cite{nielsen_quantum_2010}: say $\rho=\ketbra{\psi}$ is pure and separable,
+then:
+\begin{equation}
+  \Tr{\rho^{2}} = \sum_{jklm}p_{jk}p_{lm}\Tr{\rho_{j}\rho_{l}}\Tr{\sigma_{k}\sigma_{m}}
+\end{equation}
+and by the Cauchy-Schwartz inequality with the Frobenious inner product
+\begin{equation}
+  \Tr{\rho^{2}} \leq \sum_{jklm}p_{jk}p_{lm}\Tr{\rho_{j}^{2}}\Tr{\rho_{l}^{2}}\Tr{\sigma_{k}^{2}}\Tr{\sigma_{m}^{2}} \leq 1
+\end{equation}
+the first inequality from right to left saturates if and only if all the $\rho_{j}$ and $\sigma_{k}$ are pure, and the first one if
+and only if all the $\rho_{j}$ and $\sigma_{k}$ are equal between themselves i.e. $p_{jl}=\delta_{0l}\delta_{0j}$. Hence there are pure states
+in $\mathcal{H}_{A}$ and $\mathcal{H}_{B}$ such that:
+\begin{equation}
+  \ketbra{\psi} = \ketbra{\alpha}\otimes\ketbra{\beta}.
+\end{equation}
+For a classical system all states are separable thanks to the representation via $\delta$ functions
+of probability densities \cite{diosi_short_2011} so it is a purely quantum phenomena, although it is remarked that there are non-classical
+correlations that do not require non-separability e.g. discord \cite{adesso2016introduction}.
 
 %%% Local Variables:
 %%% mode: latex
