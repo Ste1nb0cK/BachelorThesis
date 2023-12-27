@@ -43,7 +43,7 @@ of it:
   \partial_{t}\rho_{t} =& -iH\rho_{t} + \rho_{t}iH\\
   \partial_{t}\rho_{t} =& -i[H, \rho_{t}]\label{eq:Liouville-VonNeumann}.
 \end{align}
-Equation \eqref{eq:Liouville-VonNeumann} is called the Liouville-Von Neumann equation, it generalizes the time-dependent Schr\"{o}dinger equation
+Equation \eqref{eq:Liouville-VonNeumann} is called the Liouville-Von Neumann equation, it generalizes the  Schr\"{o}dinger equation
 to mixed states and can be interpreted as the quantum analog of the Liouville equation in classical mechanics (with the Poisson braket) through
 the quantization rule $\{\bullet,\bullet\} \to -i[\bullet,\bullet]$. As will be seen in later chapters, this type of evolution is characteristic
 of closed quantum systems.
@@ -174,23 +174,73 @@ in order:
         For proposals of suitable generalizations see \cite{reyes-lega_aspects_2015}.
 \end{enumerate}
 Despite this conceptual difficulties the partial trace remains a key tool in Quantum Information Theory for studying open systems and
-local operations. Next we explore one of its most promiment applications.
-\subsection{The Von Neumann Entropy}
-As can be seen in the study of Bell's inequalities in a two qubit system, not all entangled states show the same amount of violation of the
-inequalities, and it is not even true that non-separability is sufficient to violate them \cite{ballentine_quantum_2014}, thus not all entangled
-states are made equal and classifying them is a relevant task; to achieve this we introduce \textit{\textbf{Entanglement Measures}}, which
-quantify how strong this non-classical correlations is in a bipartite state.
-Following \cite{vedral1997quantifying} we demand from any proper measure:
+local operations.
+\section{Quantum Operations}
+Now that we have means of describing unitary evolutions and marginalizations we are in a position to describe the most general class
+of transformation a quantum system can undergo, the so called \textbf{\textit{Quantum Operations}}. In general we can describe any
+evolution of a system of interest ($S$), called from here on simply \textbf{\textit{the system}}, by asumming there exists another one called
+\textbf{\textit{the environment}} ($E$) that represents the rest of the universe, and whose degrees of freedom are undesirable in the
+description of the $S$; these scheme is called \textit{\textbf{S+E}} and the total hamiltonian is generically of the form
+$H = H_{S}\otimes I + I\otimes H_{E} + V$ where the coupling between the two is given by the last term \cite{wiseman_quantum_2010};
+for simplicity it is assumed the environment and the system are distinguishable \cite{breuer2002theory}. The whole point is this
+is to construct a non-unitary map describing the evolution of $S$ by evolving unitarily the whole and tracing over the environment:
 
-\begin{enumerate}
-        \item it is a map $\mathcal{E}:\mathcal{L}(\mathcal{H}_{A}\otimes\mathcal{H}_{B}) \to \mathds{R}^{+}$.
-        \item $\mathcal{E}(\rho)=0$ if and only if $\rho$ is separable.
-        \item Local unitary operations preserve $\mathcal{E}(\rho)=\mathcal{E}(U_{A}\otimes U_{B} \rho U_{A}^{\dagger}\otimes U_{B}^{\dagger} )$.
-  \item The entanglement can not be increased via classical communication or local measurements \footnote{for proper definitions of
-        these see \cite{diosi_short_2011, vedral1997quantifying}}.
-\end{enumerate}
-The first condition is just the basic requirement for a figure of merit, the second assures the measure identifies the absence of entanglement,
-and the last two that the two systems can not become correlated via operations that pertain to only one of them.
+\begin{equation}
+ \mathcal{E}_{t}(\rho_{0}) \equiv \Trp{E}{U_{t}\left(\rho_{0}\otimes \sigma\right)U_{t}^{\dagger}} = \rho_{t}
+\end{equation}
+\begin{figure}[h]
+ \centering
+\begin{tikzpicture}%[transform canvas={scale=1.3}]
+% Define colors
+\definecolor{colorenv}{HTML}{55795A}
+\definecolor{colorsys}{HTML}{7286D3}
+\definecolor{colorarrow}{HTML}{D99E30}
+
+  %%%%%%%%%%%%%%%%%5Commutation diagram
+  % Define nodes
+  \begin{scope}[local bounding box=drawA]
+  \node (A) at (0cm,0) {$\mathcal{H}_{S}$};
+   \node (B) at (5cm,0) {$\mathcal{H}_{S}$};
+  \node (C) at (0cm,-3.09cm) {$\mathcal{H}_{S}\otimes\mathcal{H}_{E}$};
+  \node (D) at (5cm,-3.09cm) {$\mathcal{H}_{S}\otimes\mathcal{H}_{E}$};
+  % Draw arrows
+   \draw[->] (A) -- (B) node[midway, above] {$\mathcal{E}_{t}$};
+  \draw[->] (A) -- (C) node[midway, left] {$\otimes \sigma$};
+  \draw[<-] (B) -- (D) node[midway, right] {$\mathrm{Tr}_{E}$};
+  \draw[->] (C) -- (D) node[midway, below] {$U_{t}\left(\bullet\otimes\sigma\right)U_{t}^{\dagger}$};
+\end{scope}
+\node[above left] at (drawA.north west) {a)};
+  \begin{scope}[local bounding box=drawB]
+  %%%%%%%%%%The circles
+  %Circles
+  \fill[color=colorenv] (10cm,-1.545cm) circle (2.3cm);
+
+  \fill[blue!40] (10cm,-1.545cm) circle (1cm);
+  %Marks
+  \node[text=white, anchor=east] (E) at (10cm,-1.545cm) {$\mathcal{H}_{S}$};
+  \node[text=white, anchor=east] (F) at (12cm,-0.5cm) {$\mathcal{H}_{E}$};
+   \draw[<->, line width=1.2pt, color=colorarrow, text=white] (E) -- (F) node[midway, above] {$V$};
+  \end{scope}
+ \node[above left] at (drawB.north west) {b)};
+\end{tikzpicture}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Von Neumann Entropu
+% \subsection{The Von Neumann Entropy}
+% As can be seen in the study of Bell's inequalities in a two qubit system, not all entangled states show the same amount of violation of the
+% inequalities, and it is not even true that non-separability is sufficient to violate them \cite{ballentine_quantum_2014}, thus not all entangled
+% states are made equal and classifying them is a relevant task; to achieve this we introduce \textit{\textbf{Entanglement Measures}}, which
+% quantify how strong this non-classical correlations is in a bipartite state.
+% Following \cite{vedral1997quantifying} we demand from any proper measure:
+
+% \begin{enumerate}
+%         \item it is a map $\mathcal{E}:\mathcal{L}(\mathcal{H}_{A}\otimes\mathcal{H}_{B}) \to \mathds{R}^{+}$.
+%         \item $\mathcal{E}(\rho)=0$ if and only if $\rho$ is separable.
+%         \item Local unitary operations preserve $\mathcal{E}(\rho)=\mathcal{E}(U_{A}\otimes U_{B} \rho U_{A}^{\dagger}\otimes U_{B}^{\dagger} )$.
+%   \item The entanglement can not be increased via classical communication or local measurements \footnote{for proper definitions of
+%         these see \cite{diosi_short_2011, vedral1997quantifying}}.
+% \end{enumerate}
+% The first condition is just the basic requirement for a figure of merit, the second assures the measure identifies the absence of entanglement,
+% and the last two that the two systems can not become correlated via operations that pertain to only one of them.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
