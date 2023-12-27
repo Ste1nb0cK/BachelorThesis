@@ -80,32 +80,117 @@ the latter to have new a new type of correlations. Here we define entanglement f
 
 \begin{definition}
   Given a state $\rho$ in a system composed of two subsystems $A$ and $B$ with total Hilbert space $\mathcal{H}_{A}\otimes \mathcal{H}_{B}\}$, we say it is
-  an \textbf{\textit{entangled}} or \textit{\textbf{non-separable}} if there doesn't exists a set states $\{\rho_{j}\otimes \sigma_{k}\}_{jk}$ and of coefficients
-  $\{p_{jk}\}_{jk},  \sum_{jk}p_{jk}=1, \hspace{0.1cm} p_{jk}\geq 0$ such that:
+  an \textbf{\textit{entangled}} or \textit{\textbf{non-separable}} if there doesn't exists a set states $\{\rho_{j}\otimes \sigma_{j}\}_{j}$ and coefficients
+  $\{p_{j}\}_{j},  \sum_{j}p_{j}=1, \hspace{0.1cm} p_{j}\geq 0$ such that:
   \begin{equation}
-    \rho = \sum_{jk}p_{jk}\rho_{j}\otimes \sigma_{k}
+    \rho = \sum_{j}p_{j}\rho_{j}\otimes \sigma_{j}
   \end{equation}
   if it does exists, the state is called \textbf{\textit{separable}}.
 \end{definition}
-For the case of pure state this definition coincides with the usually given one \cite{nielsen_quantum_2010}: say $\rho=\ketbra{\psi}$ is pure and separable,
-then:
+For the case of pure state this definition coincides with the usually given one \cite{nielsen_quantum_2010}: say $\rho=\ketbra{\psi}$ is pure and separable, then:
 \begin{equation}
-  \Tr{\rho^{2}} = \sum_{jklm}p_{jk}p_{lm}\Tr{\rho_{j}\rho_{l}}\Tr{\sigma_{k}\sigma_{m}}
+  \Tr{\rho^{2}} = \sum_{jk}p_{j}p_{k}\Tr{\rho_{j}\rho_{k}}\Tr{\sigma_{j}\sigma_{k}}
 \end{equation}
 and by the Cauchy-Schwartz inequality with the Frobenious inner product
 \begin{equation}
-  \Tr{\rho^{2}} \leq \sum_{jklm}p_{jk}p_{lm}\Tr{\rho_{j}^{2}}\Tr{\rho_{l}^{2}}\Tr{\sigma_{k}^{2}}\Tr{\sigma_{m}^{2}} \leq 1
+  \Tr{\rho^{2}} \leq \sum_{jk}p_{j}p_{k}\Tr{\rho_{j}^{2}}\Tr{\rho_{k}^{2}}\Tr{\sigma_{j}^{2}}\Tr{\sigma_{k}^{2}} \leq 1
 \end{equation}
 the first inequality from right to left saturates if and only if all the $\rho_{j}$ and $\sigma_{k}$ are pure, and the first one if
-and only if all the $\rho_{j}$ and $\sigma_{k}$ are equal between themselves i.e. $p_{jl}=\delta_{0l}\delta_{0j}$. Hence there are pure states
+and only if all the $\rho_{j}$ and $\sigma_{k}$ are equal between themselves i.e. $p_{j}=\delta_{0j}$, hence there are pure states
 in $\mathcal{H}_{A}$ and $\mathcal{H}_{B}$ such that:
 \begin{equation}
   \ketbra{\psi} = \ketbra{\alpha}\otimes\ketbra{\beta}.
 \end{equation}
 For a classical system all states are separable thanks to the representation via $\delta$ functions
-of probability densities \cite{diosi_short_2011} so it is a purely quantum phenomena, although it is remarked that there are non-classical
-correlations that do not require non-separability e.g. discord \cite{adesso2016introduction}.
+of probability densities \cite{diosi_short_2011} and in this sense entanglement is a purely non-classical phenomena, in fact for pure states
+this completely exhaust all the possible non-classical correlations. For mixed states the characterization is considerably richer
+and allows for bipartite states that despite being separable show non-classical correlations \cite{adesso2016introduction}.
+\subsection{Marginalization}
+Consider a bipartite system in state $\rho$ with subsystems $A$ and $B$, and assume only the former can be accessed
+experimentally; e.g. $B$ is on the other side of the galaxy, has too many degrees of freedom or is simply not of interest and is desirable
+to prescend from it. Any
+observable $\Gamma$ that we decide to measure must be of the form $\Gamma=\Lambda \otimes I$ so that it describes only actions on
+$\mathcal{H}_{A}$; in this sense we say it is \textit{\textbf{local}}. We want to obtain the probability distribution describing the statistics
+of $\Lambda$, by definition:
+\begin{align}
+  \wp(\lambda)=&\Tr{\rho (\ketbra{\lambda^{A}}\otimes I)}\\
+  \wp(\lambda)=& \sum_{\lambda'k}\bra{\psi_{k}^{B}}\bra{\lambda'^{A}}\rho (\ketbra{\lambda}\otimes I)\ket{\lambda'^{A}}\ket{\psi_{k}^{B}}\\
+  \wp(\lambda)=& \sum_{\lambda'k}\bra{\psi_{k}^{B}}\bra{\lambda'^{A}}\rho \ket{\lambda'^{A}}\ket{\psi_{k}^{B}} \delta_{\lambda\lambda'}\\
+  \wp(\lambda)=& \sum_{k}\bra{\psi_{k}^{B}}\bra{\lambda^{A}}\rho \ket{\lambda^{A}}\ket{\psi_{k}^{B}} \\
+  \wp(\lambda)=&\bra{\lambda^{A}} \left(\sum_{k}\bra{\psi_{k}^{B}}\rho\ket{\psi_{k}^{B}}\right)\ket{\lambda^{A}}\\
+  \wp(\lambda)=& \Tr{\ketbra{\lambda^{A}}\sum_{k}\bra{\psi_{k}^{B}}\rho\ket{\psi_{k}^{B}}} \label{eq:partial_trace}.
+\end{align}
+Equation \eqref{eq:partial_trace} suggest that there exists a state in $\mathcal{H}_{A}$ whose statistics  coincide
+with those of $\rho$ and that it should be given by the sum in \eqref{eq:partial_trace}, in this sense we have a marginalization i.e.
+an assignement of states of in $\mathcal{H}_{A}\otimes\mathcal{H}_{B}$ to states in $\mathcal{H}_{A}$ such that it has the correct statistics
+i.e. $\Tr{\rho^{AB}(\Lambda \otimes I)}=\Tr{\rho^{A}\Lambda}$ for any observable $\Lambda$ of $A$. It is desirable for this map to be unique
+for the following: assume an experimentalist has an infinite ensemble of copies of the system in state $\rho$ but can only measure local
+observables in $A$, although any and as many time as wanted, i.e. it is possible to fully characterize the statistics of any local observable,
+which state should the experimentalist asign? If the marginalization is not unique there is an ambiguity, an marginalizations sure must
+exists as local experiments are always possible, hence uniqueness is important to account properly for this experiment; turns out to
+assure it suffices to demand linearity. This map is called the \textit{\textbf{Partial Trace}}:
 
+\begin{definition}
+  Given two vector spaces $V$ and $W$, for simplicity assumed of finite dimension\footnote{although we will use it too for infinite dimensions without inquiring wheter the operators are even traceclass}, the partial trace taken over $W$ is the map\cite{nielsen_quantum_2010}:
+\[
+\mathrm{Tr}_{W}: \begin{array}{rcl}
+A\otimes B \in \mathcal{L}(V\otimes W)& \mapsto & A \Tr{B} \in \mathcal{L}(V)
+\end{array}
+\]
+where the $\mathcal{L}$ denotes the space of operator, and the map is  linearly extended to all of $\mathcal{L}(V\otimes W)$
+.
+\end{definition}
+The linear extension makes the partial trace coincide with the sum in \eqref{eq:partial_trace} and the non-manifestly base invariant definition
+usually given in sources like \cite{maziero2017computing}. Next we prove this is in fact the only linear map with the correct statistics:
+\begin{theorem}
+  The partial trace is the only linear map such that $\mathcal{E}:\to \mathcal{L}(\mathcal{H}_{A}\otimes \mathcal{H}_{B}) \to \mathcal{L}(\mathcal{H}_{A})$
+  such that $\Tr{\rho (\Lambda\otimes I)} = \Tr{\mathcal{E}(\rho)\Lambda}$ for all $\rho \in \mathcal{H}_{A}\otimes \mathcal{H}_{B}$ and
+  $\Lambda \in \mathcal{L}(\mathcal{H}_{A})$.
+\end{theorem}
+\begin{proof}
+  Assume there exists a map $\mathcal{E}:\to \mathcal{L}(\mathcal{H}_{A}\otimes \mathcal{H}_{B}) \to \mathcal{L}(\mathcal{H}_{A})$ with the
+  correct statistics and introduce an orthogonal product basis in $\mathcal{H}_{A}\otimes \mathcal{H}_{B}$,
+  $\{\ket{\psi^{A}_{j}}\ket{\psi^{B}_{k}}\}_{jk}$. By construction we have:
+  \begin{align}
+    \Tr{\mathcal{E}(\rho)\Lambda} =& \sum_{jk} \bra{\psi^{B}_{j}}\bra{\psi^{A}_{k}}\rho (\Lambda \otimes I) \ket{\psi^{A}_{k}}\ket{\psi^{B}_{j}}\\
+ \Tr{\mathcal{E}(\rho)\Lambda} =& \sum_{k} \bra{\psi_{k}^{A}}\sum_{j}\bra{\psi^{B}_{j}}\rho\ket{\psi^{B}_{j}}(\Lambda \ket{\psi_{k}^{A}})\\
+\Tr{\mathcal{E}(\rho)\Lambda} =& \sum_{k} \bra{\psi_{k}^{A}}\Trp{B}{\rho}(\Lambda\ket{\psi_{k}^{A}})\\
+\Tr{\mathcal{E}(\rho)\Lambda} =& \Tr{\Trp{B}{\rho}\Lambda}\\
+  \end{align}
+  As this holds for any $\Lambda$ and $\rho$, we have that $\mathcal{E}=\mathrm{Tr}_{B}$.
+\end{proof}
+Note that in the above proof we have not used any properties of $\rho$ or $\Lambda$ unlike in \eqref{eq:partial_trace}. A few remarks are
+in order:
+\begin{enumerate}
+  \item The partial traces of an state $\rho \in \mathcal{L}(\mathcal{H}_{A}\otimes\mathcal{H}_{B})$ are always mixed, unless $\rho$ is
+        both pure and separable. In this sense we say the subsystems of a system in an entangled state can not be perfectly known, not even if
+        the state of the complete system is perfectly known \autocite{nielsen_quantum_2010, adesso2016introduction, diosi_short_2011}.
+  \item When $\rho$ is entangled and pure $\Trp{B}{\rho}$ is an improper mixture \cite{schlosshauer_decoherence_2007}, in the sense that for none of the possible ensembles that
+        represent this density operator is possible to say that $A$ is in an unknown state $\ket{\psi} \in \mathcal{H}_{A}$  with some
+        probability; if this were the case we could perform experiments in both $A$ and $B$ to discover this unknown states and then the total
+        state would have not been entangled in the first place.
+  \item For identical particles this construction is not valid as the space of physical states is not $\mathcal{H}_{A}\otimes \mathcal{H}_{B}$
+        but its symmetrization, otherwise the symmetrization postulate is violated.
+        For proposals of suitable generalizations see \cite{reyes-lega_aspects_2015}.
+\end{enumerate}
+Despite this conceptual difficulties the partial trace remains a key tool in Quantum Information Theory for studying open systems and
+local operations. Next we explore one of its most promiment applications.
+\subsection{The Von Neumann Entropy}
+As can be seen in the study of Bell's inequalities in a two qubit system, not all entangled states show the same amount of violation of the
+inequalities, and it is not even true that non-separability is sufficient to violate them \cite{ballentine_quantum_2014}, thus not all entangled
+states are made equal and classifying them is a relevant task; to achieve this we introduce \textit{\textbf{Entanglement Measures}}, which
+quantify how strong this non-classical correlations is in a bipartite state.
+Following \cite{vedral1997quantifying} we demand from any proper measure:
+
+\begin{enumerate}
+        \item it is a map $\mathcal{E}:\mathcal{L}(\mathcal{H}_{A}\otimes\mathcal{H}_{B}) \to \mathds{R}^{+}$.
+        \item $\mathcal{E}(\rho)=0$ if and only if $\rho$ is separable.
+        \item Local unitary operations preserve $\mathcal{E}(\rho)=\mathcal{E}(U_{A}\otimes U_{B} \rho U_{A}^{\dagger}\otimes U_{B}^{\dagger} )$.
+  \item The entanglement can not be increased via classical communication or local measurements \footnote{for proper definitions of
+        these see \cite{diosi_short_2011, vedral1997quantifying}}.
+\end{enumerate}
+The first condition is just the basic requirement for a figure of merit, the second assures the measure identifies the absence of entanglement,
+and the last two that the two systems can not become correlated via operations that pertain to only one of them.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"

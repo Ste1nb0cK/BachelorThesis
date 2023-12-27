@@ -1,0 +1,31 @@
+\message{ !name(cap1.tex)}
+\message{ !name(cap1.tex) !offset(0) }
+\section{Density Operators}
+We begin by stating the a common axiomatization of Quantum Mechanics (QM) based on Hilbert Spaces following \cite{ballentine2014quantum}, we choose it for mathematical simplicity; for alternatives see e.g. \cite{reyes2017some}.
+\begin{enumerate}
+        \item To each physical system $\mathcal{S}$ there corresponds a Hilbert Space $\mathcal{H}$ and states of the system are described by positive and unit trace operators. The Hilbert Space of a composite system made up of $\mathcal{S}$ and $\mathcal{S}'$
+        is given by the tensor product of the Hilbert spaces i.e. $\mathcal{H}\otimes\mathcal{H}'$.
+        \item To each dynamical variable there corresponds a self-adjoint operator on $\mathcal{H}$, called an observable, whose possible
+        values are given by its eigenvalues.
+        \item Given a system in a state $\rho$ and some observable $A$ of it, the probability of measuring $A$ and obtaining the result
+        $\lambda$ is given by $\mathrm{Tr}[\rho P_{\lambda}]$ where $P_{\lambda}$ is the eigen-projector into the subspace associated with
+        $\lambda$. Furthermore the expectation value is $\mathrm{Tr}[\rho A]$.
+        \item After a measurement with result $\lambda$ the state of the system becomes $\frac{P_{\lambda}\rho P_{\lambda}}{\mathrm{Tr}[P_{\lambda}\rho
+        P_{\lambda}]}$.
+        \item The time evolution of the system in a time interval $(0,t)$ in which no measurement is done is given by some unitary operator
+        $U_{t}$ according to $\rho_{t}=U_{t}\rho U_{t}^{\dagger}$ where $\rho$ is the state of the system at time $t=0$.
+\end{enumerate}
+Operators satisfying the properties required for a state are called \textit{\textbf{Density Operators}} and in contrast to frameworks
+whose treatment of quantum states is merely as rays in $\mathcal{H}$, they describe statistical mixtures so imperfect state preparation
+can be handled. To see this consider the spectral resolution of some density operator:
+\begin{equation}
+  \rho = \sum_{n}p_{n}\ketbra{\psi_{n}}
+\end{equation}
+by definition we have $p_{n}\geq 0, \sum_{n}p_{n}=1$  any density operator can be seen as a convex sum of rays in $\mathcal{H}$ (provided we
+identify each one with its associated projector $\ketbra{\psi}$) i.e. an interpretation of $\rho$ as an statistical mixture of rays is suggested.
+To explore this interpretation consider the case $p_{n}=\delta_{nm}$, it is not possible to find any
+convex superposition of rays that decompose the state except for $\rho=\ketbra{\psi_{m}}$ and in this sense these type of states are
+\textit{extremal} \cite{ballentine2014quantum} as any other type of state can always be decomposed into an infinite number of distinct
+orthogonal sets $\{\ketbra{\psi_{l}'}\}_{l}$ \cite{nielsen_quantum_2010, reyes}
+
+\message{ !name(cap1.tex) !offset(-31) }
