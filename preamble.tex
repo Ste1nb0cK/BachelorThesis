@@ -15,14 +15,19 @@
 \usepackage{graphicx}
 \usepackage{lscape}
 \usepackage{tabularx}
-\usepackage{subfigure}
+% \usepackage{subfigure}
+\usepackage{subcaption} %Multi figures
 \usepackage{epigraph}
 \usepackage{dsfont} %The font of R of the reals
 \usepackage{braket} %Dirac Notation
 \usepackage{longtable}
+\usepackage{tikz-cd} %The package that will change your life drawing commutation diagrams
+\usepackage{tikz, pgfplots} %The package that will change your life
+\usetikzlibrary{positioning}
 \usepackage{hyperref} %Hyperlinks in the document
 %Configure the bibliography
-\usepackage[backend=biber, style=numeric,eprint=false, isbn=false, doi=false, clearlang=true, url=false]{biblatex}
+\usepackage[backend=biber, style=numeric,eprint=false, isbn=false, doi=false,
+clearlang=true, url=false, sortcites]{biblatex}
 %Prevent the note in the bib from printing
 \DeclareSourcemap{
   \maps[datatype=bibtex]{

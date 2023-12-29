@@ -177,53 +177,75 @@ Despite this conceptual difficulties the partial trace remains a key tool in Qua
 local operations.
 \section{Quantum Operations}
 Now that we have means of describing unitary evolutions and marginalizations we are in a position to describe the most general class
-of transformation a quantum system can undergo, the so called \textbf{\textit{Quantum Operations}}. In general we can describe any
-evolution of a system of interest ($S$), called from here on simply \textbf{\textit{the system}}, by asumming there exists another one called
-\textbf{\textit{the environment}} ($E$) that represents the rest of the universe, and whose degrees of freedom are undesirable in the
-description of the $S$; these scheme is called \textit{\textbf{S+E}} and the total hamiltonian is generically of the form
-$H = H_{S}\otimes I + I\otimes H_{E} + V$ where the coupling between the two is given by the last term \cite{wiseman_quantum_2010};
-for simplicity it is assumed the environment and the system are distinguishable \cite{breuer2002theory}. The whole point is this
-is to construct a non-unitary map describing the evolution of $S$ by evolving unitarily the whole and tracing over the environment:
+of transformation a quantum system can undergo, the so called \textbf{\textit{Quantum Operations}}. In a lot of cases it makes
+sense to take the following view: there exists a system whose evolution if of interest  ($S$), called from here on simply \textbf{\textit{the
+    system}}, the rest of the universe is called \textbf{\textit{the environment}} ($E$) and its degrees of freedom are undesirable
+in the description of the $S$; this scheme is called \textit{\textbf{S+E}} and the total hamiltonian is generically of the form
+$H = H_{S}\otimes I + I\otimes H_{E} + V$ where the coupling between the two is given by the last term \cite{wiseman_quantum_2010} and
+for simplicity it is assumed the environment and the system are distinguishable \cite{breuer2002theory}. The whole point
+is to construct a map describing the evolution of $S$ solely with its degrees of freedom, this is achieved simply by evolving unitarily the
+whole and tracing over the environment:
 
-\begin{equation}
+\begin{equation} \label{eq:SE_map}
  \mathcal{E}_{t}(\rho_{0}) \equiv \Trp{E}{U_{t}\left(\rho_{0}\otimes \sigma\right)U_{t}^{\dagger}} = \rho_{t}
 \end{equation}
-\begin{figure}[h]
- \centering
-\begin{tikzpicture}%[transform canvas={scale=1.3}]
-% Define colors
-\definecolor{colorenv}{HTML}{55795A}
-\definecolor{colorsys}{HTML}{7286D3}
-\definecolor{colorarrow}{HTML}{D99E30}
+\input{Chapters/figure1.tex}
+In figure (\ref{fig:SE_Diagrams}) two diagrams representing  the scheme are presented. On an intuitive level is true that any non-unitary
+evolution should be of this form, nevertheless we provide a more axiomatic point of view to allow for a slight generalization and because in
+practice it is not rarely possible to make progress with analytical methods using \eqref{eq:SE_map}. We demand from any physically aceptable
+transformation the following:
 
-  %%%%%%%%%%%%%%%%%5Commutation diagram
-  % Define nodes
-  \begin{scope}[local bounding box=drawA]
-  \node (A) at (0cm,0) {$\mathcal{H}_{S}$};
-   \node (B) at (5cm,0) {$\mathcal{H}_{S}$};
-  \node (C) at (0cm,-3.09cm) {$\mathcal{H}_{S}\otimes\mathcal{H}_{E}$};
-  \node (D) at (5cm,-3.09cm) {$\mathcal{H}_{S}\otimes\mathcal{H}_{E}$};
-  % Draw arrows
-   \draw[->] (A) -- (B) node[midway, above] {$\mathcal{E}_{t}$};
-  \draw[->] (A) -- (C) node[midway, left] {$\otimes \sigma$};
-  \draw[<-] (B) -- (D) node[midway, right] {$\mathrm{Tr}_{E}$};
-  \draw[->] (C) -- (D) node[midway, below] {$U_{t}\left(\bullet\otimes\sigma\right)U_{t}^{\dagger}$};
-\end{scope}
-\node[above left] at (drawA.north west) {a)};
-  \begin{scope}[local bounding box=drawB]
-  %%%%%%%%%%The circles
-  %Circles
-  \fill[color=colorenv] (10cm,-1.545cm) circle (2.3cm);
+\begin{itemize}
+  \item Valid states are mapped into valid states.
+  \item It is convex linear.
+  \item  It should preserve the trace
+\end{itemize}
+The last two can be well motivated by considering a proper mixture of two ensembles of pure states i.e. with $N$ total copies, $\rho =
+p_{1}\rho_{1} + p_{2}\rho_{2}$, applaying the given transformation $\mathcal{E}$ to the copies of  $\ketbra{\psi_{1}}$ and $\ketbra{\psi_{2}}$  must produce a new total ensemble with $p_{1}N$ copies of $\mathcal{E}(\ketbra{\psi_{1}})$ and $p_{2}N$ copies of
+$\mathcal{E}(\ketbra{\psi_{2}})$ and the trace cannot change because then the state would be invalid. From this we introduce
+\textit{\textbf{Completely Positive and Trace Preserving (CPTP)}} maps \cite{nielsen_quantum_2010}:
 
-  \fill[blue!40] (10cm,-1.545cm) circle (1cm);
-  %Marks
-  \node[text=white, anchor=east] (E) at (10cm,-1.545cm) {$\mathcal{H}_{S}$};
-  \node[text=white, anchor=east] (F) at (12cm,-0.5cm) {$\mathcal{H}_{E}$};
-   \draw[<->, line width=1.2pt, color=colorarrow, text=white] (E) -- (F) node[midway, above] {$V$};
-  \end{scope}
- \node[above left] at (drawB.north west) {b)};
-\end{tikzpicture}
-\end{figure}
+\begin{definition}
+  Given two Hilbert Spaces $\mathcal{H}$ and $\mathcal{H}'$, a map $\mathcal{E}:\mathcal{L}(\mathcal{H})\to\mathcal{L}(\mathcal{H}')$ such that:
+  \begin{enumerate}
+          \item $\Tr{\mathcal{E}(\rho)}=\Tr{\rho}$ for all trace-class operators $\rho \in \mathcal{L}(\mathcal{H})$ (trace preserving)
+          \item $\mathcal{E}(p_{1}\rho_{1}+p_{2}\rho_{2}) =p_{1}\mathcal{E}(\rho_{1})+p_{2}\mathcal{E}(\rho_{2}) $ for all $\rho_{1} \rho_{2} \in \mathcal{L}(\mathcal{H})$ and $p_{1}, p_{2} \geq 0$ s.t. $p_{1}+p_{2}=1$ (Convex linearity)
+    \item if $\rho \in \mathcal{L}(\mathcal{H})$ is positive, then so is $\mathcal{L}(\rho)$ is also positive (positivity) and furthermore,
+          for any linear extension to $\mathcal{L}(\mathcal{H}\otimes \mathcal{H}'')$ of the form $\mathcal{E}\otimes I''$ we have that
+          $\mathcal{E}(\rho \otimes I)$ is also positive (complete positivity), where $\mathcal{H}''$ is any separable Hilbert space
+          and $I''$ the identity on it.
+  \end{enumerate}
+  is called a \textbf{\textit{Quantum Channel}}.
+\end{definition}
+The last condition deserves a discussion as it did not appear directly in our motivation: mathematically it is a well known fact that there
+exists maps $\mathcal{E}$ that send positive operator into positive operator yet their extensions fail to do so e.g. the transpose, so
+to be consistent with the idea of \textit{sending states to states} one needs complete positivity;
+to this one might argue that changing Hilbert Spaces is meaningless as it implies changing the underlying system of study, but there are of situations in which this is desirable e.g. initially a two level from which we will measure the energy of the photons produced in the energy
+transitions, so it do is meaningful. A few key results for the manipulation of quantum channels are the following \cite{nielsen_quantum_2010,wiseman_quantum_2010}:
+
+\begin{enumerate}
+  \item There exists a Hilbert space $\mathcal{H}_{E}$, a state $\sigma$ in it and a unitary operator $U \in\mathcal{L}(\mathcal{H}_{S}\otimes\mathcal{H}_{E})$ such that $\mathcal{E}(\rho) = \Trp{E}{U\left(\rho\otimes\sigma\right)U^{\dagger}}$.
+  \item There exists a set of operators $\{K_{j} \}_{j}$ such that $\mathcal{E}(\rho) = \sum_{j}\rho K_{j}^{\dagger}K_{j}$ and $\sum_{j}K_{j}K_{j}^{\dagger}=I$. These are called \textit{\textbf{Kraus Operators}}.
+  \item Any map of the above forms is a quantum channel.
+  \item The Kraus Operators representation of a quantum channel is not unique; any unitary combination is also a valid representation.
+\end{enumerate}
+The first one is what we already anticipated with the caveat that given an operation generically there is no unique way to implement it as
+a $S+E$ scheme, the Kraus operators are in a lot of situations the main tool to manipulate these maps and suggest that we can
+always implement a channel via the application of \textbf{\textit{Completely Positive Non-Trace Increasing (CP)}} maps  defined as $\mathcal{E}_{j}(\rho)=K_{j}\rho K_{j}^{\dagger}$ such that $\mathcal{E} = \sum_{j}\mathcal{E}_{j}$. This can be interpreted as an \textbf{\textit{stochastic map}} \cite{nielsen_quantum_2010} by the following
+rewriting of the image of $\rho$:
+
+\begin{equation}
+  \mathcal{E}(\rho) = \sum_{j}\mathcal{E}_{j}(\rho) = \sum_{j}\Tr{\mathcal{E}_{j}(\rho)}\frac{\mathcal{E}_{j}(\rho)}{\Tr{\mathcal{E}_{j}(\rho)}},
+\end{equation}
+
+each $\frac{\mathcal{E}_{j}(\rho)}{\Tr{\mathcal{E}_{j}(\rho)}}$ is a valid density operator and $\Tr{\mathcal{E}_{j}(\rho)}\geq 0,
+\sum_{j}\Tr{\mathcal{E}_{j}(\rho)}=1$ so we can say that when we apply the channel $\mathcal{E}$ there is a probability
+$\Tr{\mathcal{E}_{j}(\rho)}$ of the output state being $\frac{\mathcal{E}_{j}(\rho)}{\Tr{\mathcal{E}_{j}(\rho)}}$. The main inconveniente
+with this interpretation is the non-uniqueness of the possible output states unless one is using a particular physical platform that
+defines them, nevertheless this is no surprise as in general we can not select such set of states from only a density operator. In figure
+\ref{fig:stochastic_map_diagram} a drawing representing the idea is presented.
+%%%%%%Stochastic Interpretation Quantum Channels
+\input{Chapters/figure2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Von Neumann Entropu
 % \subsection{The Von Neumann Entropy}
 % As can be seen in the study of Bell's inequalities in a two qubit system, not all entangled states show the same amount of violation of the
