@@ -203,7 +203,7 @@ transformation the following:
 The last two can be well motivated by considering a proper mixture of two ensembles of pure states i.e. with $N$ total copies, $\rho =
 p_{1}\rho_{1} + p_{2}\rho_{2}$, applaying the given transformation $\mathcal{E}$ to the copies of  $\ketbra{\psi_{1}}$ and $\ketbra{\psi_{2}}$  must produce a new total ensemble with $p_{1}N$ copies of $\mathcal{E}(\ketbra{\psi_{1}})$ and $p_{2}N$ copies of
 $\mathcal{E}(\ketbra{\psi_{2}})$ and the trace cannot change because then the state would be invalid. From this we introduce
-\textit{\textbf{Completely Positive and Trace Preserving (CPTP)}} maps \cite{nielsen_quantum_2010}:
+\textit{\textbf{Completely Positive and Trace Preserving (CPTP)}} maps:
 
 \begin{definition}
   Given two Hilbert Spaces $\mathcal{H}$ and $\mathcal{H}'$, a map $\mathcal{E}:\mathcal{L}(\mathcal{H})\to\mathcal{L}(\mathcal{H}')$ such that:
@@ -221,7 +221,7 @@ The last condition deserves a discussion as it did not appear directly in our mo
 exists maps $\mathcal{E}$ that send positive operator into positive operator yet their extensions fail to do so e.g. the transpose, so
 to be consistent with the idea of \textit{sending states to states} one needs complete positivity;
 to this one might argue that changing Hilbert Spaces is meaningless as it implies changing the underlying system of study, but there are of situations in which this is desirable e.g. initially a two level from which we will measure the energy of the photons produced in the energy
-transitions, so it do is meaningful. A few key results for the manipulation of quantum channels are the following \cite{nielsen_quantum_2010,wiseman_quantum_2010}:
+transitions, so it do is meaningful. A few key results for the manipulation of quantum channels are the following \cite{nielsen_quantum_2010,wiseman_quantum_2010, ,strasberg2022quantum}:
 
 \begin{enumerate}
   \item There exists a Hilbert space $\mathcal{H}_{E}$, a state $\sigma$ in it and a unitary operator $U \in\mathcal{L}(\mathcal{H}_{S}\otimes\mathcal{H}_{E})$ such that $\mathcal{E}(\rho) = \Trp{E}{U\left(\rho\otimes\sigma\right)U^{\dagger}}$.
@@ -246,6 +246,93 @@ defines them, nevertheless this is no surprise as in general we can not select s
 \ref{fig:stochastic_map_diagram} a drawing representing the idea is presented.
 %%%%%%Stochastic Interpretation Quantum Channels
 \input{Chapters/figure2}
+From here it is clear that weakening the trace preservation condition is desirable as we are interpreting each $\mathcal{E}$ also as
+\textit{physical operations}. We end the section with the definition of a \textbf{\textit{Quantum Operation}} \cite{strasberg2022quantum,nielsen_quantum_2010,wiseman_quantum_2010}:
+
+\begin{definition}
+  Given two Hilbert Spaces $\mathcal{H}$ and $\mathcal{H}'$, a map $\mathcal{E}:\mathcal{L}(\mathcal{H})\to\mathcal{L}(\mathcal{H}')$ such that:
+  \begin{enumerate}
+          \item $\Tr{\mathcal{E}(\rho)}\geq\Tr{\rho}$ for all trace-class operators $\rho \in \mathcal{L}(\mathcal{H})$
+          \item $\mathcal{E}(p_{1}\rho_{1}+p_{2}\rho_{2}) =p_{1}\mathcal{E}(\rho_{1})+p_{2}\mathcal{E}(\rho_{2}) $ for all $\rho_{1} \rho_{2} \in \mathcal{L}(\mathcal{H})$ and $p_{1}, p_{2} \geq 0$ s.t. $p_{1}+p_{2}=1$ (Convex linearity)
+          \item is completely positive
+  \end{enumerate}
+  is called a \textbf{\textit{Quantum Operation}}.
+\end{definition}
+The results regarding equivalent representations can be generalized \cite{strasberg2022quantum,wiseman_quantum_2010}:
+\begin{enumerate}
+  \item There exists a Hilbert space $\mathcal{H}_{E}$, a state $\sigma$ in it, a unitary operator $U \in\mathcal{L}(\mathcal{H}_{S}\otimes\mathcal{H}_{E})$ and a  projector $P_{r}$ acting in $\mathcal{H}_{E}$ such that $\mathcal{E}(\rho) = \Trp{E}{P_{r}U\left(\rho\otimes\sigma\right)U^{\dagger}}$.
+  \item There exists a set of operators $\{K_{j} \}_{j}$ such that $\mathcal{E}(\rho) = \sum_{j}\rho K_{j}^{\dagger}K_{j}$ and $\sum_{j}K_{j}K_{j}^{\dagger}\geq I$
+  \item Any map of the above forms is a quantum operation.
+  \item The Kraus Operators representation of a quantum operation is not unique; any unitary combination is also a valid representation.
+\end{enumerate}
+Conceptually operations are somewhat more desirable than channels yet they do not offer any considerable generalization as a set of operations
+can always be completed into a channel \cite{nielsen_quantum_2010}. One last remark: due to the non-uniqueness of the decomposition into operations in a sense quantum channels are somewhat like black-boxes,
+you know what goes in and what comes out yet unless you have extra information it is not possible to pin down exactly what happens inside the
+channel.
+\section{Generalized Measurements}
+We have not addresed an important consistency question: are measurement collapses acceptable quantum operations? It is quickly to see that
+in fact they are by defining the operation $\mathcal{E}_{r}(\rho)=P_{r}\rho P_{r}$ where $r$ is the eigenvalue of some observable and $P_{r}$ its
+associated projector, this means that our formalism can really accomodate all the transformations required by the postulates. Without entering
+directly into the phenomenology of measurements we can understand them with the following generic scheme: say we are perfoming an experiment
+with $N$ possible outcomes indexed by ${r=1,..,N}$ just like in figure \ref{fig:stochastic_map_diagram}, each possible outcome corresponds to a
+different collapse described by maps of the form $\mathcal{E}_{r}$ with a corresponding probability $\Tr{\mathcal{E}_{r}(\rho)}$ (Born rule).
+It is possible to idenfity two different types of measurements: one when we known a measurement happend and which collapsed occured i.e.
+the outcome of the experiment is known, this is  called  \textit{\textbf{a Selective Measurement}} \cite{diosi_short_2011}
+and is described by:
+\begin{equation}
+\rho \to \mathcal{E}_{r}(\rho);
+\end{equation}
+and one in which all we known is that the experiment happened but not the outcome, this is called \textit{\textbf{a non-Selective Measurement}}
+\cite{diosi_short_2011} and is described by
+
+\begin{equation}
+\rho \to \sum_{r}\mathcal{E}_{r}(\rho).
+\end{equation}
+So far the main physical assumption we have made is that our measurements are \textbf{\textit{Projective}} i.e. the post-measurement state
+of a selective measuremente is given by projectors
+\begin{equation}
+\rho_{r} = \frac{P_{r}\rho P_{r}}{\Tr{P_{r}\rho}},
+\end{equation}
+but this doesn't have to be the case. Consider the following: no physical system $S$ might be directly measured as any measurement apparatus is
+also a physical system $A$ which couples unitarily to $S$ in order to get correlated with it, and so it is debatable whether using the collapse postulate and the Born rule on $S$ is valid as the
+result of the measurement really is read from the apparatus ... which itself must be measured by a second apparatus $A'$ and so on; this
+potentially infinite chain of systems is called \textbf{\textit{a Von Neumann Chain}} and leaves us with the question of to which one should the
+collapse postulate be applaied to; here we accept that using it on $A$ is already valid, hence the operation giving a selective measurement
+should really be $\mathcal{E}_{r}(\rho) = \Trp{A}{P_{r} U\left(\rho\otimes\sigma \right)U^{\dagger}}$ where $U$ is the unitary evolution during
+the coupling and $P_{r}$ a projector not on the Hilbert space of $S$ but of $A$ as the result is being read from it. We summarize this disscusion
+in the following definition:
+
+\begin{definition}
+  Given a set of outcomes $r=1,2,3..$ and set of quantum operations  mapping the system to itself indexed by them $\{\mathcal{O}_{r}\}_{r=1}$  such that $\mathcal{O}=\sum_{r}\mathcal{O}_{r}$ is trace-preserving, we say that this is a \textit{\textbf{Generalized Measurement Scheme}}.
+  We also define the following:
+  \begin{enumerate}
+    \item The probability of obtaining the result $r$ from a state $\rho$ is $\wp(r) = \Tr{\mathcal{O}_{r}(\rho)}$.
+    \item The selective post-measurement state associated with the result $r$ is $\rho_{r} = \frac{\mathcal{O}_{r}(\rho)}{\Tr{\mathcal{O}_{r}(\rho)}}$.
+    \item The non-selective post-measurement state is $\mathcal{O}(\rho)$.
+  \end{enumerate}
+\end{definition}
+For a comprehensive treatment of generalized quantum measurements and its phenomenology the reader is refered to \cite{wiseman_quantum_2010}.
+Finally, we analyze the expansion in Kraus operators of the probabilities in a generalized measurement scheme, the relevant concept
+we will employ to study quantum estimation will come from this. Consider the operation associated with the result $r$, $\mathcal{O}_{r}$
+and some set of Kraus operators associated with it $\{K\}_{rj}$, the probability of obtaining this outcome is from some state $\rho$ is:
+\begin{equation}
+  \wp(r) = \Tr{\left(\sum_{rj}K_{rj}^{\dagger}K_{j}\right)\rho}
+\end{equation}
+this tells us that really the probability is described by a single positive operator:
+\begin{equation}\label{eq:sum_POVM}
+\Pi_{r} = \sum_{rj}K_{rj}^{\dagger}K_{j},
+\end{equation}
+and it is clear that the trace-preserving condition imposes:
+\begin{equation}\label{eq:sum_POVM}
+\sum_{r}\Pi_{r} = I.
+\end{equation}
+From here comes the definition we have been trying to construct all along:
+
+\begin{definition}
+  A set of positive operators $\{\Pi_{r}\}_{r}$ such that $\sum_{r}\Pi_{r}=I$ is called \textit{\textbf{a Positive Operator Valued Measure (POVM)}}.
+\end{definition}
+The importance of POVMs is that in many cases, like the determination of a precision bound in  quantum estimation, only the probabilities of the outcomes are of interest; then defining a measurement scheme for this cases is not necessary as a POVM already induces the probabily distribution and describes them.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Von Neumann Entropu
 % \subsection{The Von Neumann Entropy}
 % As can be seen in the study of Bell's inequalities in a two qubit system, not all entangled states show the same amount of violation of the
