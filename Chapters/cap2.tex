@@ -34,12 +34,12 @@ of this chapter is the classification in terms of generators due to Linblad, whi
   \begin{equation}\label{eq:linblad}
   \partial_{t}\rho(t) = \mathcal{L}\rho(t) = -i[ H,\rho ] + \sum_{k}\gamma_{k}\left(L_{k}\rho(t) L_{k}^{\dagger} - \frac{1}{2}\{L_{k}^{\dagger}L_{k}, \rho(t)\}\right)
   \end{equation}
-  with $L_{k}$ operators  and $H$ a self-adjoint one \cite{breuer2002theory, lindblad1976generators, wiseman_quantum_2010,hornberger2009introduction}, futhermore, all equations of this form define a dynamical semigroup.
-  Equation (\ref{eq:linblad}) is called \textbf{the Linblad Equation}, the traceless $L_{k}$'s the \textbf{Linblad operators}, and
-  the $\gamma_{k}$ are positive constants.
+  with $L_{k}$ operators  and $H$ a self-adjoint one, futhermore, all equations of this form define a dynamical semigroup.
+  Equation (\ref{eq:linblad}) is called \textbf{the Linblad Master Equation}, the traceless $L_{k}$'s the \textbf{Linblad operators}, and
+  the $\gamma_{k}$ are positive constants with inverse time dimensions \cite{breuer2002theory, lindblad1976generators, wiseman_quantum_2010,hornberger2009introduction}.
 \end{theorem}
 
-\section{Kraus representation of the Evolution}
+\section{Trajectory Interpretation of the Evolution}
 It is clear that at the very least (\ref{eq:linblad}) accepts a formal solution in terms of an exponential superator $\exp(t\mathcal{L})$, one
 can use this to form a generalized Dyson series expansion that will gives us a Kraus representation of it by defining a sort
 of interaction picture. Begin by defining an
@@ -102,13 +102,31 @@ For the evaluation we introduce the following result:
   \end{proof}
   allowing us to write (\ref{eq:unraveling}) as in \cite{wiseman_quantum_2010}:
 
-  \begin{equation}
+
+  \begin{equation}\label{eq:superoperator_decomposition}
     \rho = J[e^{t \frac{1}{i}\tilde{H}}]\rho(0)  +  \sum_{n=1}^{\infty}\mathcal{K}^{(n)}_{t}\rho(0)
       \end{equation}
 \begin{align}
   \mathcal{K}^{(n)}_{t}=&\int_{0}^{t}dt_{n}\int_{0}^{t_{n}}dt_{n-1}...\int_{0}^{t_{2}}dt_{1}J[e^{(t-t_{n}) \frac{1}{i}\tilde{H}}]SJ[e^{(t_{n}-t_{n-1}) \frac{1}{i}\tilde{H}}]...J[e^{(t_{2}-t_{1}) \frac{1}{i}\tilde{H}}]SJ[e^{t_{1}\frac{1}{i}\tilde{H}}]\\
   \mathcal{K}^{(n)}_{t}=&\sum_{k_{1}...k_{n}}\int_{0}^{t}dt_{n}\int_{0}^{t_{n}}dt_{n-1}...\int_{0}^{t_{2}}dt_{1}J\left[e^{(t-t_{n})\frac{1}{i}\tilde{H}}\sqrt{\gamma_{k_{n}}}L_{k_{n}}e^{(t_{n}-t_{n-1})\frac{1}{i}\tilde{H}}...e^{(t_{2}-t_{1})\frac{1}{i}\tilde{H}}\sqrt{\gamma_{k_{1}}}L_{k_{1}}e^{t_{1}\frac{1}{i}\tilde{H}}\right]
 \end{align}
+the integrands inside $\mathcal{K}_{t}^{(n)}$ are positive, and so they must be non-trace increasing for (\ref{eq:superoperator_decomposition})
+to have the same trace in both sides. With this we conclude that (\ref{eq:unraveling}) can be interpreted as a piecewise deterministic process,
+in which continous evolutions $\exp(\tau\mathcal{L}_{0})$ are interrupted by environment induced transformations $J[L_{k}]$ at a rate
+$\gamma_{k}$. More precesely, the probability of the systems evolving during a time $t$ without \textbf{jumps} i.e. only continously is:
+
+\begin{equation}
+  P(R_{0}^{t}|\rho) = \Tr{e^{\mathcal{L}_{0}t}}
+\end{equation}
+
+and the probability of having $n$ jumps $k_{n},...,k_{1}$ at respective times $t>t_{n}>...>t_{1}$ is
+
+\begin{equation}
+  P(R_{n}^{t>t_{n}>...>t_{1}}|\rho) = \Tr{J\left[e^{(t-t_{n})\frac{1}{i}\tilde{H}}L_{k_{n}}e^{(t_{n}-t_{n-1})\frac{1}{i}\tilde{H}}...e^{(t_{2}-t_{1})\frac{1}{i}\tilde{H}}L_{k_{1}}e^{t_{1}\frac{1}{i}\tilde{H}}\right]\rho}.
+\end{equation}
+
+This is the interpretation of the \textbf{Quantum Trajectories Method} \cite{wiseman_quantum_2010,hornberger2009introduction}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
