@@ -125,8 +125,28 @@ and the probability of having $n$ jumps $k_{n},...,k_{1}$ at respective times $t
   P(R_{n}^{t>t_{n}>...>t_{1}}|\rho) = \Tr{J\left[e^{(t-t_{n})\frac{1}{i}\tilde{H}}L_{k_{n}}e^{(t_{n}-t_{n-1})\frac{1}{i}\tilde{H}}...e^{(t_{2}-t_{1})\frac{1}{i}\tilde{H}}L_{k_{1}}e^{t_{1}\frac{1}{i}\tilde{H}}\right]\rho}.
 \end{equation}
 
-This is the interpretation of the \textbf{Quantum Trajectories Method} \cite{wiseman_quantum_2010,hornberger2009introduction}
+This is the interpretation of the \textbf{Quantum Trajectories} \cite{wiseman_quantum_2010,hornberger2009introduction}
 
+\section{Damped Harmonic Osccilator}
+To illustrate how Linblad equations appear in practice we look at a single mode of a QED cavity coupled to many others in the exterior of it,
+we proceed with a \textbf{\textit{microscopic derivation}} in which we pose a total hamiltonian for system and bath and then introduce
+approximations to obtain a Markovian completely positive evolution. We consider the following hamiltonian \cite{wiseman_quantum_2010,walls_quantum_2008}:
+
+\begin{equation}\label{eq:radiative_hamiltonian}
+H = \omega_{c} a^{\dagger}a + \sum_{k}\omega_{k}b^{\dagger}_{k}b_{k} + \sum_{k}g_{k}\left( a^{\dagger}b_{k} + ab^{\dagger}_{k} \right).
+\end{equation}
+Where the $a$'s and $b_k$'s satisfy the bosonic commutation relation.
+\subsection{Transformation to the Interaction Picture}
+The interesting part of the dynamic lies in the last term of \eqref{eq:radiative_hamiltonian} and so we pass to an interaction picture
+with the first two terms in the exponential of the transformation:
+
+\begin{equation}\label{eq:H_0_radiative_model}
+  H_{0} = \omega_{c} a^{\dagger}a + \sum_{k}\omega_{k}b^{\dagger}_{k}b_{k}
+\end{equation}
+
+\begin{align}
+  \tilde{\rho}_{tot}(t) = e^{-iH_{0}t} \rho(t)e^{iH_{0}t}
+\end{align}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
