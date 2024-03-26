@@ -16,6 +16,7 @@
 \usepackage{graphicx}
 \usepackage{lscape}
 \usepackage{tabularx}
+\usepackage[normalem]{ulem} % To slash terms
 % \usepackage{subfigure}
 \usepackage{subcaption} %Multi figures
 \usepackage{epigraph}
@@ -57,9 +58,12 @@ clearlang=true, url=false, sortcites]{biblatex}
 %%%%%%%%%%%%%%%%%%%%%%%%Useful for writing Dirac Notation more efficiently
 \newcommand{\ketbra}[1]{\ket{#1}\hspace{-0.1cm}\bra{#1}}
 \newcommand{\expectation}[2]{\bra{#1}\hspace{-0.05cm}#2\hspace{-0.05cm}\ket{#1}}
-%%%%% Define the trace and the aprtial trace
+%%%%% Define the trace and the partiak trace
 \newcommand{\Tr}[1]{\mathrm{Tr}\left[#1\right]}
 \newcommand{\Trp}[2]{\mathrm{Tr}_{#1}\left[#2\right]}
+%%%%%%%%%% Define imaginary and real parts
+\renewcommand{\Im}[1]{\operatorname{Im}\left\{#1\right\}}
+\renewcommand{\Re}[1]{\operatorname{Re}\left\{#1\right\}}
 \pagestyle{fancyplain}%\addtolength{\headwidth}{\marginparwidth}
 \textheight22.5cm \topmargin0cm \textwidth16.5cm
 \oddsidemargin0.5cm \evensidemargin-0.5cm%

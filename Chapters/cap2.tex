@@ -133,20 +133,155 @@ we proceed with a \textbf{\textit{microscopic derivation}} in which we pose a to
 approximations to obtain a Markovian completely positive evolution. We consider the following hamiltonian \cite{wiseman_quantum_2010,walls_quantum_2008}:
 
 \begin{equation}\label{eq:radiative_hamiltonian}
-H = \omega_{c} a^{\dagger}a + \sum_{k}\omega_{k}b^{\dagger}_{k}b_{k} + \sum_{k}g_{k}\left( a^{\dagger}b_{k} + ab^{\dagger}_{k} \right).
+H_{tot} = \underbrace{\overbrace{\omega_{c} a^{\dagger}a}^{H_{c}} + \overbrace{\sum_{k}\omega_{k}b^{\dagger}_{k}b_{k}}^{H_{E}} }_{H_{0}}+ \underbrace{\sum_{k}g_{k}\left( a^{\dagger}b_{k} + ab^{\dagger}_{k} \right)}_{H_{I}}.
 \end{equation}
 Where the $a$'s and $b_k$'s satisfy the bosonic commutation relation.
 \subsection{Transformation to the Interaction Picture}
-The interesting part of the dynamic lies in the last term of \eqref{eq:radiative_hamiltonian} and so we pass to an interaction picture
-with the first two terms in the exponential of the transformation:
-
-\begin{equation}\label{eq:H_0_radiative_model}
-  H_{0} = \omega_{c} a^{\dagger}a + \sum_{k}\omega_{k}b^{\dagger}_{k}b_{k}
-\end{equation}
+The interesting part of the dynamic lies in the coupling term of \eqref{eq:radiative_hamiltonian} and so we pass to an interaction picture; we
+denote the Schrödinger picture operators with tildes.
 
 \begin{align}
-  \tilde{\rho}_{tot}(t) = e^{-iH_{0}t} \rho(t)e^{iH_{0}t}
+  \tilde{\rho}_{tot}(t) =& e^{-iH_{0}t} \rho_{tot}(t)e^{iH_{0}t}\\
+  \partial_{t} \tilde{\rho}_{tot}(t) =& -i[H_{0}, \tilde{\rho}_{tot}(t)] - i[H_I,\tilde{\rho}_{tot}(t) ]\\
+  -iH_{0}\tilde{\rho}_{tot} +i\tilde{\rho}_{tot}H_{0} + e^{-iH_{0}t}\partial_{t} \rho_{tot}(t)e^{iH_{0}t} =&-i[H_{0}, \tilde{\rho}_{tot}(t)] - i[H_I,\tilde{\rho}_{tot}(t) ]\\
+\partial_{t} \rho_{tot}(t) =&-i[e^{iH_{0}t}H_Ie^{-iH_{0}t},\rho_{tot}(t) ]
 \end{align}
+ now obtaining the interaction hamiltonian:
+
+\begin{align}
+  e^{iH_{0}t} H_{I}e^{-iH_{0}t} =& \sum_{k}g_{k}\left(e^{iH_{c}t}a^{\dagger}e^{-iH_{c}t} e^{iH_{E}t}b_{k}e^{-iH_{E}t} +
+                                   e^{iH_{c}t}ae^{-iH_{c}t} e^{iH_{E}t}b_{k}^{\dagger}e^{-iH_{E}t}\right)\\
+  H\equiv & \sum_{k} g_{k} \left( e^{i(\omega_{c}-\omega_{k})t}a^{\dagger}b +   e^{-i(\omega_{c}-\omega_{k})t}ab^{\dagger} \right)
+\end{align}
+one is lead to the reduced Von-Neumann equation:
+\begin{align}
+  \partial_{t}\rho_{tot} =& -i[H, \rho_{tot}]\\
+ \underbrace{\partial_{t}\rho}_{\Trp{E}{\partial_{t}\rho_{tot}}} =& -i\mathrm{Tr}_{E}\left\{[H(t), \rho_{tot}(0)]\right\} - \int_{0}^{t}dt'\mathrm{Tr}_{E}\left\{[H(t), [H(t'), \rho_{tot}(t')]]\right\}.\label{eq:pre_approximation}
+\end{align}
+So far the treatment has been exact and general but at this point the necessity for approximations come, these are typical for most derivations
+of this type \cite{hornberger2009introduction,wiseman_quantum_2010,breuer2002theory}.
+\subsubsection{Initial state of the total system}
+Our first assumption will be that at $t=0$ system and bath are completely uncorrelated i.e. $\rho_{tot}(0)=\rho(0)\otimes \rho_{E}(0)$,
+physically this is reasonable if enough control over the system to prepare its initial state in isolation from the environment.
+Furthermore the first term of \eqref{eq:pre_approximation} is forced to vanish by choosing a particular initial state for the bath, in our case
+we use a thermal state $\rho_{E}(0)=Z^{-1}e^{-\beta H_{E}}$\footnote{Here $Z$ is the canonical partition function and $\beta=1/kT$.}:
+
+\begin{align}
+  [H, \rho_{tot}(0)] =& Z^{-1}\left[ \sum_{k} g_{k} \left( e^{i(\omega_{c}-\omega_{k})t}a^{\dagger}b +   e^{-i(\omega_{c}-\omega_{k})t}ab^{\dagger}
+                        \right),\rho(0)\otimes e^{-\beta H_{E}}\right]\\
+   [H, \rho_{tot}(0)] =& Z^{-1}\sum_{k} g_{k}\left[  e^{i(\omega_{c}-\omega_{k})t}a^{\dagger}b +   e^{-i(\omega_{c}-\omega_{k})t}ab^{\dagger}
+                        ,\rho(0)\otimes e^{-\beta H_{E}}\right]\\
+  \begin{split}
+  [H, \rho_{tot}(0)] =& Z^{-1} \sum_{k} g_{k}e^{i(\omega_{c}-\omega_{k})t}\left(a^{\dagger}\rho(0)\otimes b_{k}e^{-\beta H_{E}} -
+                        \rho(0)a^{\dagger}\otimes e^{-\beta H_{E}}b_{k} \right)\\
+                      & +Z^{-1} \sum_{k} g_{k}e^{-i(\omega_{c}-\omega_{k})t}\left(a\rho(0)\otimes b_{k}^{\dagger}e^{-\beta H_{E}} -
+                        \rho(0)a\otimes e^{-\beta H_{E}}b_{k}^{\dagger} \right)
+  \end{split}
+\end{align}
+now we marginalzie and evaluate the corresponding traces,
+\begin{equation}
+\begin{split}
+  \Trp{E}{[H, \rho_{tot}(0)]} =& Z^{-1} \sum_{k} g_{k}e^{i(\omega_{c}-\omega_{k})t}\left(a^{\dagger}\rho(0)\Tr{b_{k}e^{-\beta H_{E}}} -
+                        \rho(0)a^{\dagger}\Tr{e^{-\beta H_{E}}b_{k}} \right)\\
+                      & +Z^{-1} \sum_{k} g_{k}e^{-i(\omega_{c}-\omega_{k})t}\left(a\rho(0)\Tr{b_{k}^{\dagger}e^{-\beta H_{E}}} -
+                        \rho(0)a\Tr{e^{-\beta H_{E}}b_{k}^{\dagger}} \right)
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \Tr{b_{k}e^{-\beta H_{E}}}=\Tr{b_{k}e^{-\beta\omega_{k}b_{k}^{\dagger}b_{k}}\bigotimes_{k'\neq k}e^{-\beta\omega_{k'}b_{k'}^{\dagger}b_{k}}}= \underbrace{\Tr{b_{k}e^{-\beta\omega_{k}b_{k}^{\dagger}b_{k}}}}_{=0}\Tr{\bigotimes_{k'\neq k}e^{-\beta\omega_{k'}b_{k'}^{\dagger}b_{k}}}
+\end{equation}
+\begin{equation}
+\Tr{b_{k}e^{-\beta H_{E}}}=\Tr{b_{k}^{\dagger}e^{-\beta H_{E}}}=0.
+\end{equation}
+Hence for any $\rho(0)$ we have:
+\begin{equation}
+\Trp{E}{[H, \rho_{tot}(0)]}=0
+\end{equation}
+and as a matter of fact, in general there always exists a choice of $\rho_{E}(0)$ that makes this term vanish \cite{wiseman_quantum_2010}.
+\subsubsection{Born Approximation}
+Restricting the values of the coupling paramerets $g_{k}$ to be small, we propose that in terms of second order like integral in the equation
+above it is valid to make the approximation $\rho_{tot}(t)\approx \rho(t)\otimes\rho_{E}(0)$. This is essentially a \textbf{weak coupling}
+assumption and is called the \textit{Born approximation}, which from the calculational point of view allows us to evaluate the double commutator in
+\eqref{eq:pre_approximation}.
+
+\begin{align}
+  [H(t'), \rho(t')\otimes\rho_{E}(0)]=&\sum_{k}g_{k}e^{i(\omega_{c}-\omega_{k})t'}[a^{\dagger}b_{k},\rho(t')\otimes\rho_{E}(0)] +
+g_{k}e^{-i(\omega_{c}-\omega_{k})t'}[ab_{k}^{\dagger},\rho(t')\otimes\rho_{E}(0)]\\
+  \begin{split}
+    [H(t'), \rho(t')\otimes\rho_{E}(0)]=&\sum_{k}g_{k}e^{i(\omega_{c}-\omega_{k})t'}\left\{a^{\dagger}\rho(t')\otimes b_{k}\rho_{E}(0) - \rho(t')a^{\dagger}\otimes\rho_{E}(0)b_{k} \right\}\\
++&\sum_{k}g_{k}e^{-i(\omega_{c}-\omega_{k})t'}\left\{a\rho(t')\otimes b_{k}^{\dagger}\rho_{E}(0) - \rho(t')a\otimes\rho_{E}(0)b_{k}a^{\dagger} \right\}
+  \end{split}
+\end{align}
+now to evaluate the double commutator we use (NOTE: THIS GOES IN AN APPENDIX, THE CALCULATIONS ARE QUITE TEDIOUS AND LONG):
+\begin{align}
+  \Trp{E}{[H(t),a^{\dagger}\rho(t')\otimes b_{k}\rho_{E}(0)]} =& g_{k}e^{-i(\omega_{c}-\omega_{k})t}\Tr{b_{k}^{\dagger}b_{k}\rho_{E}(0)}(aa^{\dagger}\rho(t')-a^{\dagger}\rho(t')a)\\
+  \Trp{E}{[H(t),\rho(t')a^{\dagger}\otimes \rho_{E}(0)b_{k}]} =& g_{k}e^{-i(\omega_{c}-\omega_{k})t}\Tr{b_{k}b_{k}^{\dagger}\rho_{E}(0)}(a\rho(t')a^{\dagger} - \rho(t')a^{\dagger}a)\\
+\Trp{E}{[H(t),a\rho(t')\otimes b_{k}^{\dagger}\rho_{E}(0)]} =& g_{k} e^{i(\omega_{c}-\omega_{k})t}\underbrace{\Tr{b_{k}b_{k}^{\dagger}\rho_{E}(0)}}_{\overline{n}+1}(a^{\dagger}a\rho(t') - a\rho(t')a^{\dagger})\\
+\Trp{E}{[H(t),\rho(t')a\otimes \rho_{E}(0)b_{k}^{\dagger}]} =& g_{k}e^{i(\omega_{c}-\omega_{k})t}\underbrace{\Tr{b_{k}^{\dagger}b_{k}\rho_{E}(0)}}_{\overline{n}}(a^{\dagger}\rho(t')a - \rho(t')aa^{\dagger})
+\end{align}
+where $\overline{n}$ is the average number of photons in the bath at the corresponding temperature.
+\begin{equation}
+\begin{split}
+  [H(t), [H(t'), \rho(t')\otimes \rho_{E}(0)]] =& \sum_{k}g_{k}^{2}e^{i(\omega_{c}-\omega_{k})(t'-t)}\left\{\overline{n}(aa^{\dagger}\rho(t')-a^{\dagger}\rho(t')a) - (\overline{n}+1)(a\rho(t')a^{\dagger} - \rho(t')a^{\dagger}a) \right\}\\
+  &\hspace{-1cm}+\sum_{k}g_{k}^{2}e^{-i(\omega_{c}-\omega_{k})(t'-t)}\left\{(\overline{n}+1)(a^{\dagger}a\rho(t')-a\rho(t')a^{\dagger}) - (\overline{n})(a^{\dagger}\rho(t')a - \rho(t')aa^{\dagger}) \right\}
+\end{split}
+\end{equation}
+Now we define the \textit{\textbf{Bath correlation function}}\footnote{called Reservoire correlation function in \cite{wiseman_quantum_2010}} as:
+
+\begin{equation}
+  \Gamma(\tau) =\sum_{k}g_{k}^{2}e^{i(\omega_{c}-\omega_{k})\tau}\label{eq:bath_correlation}
+\end{equation}
+
+one gets
+
+\begin{equation}
+  \begin{split}
+    [H(t), [H(t'), \rho(t')\otimes \rho_{E}(0)]] =& -2(\overline{n}+1)\Re{(\Gamma(t-t'))}a\rho(t')a^{\dagger} -2 \overline{n}\Re{\Gamma(t-t')}a^{\dagger}\rho(t')a\\
+                                                  &+\Re{\Gamma{t-t'}}(\overline(n)+1)\{a^{\dagger}a, \rho{t'}\} - i\Im{\Gamma(t-t')}(\overline(n)+1)[a^{\dagger}a,\rho(t')]\\
+    &+\Re{\Gamma(t-t')}\overline{n}\{aa^{\dagger}, \rho(t')\} -i \Im{\Gamma(t-t')}\overline{n}[aa^{\dagger},\rho(t')]
+  \end{split}
+\end{equation}
+substituting this into \eqref{eq:pre_approximation} gives a non-markovian equation called a \textit{Redfield equation}.
+\subsubsection{Markov Approximation}
+Finally, to make the equation markovian we demand the \eqref{eq:bath_correlation} be very sharp at $\tau=0$ so that the integral in
+\eqref{eq:pre_approximation} can have its lower limit extended to $-\infty$ and $\rho(t')$ be replaced by $\rho(t)$. Physically this approximatio
+n corresponds to the bath having a correlation function that decays very rapidly \cite{hornberger2009introduction}, for which we define:
+
+\begin{equation}
+  \int_{0}^{\infty}\Gamma(\tau)=\frac{\gamma}{2} -i \Delta \omega_{c}
+\end{equation}
+and finally obtain a markovian master equation, which is already in Linblad form with the supeoperators $\mathcal{D}[A]\rho=A\rho A^{\dagger}-\frac{1}{2}\{A^{\dagger}A,\rho\}$\footnote{these are called \textit{Dissipators}}:
+
+\begin{equation}
+  \partial_{t}\rho = \underbrace{-i\Delta\omega_{c}[(\overline{n}+1)a^{\dagger}a + \overline{n}aa^{\dagger}, \rho]}_{\text{coherent evolution}} + \underbrace{(\overline{n}+1)\gamma\mathcal{D}[a]\rho +
+\overline{n}\gamma\mathcal{D}[a^{\dagger}]\rho}_{\text{incoherent evolution}}.
+\end{equation}
+By rewriting the first argument of the commutator  in the first term, using the bosonic commutation relation, we see that the presence of the bath modifies natural frequency of the system $\Delta\omega_{c}$ in a fashion similar to how atoms suffer frequency shifts when placed into cavities even at zero temperature \cite{dutra2005cavity}
+
+\begin{equation}
+\partial_{t}\rho = \underbrace{-i\Delta\omega_{c}(\overline{n}+2)[aa^{\dagger}, \rho]}_{\text{photon number preserving}} + \underbrace{(\overline{n}+1)\gamma\mathcal{D}[a]\rho}_{\text{cavity emission}} +\underbrace{\overline{n}\gamma\mathcal{D}[a^{\dagger}]\rho}_{\text{incoherent excitation}}.
+\end{equation}
+To understand the other two we form a equation for the mean photon number of the mode by multiplying the above equation by $a^{\dagger}$ and
+taking the trace:
+
+\begin{align}
+  \Tr{a^{\dagger}a\mathcal{D}[a]\rho} =& \Tr{a^{\dagger}aa\rho a^{\dagger}}-\frac{1}{2}\Tr{a^{\dagger}aa^{\dagger}a\rho}-\frac{1}{2}\Tr{a^{\dagger}a\rho a^{\dagger}a} \\
+  \Tr{a^{\dagger}a\mathcal{D}[a]\rho} =& \Tr{(aa^{\dagger}-1)a\rho a^{\dagger}} - \Tr{a^{\dagger}aa^{\dagger}a\rho}\\
+  \Tr{a^{\dagger}a\mathcal{D}[a]\rho} =&-\braket{a^{\dagger}a}\\
+%\end{align}
+% \begin{align}
+\Tr{a^{\dagger}a\mathcal{D}[a^{\dagger}]\rho} =& \Tr{a^{\dagger}aa^{\dagger}\rho a} - \frac{1}{2}\Tr{a^{\dagger}aaa^{\dagger}\rho} - \frac{1}{2}\Tr{a^{\dagger}a\rho aa^{\dagger}}\\
+\Tr{a^{\dagger}a\mathcal{D}[a^{\dagger}]\rho} =& \Tr{a^{\dagger}aa^{\dagger}\rho a} - \frac{1}{2}\Tr{(aa^{\dagger}-1)aa^{\dagger}\rho} - \frac{1}{2}\Tr{(aa^{\dagger}-1)\rho aa^{\dagger}}\\
+\Tr{a^{\dagger}a\mathcal{D}[a^{\dagger}]\rho} =& 1+ \braket{a^{\dagger}a}
+\end{align}
+From here it is clear that the second term refers to the emission of the cavity, and the third one to the absortion from the bath. Substituting
+we find:
+\begin{align}
+  \frac{d}{dt}\braket{a^{\dagger}a} = &-\gamma\braket{a^{\dagger}a} + \overline{n}\gamma\\
+  \braket{a^{\dagger}a}(t) =& (\braket{a^{\dagger}a}(0)-\overline{n})e^{-\gamma t} + \overline{n},
+\end{align}
+and so the mode tends to equilibrate in photon number with the bath when $\gamma t\gg 1$.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
