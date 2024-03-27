@@ -284,22 +284,49 @@ we find:
 and so the mode tends to equilibrate in photon number with the bath when $\gamma t\gg 1$.
 \subsection{Solution to the Cavity Emission Model}
 Finally, we construct a solution to \eqref{eq:cavity_model}, the method consists in exploting the bosonic commutation relations
-to evaluate the operators $\mathcal{K}^{(n)}_{t}$. The first step consists in removing the coherent term by passing to a new rotating frame
+to evaluate the operators $\mathcal{K}^{(n)}_{t}$. To simplify the treatment we remove the coherent term by passing to a new rotating frame
 with the frequency shift times $2\overline{n}+1$, so the equation is reduced to \footnote{note that the dissipators are left unaltered thanks to the commutation relation.}:
 
 \begin{equation}
-\partial_{t}\rho = \gamma_{2}\mathcal{D}[a]\rho + \gamma_{1}\mathcal{D}[a^{\dagger}]\rho
+\partial_{t}\rho = \gamma_{1}\mathcal{D}[a]\rho + \gamma_{2}\mathcal{D}[a^{\dagger}]\rho
 \end{equation}
 
-with $\gamma_{1} = \overline{n}\gamma$, $\gamma_{2} = (\overline{n}+1)\gamma$. Note that for this case:
+with $\gamma_{2} = \overline{n}\gamma$, $\gamma_{1} = (\overline{n}+1)\gamma$. The approach is based on finding the operators $\mathcal{K}_{t}^{(m)}$,  note that from\eqref{eq:unraveling} we have
+
+\begin{equation}\label{eq:kn_operators}
+  \mathcal{K}_{t}^{(m)}=e^{\mathcal{L}_{0}t}\int_{0}^{t}dt_{m}e^{-t_{m}\mathcal{L}_{0}}Se^{t_{m}\mathcal{L}_{0}}\int_{0}^{t_{m}}dt_{m-1}e^{-t_{m-1}\mathcal{L}_{0}}Se^{t_{m-1}\mathcal{L}_{0}}...\int_{0}^{t_{2}}dt_{1}e^{-t_{1}\mathcal{L}_{0}}Se^{t_{1}\mathcal{L}_{0}},
+\end{equation}
+
+so it will suffice to evaluate the integrads as express them in terms of the canonical operators. For this case:
+
+\begin{equation}
+  \tilde{H} = -i\gamma\left((\overline{n}+1)a^{\dagger}a + \overline{n}aa^{\dagger} \right) = -i\gamma\left((2\overline{n}+1)a^{\dagger}a +\overline{n}  \right)
+\end{equation}
+
+\begin{equation}
+  S = \gamma_{1}J[a]+\gamma_{2}J[a^{\dagger}]
+\end{equation}
+
+\begin{equation}
+  e^{\mathcal{L}_{0}\tau} = e^{-\gamma\tau\overline{n}}J[e^{-\frac{1}{2}\gamma'a^{\dagger}a}]
+\end{equation}
+with $\gamma' = (2\overline{n}+1)$. Using the commutations relations:
 
 \begin{align}
-S =& \gamma_{2}J[a] + \gamma_{1}J[a^{\dagger}]\\
-  \tilde{H} =&  - \frac{i}{2}\left(\gamma_{2}a^{\dagger}a + \gamma_{1}aa^{\dagger}\right)=-\frac{i}{2}\left(\gamma (2\overline{n}+1)a^{\dagger}a+\overline{n} \right) \\
-  e^{\mathcal{L}_{0}\tau}=& \exp\left(\right)
+  e^{-\mathcal{L}_{0}\tau}Se^{\mathcal{L}_{0}\tau} =& e^{-\mathcal{L}_{0}\tau}\left(\gamma_{1}J[a]+\gamma_{2}J[a^{\dagger}] \right)e^{\mathcal{L}_{0}\tau}\\
+ e^{-\mathcal{L}_{0}\tau}Se^{\mathcal{L}_{0}\tau} =& e^{-\tau\gamma'}\gamma_{1}J[a]+e^{\tau\gamma'}\gamma_{2}J[a^{\dagger}],
 \end{align}
-
-
+and substituing into \eqref{eq:kn_operators} we obtain the sought result:
+\begin{equation}
+\mathcal{K}_{t}^{(m)}=e^{\mathcal{L}_{0}t}\int_{0}^{t}e^{-t_{m}\gamma'}\gamma_{1}J[a]+e^{t_{m}\gamma'}\gamma_{2}J[a^{\dagger}]dt_{m}\int_{0}^{t_{m}\mathcal{L}_{0}}dt_{m-1}e^{-t_{m-1}\mathcal{L}_{0}}Se^{t_{m-1}\mathcal{L}_{0}}...\int_{0}^{t_{2}\mathcal{L}_{0}}dt_{1}e^{-t_{1}\mathcal{L}_{0}}Se^{t_{1}\mathcal{L}_{0}}.
+\end{equation}
+Particularly in the zero temperature limit ($\overline{n}=0$) it is reduced to:
+\begin{align}
+\mathcal{K}_{t}^{(m)}=&J[e^{-\frac{1}{2}\gamma t a^{\dagger}a}]\int_{0}^{t}e^{-t_{m}\gamma'}\gamma J[a]dt_{m}\int_{0}^{t_{m}}dt_{m-1}e^{-t_{m}\gamma'}\gamma J[a]...\int_{0}^{t_{2}}dt_{1}e^{-t_{1}\gamma'}\gamma J[a]\\
+\mathcal{K}_{t}^{(m)}=& \frac{(1-e^{-\gamma t})^{m}}{m!}J[e^{-\frac{1}{2}\gamma t a^{\dagger}a}]J[a^{m}]
+\end{align}
+as proposed in \cite{wiseman_quantum_2010,adesso_optimal_2009}. For long times $\gamma t \to \infty$, all the $\mathcal{K}^{m}_{t}$ tend to zero
+and hence every initial state tends towards the vacuum, in the long term all the photons in the mode escape from it.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
