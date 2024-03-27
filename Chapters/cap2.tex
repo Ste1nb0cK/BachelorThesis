@@ -260,7 +260,7 @@ and finally obtain a markovian master equation, which is already in Linblad form
 By rewriting the first argument of the commutator  in the first term, using the bosonic commutation relation, we see that the presence of the bath modifies natural frequency of the system $\Delta\omega_{c}$ in a fashion similar to how atoms suffer frequency shifts when placed into cavities even at zero temperature \cite{dutra2005cavity}
 
 \begin{equation}
-\partial_{t}\rho = \underbrace{-i\Delta\omega_{c}(\overline{n}+2)[aa^{\dagger}, \rho]}_{\text{photon number preserving}} + \underbrace{(\overline{n}+1)\gamma\mathcal{D}[a]\rho}_{\text{cavity emission}} +\underbrace{\overline{n}\gamma\mathcal{D}[a^{\dagger}]\rho}_{\text{incoherent excitation}}.
+\partial_{t}\rho = \underbrace{-i\Delta\omega_{c}(\overline{n}+2)[aa^{\dagger}, \rho]}_{\text{photon number preserving}} + \underbrace{(2\overline{n}+1)\gamma\mathcal{D}[a]\rho}_{\text{cavity emission}} +\underbrace{\overline{n}\gamma\mathcal{D}[a^{\dagger}]\rho}_{\text{incoherent excitation}}.\label{eq:cavity_model}
 \end{equation}
 To understand the other two we form a equation for the mean photon number of the mode by multiplying the above equation by $a^{\dagger}$ and
 taking the trace:
@@ -282,6 +282,24 @@ we find:
   \braket{a^{\dagger}a}(t) =& (\braket{a^{\dagger}a}(0)-\overline{n})e^{-\gamma t} + \overline{n},
 \end{align}
 and so the mode tends to equilibrate in photon number with the bath when $\gamma t\gg 1$.
+\subsection{Solution to the Cavity Emission Model}
+Finally, we construct a solution to \eqref{eq:cavity_model}, the method consists in exploting the bosonic commutation relations
+to evaluate the operators $\mathcal{K}^{(n)}_{t}$. The first step consists in removing the coherent term by passing to a new rotating frame
+with the frequency shift times $2\overline{n}+1$, so the equation is reduced to \footnote{note that the dissipators are left unaltered thanks to the commutation relation.}:
+
+\begin{equation}
+\partial_{t}\rho = \gamma_{2}\mathcal{D}[a]\rho + \gamma_{1}\mathcal{D}[a^{\dagger}]\rho
+\end{equation}
+
+with $\gamma_{1} = \overline{n}\gamma$, $\gamma_{2} = (\overline{n}+1)\gamma$. Note that for this case:
+
+\begin{align}
+S =& \gamma_{2}J[a] + \gamma_{1}J[a^{\dagger}]\\
+  \tilde{H} =&  - \frac{i}{2}\left(\gamma_{2}a^{\dagger}a + \gamma_{1}aa^{\dagger}\right)=-\frac{i}{2}\left(\gamma (2\overline{n}+1)a^{\dagger}a+\overline{n} \right) \\
+  e^{\mathcal{L}_{0}\tau}=& \exp\left(\right)
+\end{align}
+
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
