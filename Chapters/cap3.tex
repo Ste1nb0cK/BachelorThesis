@@ -136,19 +136,28 @@ POVMs, this is indeed the case via a procedure proposed the
 \cite{braunstein_statistical_1994} which we outline below.
 
 \subsubsection{The Quantum Fisher Information}
-Consider a generic metrology scheme as outlined at the beginning of
-the section, the integrand in the FI heavily resembles a logarithmic derivative so taking
-this as inspiration a new operator called the \textbf{Self-adjoint
-  Logarithmic Derivative} (SLD) is introduced,  we define it as
+
+is introduced,  we define it as
 a self-adjoint solution to the equation
 
-\begin{equation}
-  \partial_{\gamma}\rho_{\gamma} = \frac{1}{2}\left(\Lambda_{\gamma}\rho_{\gamma} + \rho_{\gamma}\Lambda_{\gamma} \right),
+\begin{theorem}
+  Let $\varepsilon_{\gamma}$ be a quantum channel parametrized by $\gamma \in \mathds{R}$. For the he Fisher Information of any probability distribution coming from a POVM one has:
+
+  \begin{equation}
+F(\gamma) \leq  \Tr{\rho_{\gamma}\Lambda_{\gamma}^{2}}.
 \end{equation}
 
-later we'll come back to discuss its uniqueness and potential
-problems that may arise. Using this we find:
+where $\Lambda_{\gamma}$ is a Self-adjoint solution of
 
+\begin{equation}\label{eq:SLD_definition}
+  \partial_{\gamma}\rho_{\gamma} = \frac{1}{2}\left(\Lambda_{\gamma}\rho_{\gamma} + \rho_{\gamma}\Lambda_{\gamma} \right).
+\end{equation}
+
+and is called the  \textbf{Self-adjoint Logarithmic Derivative} (SLD). Furthermore, there always exists a projective POVM that saturates it \cite{paris_quantum_2009} i.e. there is a maximum FI, called \textbf{Quantum Fisher Information} with value $\Tr{\rho_{\gamma}\Lambda_{\gamma}^{2}}$.
+
+\end{theorem}
+
+\begin{proof}
 \begin{align}
   \Tr{\Pi_{x}\partial_{\gamma}\rho_{\gamma}} =& \Re{\Tr{\Pi_{x}\rho_{\gamma}\Lambda_{\gamma}}}\\
    F(\gamma) =& \int dx\hspace{0.1cm} \frac{\Re{\Tr{\Pi_{x}\rho_{\gamma}\Lambda_{\gamma}}}^{2}}{\Tr{\Pi_{x}\rho_{\gamma}}}\\
@@ -161,3 +170,39 @@ Using the Cauchy-Schwartz inequality and the normalization of the POVM:
 \begin{equation}
 F(\gamma) \leq  \Tr{\rho_{\gamma}\Lambda_{\gamma}^{2}}.
 \end{equation}
+
+From the spectral decomposition of $\Lambda_{\gamma}$ into rank 1 projectos:
+\begin{equation}
+\Tr{\partial_{\gamma}\rho_{\gamma}\Lambda} = \sum_{k} \lambda\Tr{(\lambda\rho_{\gamma})\Pi_{k}}
+\end{equation}
+and noting that:
+\begin{align}
+\frac{\Tr{\Lambda_{\gamma}\rho_{\gamma}\Pi_{k}}}{\Tr{\rho_{\gamma}\Pi_{k}}} =& \lambda_{k}\\
+\Tr{\rho_{\gamma}\Lambda_{\gamma}^{2}} =& \sum_{k} \frac{(\Tr{(\Lambda_{\gamma}\rho_{\gamma})\Pi_{k}})^{2}}{\Tr{\rho_{\gamma}\Pi_{k}}}\\
+\Tr{\rho_{\gamma}\Lambda_{\gamma}^{2}} =&\sum_{k} \frac{(\Tr{(\partial_{\gamma}\rho_{\gamma})\Pi_{k}})^{2}}{\Tr{\rho_{\gamma}\Pi_{k}}}
+\end{align}
+the last line is the FI associated to the POVM formed by the rank 1 projectors of the SLD and so it saturates the inequality.
+\end{proof}
+
+This theorem shows there exists POVM independent limits to the variance of parameter estimation
+i.e.  \textbf{measurement independent precision bound}. There is no choice of rule for relating outcomes to parameters (estimator) and
+measurement strategy (POVM) capable of beating this bound, and so we regard it as a fundamental limit imposed by Quantum Mechanics.
+To explore potential quantum advantages use \eqref{eq:SLD_definition} to expand the SLD in the eigenbasis of $\rho_{\gamma}$
+
+\begin{equation}
+  \Lambda_{\gamma} = 2\sum_{\substack{nm\\ p_{n}+p_{m}\neq 0}}\frac{\bra{\psi_{n}}\partial_{\gamma}\Lambda_{\gamma}\ket{\psi_{m}}}{p_{n} + p_{m}}\ketbratwo{\psi_{n}}{\psi_{m}}
+\end{equation}
+
+where the $p_{k}$'s are the eigenvalues and the $\ket{\psi_{k}}$'s the eigenvectors. Note that the sum is restricted to the support of
+$\rho_{\gamma}$ as the SLD is uniquely defined only on it, following \cite{braunstein_statistical_1994} we define it as zero outside it,
+this is physically reasonable as the kernel of $\rho_{\gamma}$ plays no meaningful role in the probability distributions induced by the POVMs.
+Substituting into the expression for the QFI \cite{paris_quantum_2009}:
+
+\begin{equation}
+  \mathcal{F}_{Q}(\gamma) = \sum_{\substack{n\\p_{n}\neq 0}} \frac{(\partial_{\gamma}p_{n})^{2}}{p_{n}} + 2\sum_{\substack{n\neq m\\p_{n} +p_{m}\neq 0}}
+  \frac{(p_{m}-p_{n})^{2}}{p_{m}+p_{n}}|\braket{\psi_{n}|\partial_{\gamma}\psi_{m}}|
+\end{equation}
+
+The first term is identified as a classical contribution whereas the second one constitutes the quantum addition i.e. there is a quantum
+advantage in the optimal probability distribution provided the second term doesn't vanish. This section achieves the basic objective of this
+work, stablish the fundamental limits of parameter estimation and identify the possibility for quantum advantages.
