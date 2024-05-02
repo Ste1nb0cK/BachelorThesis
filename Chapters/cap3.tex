@@ -137,15 +137,7 @@ POVMs, this is indeed the case via a procedure proposed the
 
 \subsubsection{The Quantum Fisher Information}
 Consider a generic metrology scheme as outlined at the beginning of
-the section, its FI is easily bounded by:
-
-\begin{equation}
-  F(\gamma) = \int dx
-  \frac{(\Tr{\Pi_{x}\partial_{\gamma}\rho_{\gamma}})^{2}}{\Tr{\Pi_{x}\rho_{\gamma}}} \leq \int dx
-  \frac{|\Tr{\Pi_{x}\partial_{\gamma}\rho_{\gamma}}|^{2}}{\Tr{\Pi_{x}\rho_{\gamma}}}.
-\end{equation}
-
-The integrand heavily resembles a logarithmic derivative so taking
+the section, the integrand in the FI heavily resembles a logarithmic derivative so taking
 this as inspiration a new operator called the \textbf{Self-adjoint
   Logarithmic Derivative} (SLD) is introduced,  we define it as
 a self-adjoint solution to the equation
@@ -158,5 +150,14 @@ later we'll come back to discuss its uniqueness and potential
 problems that may arise. Using this we find:
 
 \begin{align}
-  \Tr{\Pi_{x}\partial_{\gamma}\rho_{\gamma}} =&\frac{1}{2}\left( \Tr{\Pi_{x}\rho_{\gamma}\Lambda_{\gamma}} +\Tr{\Pi_{x}\Lambda_{\gamma}\rho_{\gamma}}\right)\\
+  \Tr{\Pi_{x}\partial_{\gamma}\rho_{\gamma}} =& \Re{\Tr{\Pi_{x}\rho_{\gamma}\Lambda_{\gamma}}}\\
+   F(\gamma) =& \int dx\hspace{0.1cm} \frac{\Re{\Tr{\Pi_{x}\rho_{\gamma}\Lambda_{\gamma}}}^{2}}{\Tr{\Pi_{x}\rho_{\gamma}}}\\
+   F(\gamma) \leq& \int dx\hspace{0.1cm} \frac{|\Tr{\Pi_{x}\rho_{\gamma}\Lambda_{\gamma}}|^{2}}{\Tr{\Pi_{x}\rho_{\gamma}}}\\
+   F(\gamma) \leq& \int dx\hspace{0.1cm} \frac{\Tr{\sqrt{\Pi_{x}}\sqrt{\rho_{\gamma}}\sqrt{\rho_{\gamma}}\Lambda_{\gamma}\sqrt{\Pi_{x}}}}{\Tr{\Pi_{x}\rho_{\gamma}}}\\
 \end{align}
+
+Using the Cauchy-Schwartz inequality and the normalization of the POVM:
+
+\begin{equation}
+F(\gamma) \leq  \Tr{\rho_{\gamma}\Lambda_{\gamma}^{2}}.
+\end{equation}
