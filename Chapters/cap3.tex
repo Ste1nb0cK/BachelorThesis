@@ -132,15 +132,10 @@ Different choices of measurement strategy will lead to different
 distributions and in turn to different values of FI, this means
 that not all the POVMs are made equal. A good
 question now is wheter one can bound the FI for all possible
-POVMs, this is indeed the case via a procedure proposed the
-\cite{braunstein_statistical_1994} which we outline below.
+POVMs, this is indeed the case via a procedure proposed in
+\cite{braunstein_statistical_1994} to prove theorem \ref{theorem:QFI}.
 
-\subsubsection{The Quantum Fisher Information}
-
-is introduced,  we define it as
-a self-adjoint solution to the equation
-
-\begin{theorem}
+\begin{theorem}\label{theorem:QFI}
   Let $\varepsilon_{\gamma}$ be a quantum channel parametrized by $\gamma \in \mathds{R}$. For the he Fisher Information of any probability distribution coming from a POVM one has:
 
   \begin{equation}
@@ -152,9 +147,7 @@ where $\Lambda_{\gamma}$ is a Self-adjoint solution of
 \begin{equation}\label{eq:SLD_definition}
   \partial_{\gamma}\rho_{\gamma} = \frac{1}{2}\left(\Lambda_{\gamma}\rho_{\gamma} + \rho_{\gamma}\Lambda_{\gamma} \right).
 \end{equation}
-
 and is called the  \textbf{Self-adjoint Logarithmic Derivative} (SLD). Furthermore, there always exists a projective POVM that saturates it \cite{paris_quantum_2009} i.e. there is a maximum FI, called \textbf{Quantum Fisher Information} with value $\Tr{\rho_{\gamma}\Lambda_{\gamma}^{2}}$.
-
 \end{theorem}
 
 \begin{proof}
@@ -205,4 +198,117 @@ Substituting into the expression for the QFI \cite{paris_quantum_2009}:
 
 The first term is identified as a classical contribution whereas the second one constitutes the quantum addition i.e. there is a quantum
 advantage in the optimal probability distribution provided the second term doesn't vanish. This section achieves the basic objective of this
-work, stablish the fundamental limits of parameter estimation and identify the possibility for quantum advantages.
+work: stablish the fundamental limits of parameter estimation and identify the possibility for quantum advantages. In the rest we study some particularly important cases, particularly  with phase estimation in this chapter and loss parameters in the next one.
+
+\subsection{Unitary Channels and the Metrological Uncertainty Relations}
+Our objective for the rest of this section is to obtain the generic precision bound associated with the QFI of  unitary channels,
+this is called the \textbf{Quantum Crame\'er-Rao Bound} (QCRB).
+Unitary channels are extremal \cite{watrous2018theory,demkowicz-dobrzanski_elusive_2012} i.e. they
+cannot be written as a convex superposition of another channels and have the form:
+
+\begin{equation}
+  \varepsilon_{\phi}(\rho)=e^{-iG\phi)}\rho e^{iG\phi}
+\end{equation}
+where $G\phi$ is a self-adjoint operator that acts as a generator. We begin by studying the effect of state mixing in the QFI, intuitevly one
+expects some type of convexity property as mixed states include ignorance additional to the one about the parameter and indeed this is the case \cite{yu2013quantum}, in fact any Fisher Information has this property \cite{cohen1968fisher}. Specifically
+this means that for any set of states $\{\rho_1, \dots, \rho_n,\}$
+with associated probabilities $\{p_1,\dots, p_n\}$ and for any channel
+
+\begin{equation}
+  \mathcal{F}_{Q}[\phi; \sum_{k=1}^{n}\rho_{k}] \leq \sum_{k=1}^{n}p_{k}\mathcal{F}_{Q}[\phi; \rho_{k}].
+\end{equation}
+Hence to maximize the QFI one must choose a pure initial state.
+
+\begin{theorem}Precision Bound of unitary channels with pure initial state
+  For any unitary channel $\varepsilon_{\phi}$ with generator $G$, evolution parameter $\phi$ and a pure initial state $\ket{\psi_{0}}$ one has:
+  \begin{align}
+    \Lambda_{\phi} =& 2 \partial_{\phi}\rho_{\phi}\\
+    \mathcal{F}_{Q}(\phi) =& 4 \Delta G
+  \end{align}
+  where $\Delta^2G$ is the variance of the generator respect to the
+  initial state. Furthermore, the QFI is independent of the value
+  of the parameter.
+\end{theorem}
+
+\begin{proof}
+  As unitary channels preserve the purity we have that for all $\phi$:
+  \begin{align}
+    \rho_{\phi} =& \rho_{\phi}^{2}\\
+    \partial_{\phi}\rho_{\phi}  =& \rho_{\phi}\partial_{\phi}\rho_{\phi} +\partial_{\phi}\rho_{\phi} \rho_{\phi}
+  \end{align}
+  and so by inspection we get
+  \begin{equation}
+    \Lambda_{\phi} = 2\partial_{\phi}\rho_{\phi} = -2[ G, \rho ].
+  \end{equation}
+  For the QFI we do a direct calculation
+  \begin{equation}
+    \mathcal{F}_{Q}(\phi) = \Tr{\Lambda_{\phi}\partial_{\phi}\rho_{\phi}}= 2\Tr{([G, \rho ])^{2}}
+  \end{equation}
+\begin{equation}
+     ([G, \rho ])^{2}= -e^{-iG\phi}[G, \rho_{0}]^{2}e^{-iG\phi}
+\end{equation}
+and thanks to the cyclic property of the trace it suffices to calculate the square of the commutator
+
+\begin{align}
+\Tr{([G, \rho ])^{2}}=& 2\Tr{G\underbrace{\rho_{0}G\rho_{0}}_{\expectation{\psi_{0}}{G}\ketbra{\psi_{0}}}} - 2\Tr{\rho_{0}G^{2}}\\
+  \Tr{([G, \rho ])^{2}}=&-2\expectation{\psi_{0}}{G}\\
+  \mathcal{F}_{Q}(\phi) =&  4 \Delta G.
+\end{align}
+Moments of the generator are always indepedent of the evolution parameter, as can quickly be seen:
+\begin{equation}
+  \Tr{\rho_{\phi}G^{n}}= \expectation{\psi_{\phi}}{G^{n}}= \expectation{\psi_{0}}{e^{i\phi G}G^{n}e^{-i\phi G}} = \expectation{\psi_{0}}{ G^{n}}
+\end{equation}
+and hence so is the QFI.
+\end{proof}
+The previous result gives us the QCRB:
+
+\begin{equation}\label{eq:unitary_QCRB}
+  \Delta \phi \Delta G\geq \frac{1}{4}
+\end{equation}
+
+and it resembles an uncertainty relation for, but with the
+important difference that it is not necessary for $\phi$ to have
+an associated observable. An inmediate application of this
+result is to the time-energy relation, which can be easily
+recovered when $G$ is the hamiltonian of the system
+and $\phi$ time; this derivation operationalizes its meaning:
+the shorter the time shift the bigger the uncertainty in any
+energy measurement, the greatest the uncerainty in the energy the better one could estimate the time shift. The main advantage of this
+derivation is that's model independent and does not rely on any type of heuristic, in great contrast to derivations shown in classical
+textbooks like \cite{cohen1986quantum,sakurai2020modern}. Similarly one can apply it to the photon number-phase relation that typically
+appears in quantum optics \cite{loudon_quantum_2010}, giving an alternative view to the geometric arguments related to the Wigner function.
+Note nevertheless that the nature of this \textbf{metrological uncertainty relation} is different from the most general uncertainty relation
+derived from operator algebra arguments \cite{gieres2000mathematical}:
+
+\begin{equation}
+\Delta A \Delta B \geq \frac{1}{2}|i\braket{A\psi, B\psi} - i\braket{B\psi,A\psi}|
+\end{equation}
+
+and they do not coincide for cases like the angular momentum-azimuthal angle case, this is no surprise as our derivation does not rely in
+anyway in properties of the adjoint in infinite dimensions and so no inconvenient related to domains happen. To further illustrate this
+difference consider the famous position-momentum uncertainty relation: if we choose $G$ to be the momentum $\Delta phi$ is
+the estimation uncertainty in a position shift i.e. \eqref{eq:unitary_QCRB} is associated with a particular physical transformation that
+can be regarded as a preparation, and if a perfect momentum measurement is performed there will be simultaneously a matter of fact about the
+value of the momentum and that of the shift; only momentum measurements are necessary to access the value of the shift.
+This is in great contrast to the usual interpretation that comes from the operator derivation in which no preparation is specified, two
+measurements are involved, and there is no simultaneous matter of fact. The conclusion we extract from this is that a \textbf{preparation
+  parameter} like the shift and a \textbf{physical observable} like the position are fundamentally different quantities, and hence claims
+that \eqref{eq:unitary_QCRB} recovers the usual uncertainty relations such as those in \cite{wiseman_quantum_2010} must be taken with care for
+they ignore this important subtlety.
+
+\section{Quantum Advantage in Phase Estimation}
+The problem of phase estimation consists in determining the phase shift $\theta$ in a channel of the form:
+\begin{equation}
+  \varepsilon_{\theta}(\rho) = e^{-i\theta G}\varepsilon_{0}(\rho)e^{i\theta G},
+\end{equation}
+
+which in general is not unitary as $\varepsilon_{0}$ might include $\theta$ independent non-unitary effects. We choose as
+as our model to study the role of environmental effects in precision bounds the case of a photonic system i.e. a \textbf{Bosonic Channel},
+under markovian noise.
+\subsection{Quantum Advantage in the Unitary Case}
+In particular choosing $G=a^{\dagger}a$ as would be the case for example in a Mach-Zender interferometer (MZI) in which $\theta$ is associated
+with a phase shift due to the arm-length difference, and taking as input a coherent state $\ket{\psi_{0}}=\ket{\alpha}$ one finds
+
+\begin{equation}
+\Delta \theta \geq \frac{1}{|\alpha|}=\frac{1}{\sqrt{N}}
+\end{equation}
