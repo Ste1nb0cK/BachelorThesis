@@ -296,19 +296,56 @@ measurements are involved, and there is no simultaneous matter of fact. The conc
 that \eqref{eq:unitary_QCRB} recovers the usual uncertainty relations such as those in \cite{wiseman_quantum_2010} must be taken with care for
 they ignore this important subtlety.
 
-\section{Quantum Advantage in Phase Estimation}
+\section{Phase Estimation}
 The problem of phase estimation consists in determining the phase shift $\theta$ in a channel of the form:
 \begin{equation}
   \varepsilon_{\theta}(\rho) = e^{-i\theta G}\varepsilon_{0}(\rho)e^{i\theta G},
 \end{equation}
 
 which in general is not unitary as $\varepsilon_{0}$ might include $\theta$ independent non-unitary effects. We choose as
-as our model to study the role of environmental effects in precision bounds the case of a photonic system i.e. a \textbf{Bosonic Channel},
+as our system to study the role of environmental effects in precision bounds the case of a photonic system i.e. a \textbf{Bosonic Channel},
 under markovian noise.
 \subsection{Quantum Advantage in the Unitary Case}
 In particular choosing $G=a^{\dagger}a$ as would be the case for example in a Mach-Zender interferometer (MZI) in which $\theta$ is associated
 with a phase shift due to the arm-length difference, and taking as input a coherent state $\ket{\psi_{0}}=\ket{\alpha}$ one finds
 
-\begin{equation}
-\Delta \theta \geq \frac{1}{|\alpha|}=\frac{1}{\sqrt{N}}
+\begin{equation}\label{eq:shot_noise}
+\Delta \theta \geq \frac{1}{4\Delta N}=\frac{1}{\sqrt{N}}
 \end{equation}
+
+where $N$ is the average photon number of the input and we have used the poissonian statistics of photon counting for coherent states. The
+higher the photon number, the higher precision one can achieve and thus to
+increase our knowledge of $\theta$ what must be done is to increase $N$; in this sense we say the photon number acts as a \textbf{resource}.
+How much increase in precision one gets from a given increase in $N$ is determined by the characteristics of the initial state, particularly
+by how the QFI depends on $N$. It is common terminalogy to call scalings $\Delta \theta \propto N^{-1/2}$ \textbf{shot noise} and  $\Delta \theta \propto N^{-1}$ \textbf{Heisenberg Scaling} \cite{barbieri_optical_2022} \footnote{the origin of these scalings in quantum optics can be tracked down to the dynamics of photodetection, see \cite{wiseman_quantum_2010}}. The really interesting thing about
+a particular precision bound is not so much its actual value but the scaling; \eqref{eq:shot_noise} shows that if we identify
+classical light as coherent states, then the classical limit of phase estimation in an optical systems is the shot noise.
+Then the inmediate question that arises is whether it is possible to surpass it with non-poissonian statistics, embracing the non-classical
+aspects of light, for this we consider a squeezed state $\ket{\xi}$ with the same mean photon number, leading to
+
+\begin{equation}
+\Delta \theta \geq \frac{1}{N}.
+\end{equation}
+
+From here we see that the addition of a non-classical resource, in this quadrature case squeezing, leads to a \textbf{quantum advantage in
+  the scaling respect to the mean photon number}. Many other non-classical resources have been shows to lead to advantages in different types
+of systems e.g. entanglement, quantum criticality and even quantum chaos \cite{escher_general_2011, giovannetti_quantum_2006, jiao_quantum_2023}.
+\subsection{Enviromental effects}
+Consider the zero-temperature radiative damping,  restoring the Schr{\"o}dinger picture to regard $\omega $ as a phase shift the channel takes
+the form:
+
+\begin{equation}
+  \varepsilon_{\omega}(\rho_{0}) = e^{-i\omega t a^{\dagger}a}\left(\sum_{m=0}^{\infty}\frac{(1-e^{-\gamma t})^{m}}{m!}J[e^{-\gamma t a^{\dagger}a/2}a^{m}]\right)e^{i\omega t a^{\dagger}a}.
+\end{equation}
+
+For coherent and squeezed state as input one finds respectevly \cite{jiao_quantum_2023}
+
+\begin{equation}
+\mathcal{F}_{Q}(\omega) = 4t^{2}e^{-\gamma t}N, \mathcal{F}_{Q}(\omega) \leq \frac{2Nt^{2}}{e^{2\gamma t}-1}
+\end{equation}
+
+so not only does the presence of noise degrade the Heisenberg scaling to shot noise but also an exponential decay with time appears even
+for small losses, making also harder an experimental implementation as now there exists an optimal \textbf{encoding time}. This exponential
+decay of the QFI, proper of markovian models, is sometimes referred to as the \textbf{no-go theorem of Quantum Metrology} although
+ways to bend it have been proposed e.g. including environment monitoring, control strategies and non-markovian models
+% \cite{albarelli_restoring_2018 ,jiao_quantum_2023, liu2017quantum}.
