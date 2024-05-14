@@ -348,4 +348,53 @@ so not only does the presence of noise degrade the Heisenberg scaling to shot no
 for small losses, making also harder an experimental implementation as now there exists an optimal \textbf{encoding time}. This exponential
 decay of the QFI, proper of markovian models, is sometimes referred to as the \textbf{no-go theorem of Quantum Metrology} although
 ways to bend it have been proposed e.g. including environment monitoring, control strategies and non-markovian models
-% \cite{albarelli_restoring_2018 ,jiao_quantum_2023, liu2017quantum}.
+\cite{albarelli_restoring_2018, ,jiao_quantum_2023, liu2017quantum}.
+
+\section{Loss Parameter Estimation in Bosonic Channels}
+In this section we follow \cite{adesso_optimal_2009, monras_optimal_2007} to study the problem of loss parameter estimation in a zero
+temperature environment (e.g. a leaky QED cavity). These types of channels are governed by the master equation:
+
+\begin{equation}
+  \partial_{t} \rho = \gamma(a\rho a^{\dagger} -\frac{1}{2}\{a^{\dagger}a, \rho\})
+\end{equation}
+
+where $a,a^{\dagger}$ are the bosonic canonical operators, the objective is to estimate $\gamma$. Notice in first place that this form
+is inadequate for the previous formalism as the derivative si taken respect to time instead of $\gamma$, to circumbert this we consider
+instead the problem for an adimensional $\tau$:
+
+\begin{equation}
+  \partial_{\tau} \rho = a\rho a^{\dagger} -\frac{1}{2}\{a^{\dagger}a, \rho\}
+\end{equation}
+
+and later we'll restablish $\gamma$ and $t$ via an appropiate reparametrization, following \cite{adesso_optimal_2009,monras_optimal_2007}.
+The form of the channel is the same as in the previous case, with the only difference that here we omit the rotating terms as they are not of
+interest:
+
+\begin{equation}
+ \varepsilon_{\tau}(\rho_{0}) = \sum_{m=0}^{\infty}\frac{(1-e^{-\tau})^{m}}{m!}J[e^{-\tau a^{\dagger}a/2}a^{m}]\rho_{0}.
+\end{equation}
+For this case we examine three input states with the same mean photon number: Fock, squeezed and coherent;
+their QIFs are presented in the following table and plot.
+
+\begin{center}
+      % \resizebox{0.8\columnwidth}{!}{
+      \begin{tabular}{c c c c }
+        % \toprule
+        &\textbf{Coherent} & \textbf{Squeezed}  & \textbf{Fock}   \\
+        % \midrule
+        % Frequency & $Nt^2$& $t^{2} (\frac{1}{2}N^{2}+5N )$ &  $t^{2}(\frac{N^{2}}{2}+N)$\\
+        Loss & $N t^{2}e^{-t\gamma}$ & $ t^{2}N \frac{-2e^{\gamma t} +e^{2\gamma t}+2}{(e^{\gamma t}-1)(2e^{\gamma t}N-2N +e^{2\gamma t})}$ & $t^{2}N \frac{1}{e^{\gamma t}-1}$\\
+        % \bottomrule
+      \end{tabular}
+    % }
+      \label{tab:table1}
+\end{center}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.35]{Images/Loss_QFI_Plot.pdf}
+    \caption{Adapted from \cite{rossi_2016}}
+\end{figure}
+
+Notably, the Fock state is actually the optimal initial state \cite{adesso_optimal_2009} in general and not
+only between these 3. Similar to the phase estimation case we see that there exists optimal encoding times and that an exponential decay appears.
