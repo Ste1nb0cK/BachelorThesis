@@ -1,9 +1,16 @@
 \chapter{Markovian Open Systems}
-% As commented in the previous chapter, in many situations we are interested in only a few degrees of freedoms that couple to many more
-% e.g. an atom interacting with an electromagnetic field, in such a way that the description of the complete system is untracktable. For this
-% reason it is of great importance to develop methods that allow for the construction of equations of motions for reduced density operators, which
-% when exact give almost as intractable non-markovian dynamics like those described by the Nakajima-Zwanzig equation \cite{breuer2002theory} and
-% that thus require approximations for their analytical or numerical study. In this chapter we review the
+As commented in the previous chapter, in many situations we are interested in only a few degrees of freedoms that couple to many more
+e.g. an atom interacting with an electromagnetic field, in such a way that the description of the complete system is untracktable. For this
+reason it is of great importance to construct equations of motions for reduced density operators, nevertheless
+when exact they tend to give almost as intractable problems; like solving the Nakajima-Zwanzig equation \cite{breuer2002theory}, for this it is
+necessary to develop a approximation schemes that allow the study of certain regimes, among these by far the most studied one is the markovian
+regime which we describe and apply in the context of quantum optics during this chapter.
+\\\\
+We begin by characterizing markovian open systems as those possesing a evolution described by a dynamical semigroup, immedeatly after
+we state Lindblad's theorem to describe the equations of motion that these obey. Then we introduce the idea of quantum trajectories
+to interpret the evolution. Finally study a damped QED cavity to show the typical approximations that produce a markovian equation
+of motion, this will also give us our first example of a bosonic channel.
+
 \section{Dynamical Semigroups}
 The most accessible and studied type of open quantum systems are those which accept a description through a \textbf{markovian} and \textbf{time
   homogeneous} differential equation. Classical stochastic processes of this kind are characterized through the semigroup
@@ -24,7 +31,7 @@ will still be deterministic.
 \end{definition}
 
 In general these are irreversible; mathematically because the image is \textit{contractive} and physically due to its
-positive entropy production \cite{breuer2002theory}, for this demanding a full group structure is too strong. The main result
+positive entropy production \cite{breuer2002theory}, and so demanding a full group structure is too strong. The main result
 of this chapter is the classification in terms of generators due to Linblad, which is presented in the following theorem.
 
 \begin{theorem}
@@ -35,85 +42,81 @@ of this chapter is the classification in terms of generators due to Linblad, whi
   \partial_{t}\rho(t) = \mathcal{L}\rho(t) = -i[ H,\rho ] + \sum_{k}\gamma_{k}\left(L_{k}\rho(t) L_{k}^{\dagger} - \frac{1}{2}\{L_{k}^{\dagger}L_{k}, \rho(t)\}\right)
   \end{equation}
   with $L_{k}$ operators  and $H$ a self-adjoint one, futhermore, all equations of this form define a dynamical semigroup.
-  Equation (\ref{eq:linblad}) is called \textbf{the Linblad Master Equation}, the traceless $L_{k}$'s the \textbf{Linblad operators}, and
+  Equation (\ref{eq:linblad}) is called \textbf{the Gorini--Kossakowski-–Sudarshan--Linblad  Master Equation}\footnote{From here on we simply refer to it as Lindblad equation}, the traceless $L_{k}$'s the \textbf{Linblad operators}, and
   the $\gamma_{k}$ are positive constants with inverse time dimensions \cite{breuer2002theory, lindblad1976generators, wiseman_quantum_2010,hornberger2009introduction}.
 \end{theorem}
 
 \section{Trajectory Interpretation of the Evolution}
-It is clear that at the very least (\ref{eq:linblad}) accepts a formal solution in terms of an exponential superator $\exp(t\mathcal{L})$, one
-can use this to form a generalized Dyson series expansion that will gives us a Kraus representation of it by defining a sort
+It is clear that at the very least (\ref{eq:linblad}) accepts a formal solution in terms of an exponential superator $\exp(t\mathcal{L})$,
+this can be used to form a generalized Dyson series expansion that will gives us a Kraus representation of it by defining a sort
 of interaction picture. Begin by defining an
-arbitrary decomposition of the generator in terms of two terms $\mathcal{L}_{0}, S$:
+arbitrary decomposition of the generator in terms of two terms $\mathcal{L}_{0}, S$
 \begin{equation}
   \mathcal{L} = \mathcal{L}_{0} + S
 \end{equation}
-and now introduce the auxiliary unnormalized state $\rho'$
+and now introduce the auxiliary unnormalized state $\rho'$,
 \begin{equation}
 \rho = e^{\mathcal{L}_{0}t}\rho'
 \end{equation}
-subsituting it in the first equality of the Linblad equation one obtains:
+replaving it in the first equality of the Linblad equation, one obtains:
 \begin{align}
   e^{\mathcal{L}_{0}t}\partial_{t}\rho' + \mathcal{L}_{0}\rho =& S\rho + \mathcal{L}_{0}\rho \\
-\partial_{t}\rho' =& e^{-\mathcal{L}_{0}t}Se^{\mathcal{L}_{0}t}\rho_{1}
+\partial_{t}\rho' =& e^{-\mathcal{L}_{0}t}Se^{\mathcal{L}_{0}t}\rho,
 \end{align}
-and integrating from 0 to $t$:
+and integrating from 0 to $t_{1}$:
 \begin{align}
-\rho' = \rho(0) + \int_{0}^{t}dt_{1} e^{-\mathcal{L}_{0}t_{1}}Se^{\mathcal{L}_{0}t_{1}}\rho_{1}(t_{1}).
+\rho' = \rho'(0) + \int_{0}^{t}dt_{1} e^{-\mathcal{L}_{0}t_{1}}Se^{\mathcal{L}_{0}t_{1}}\rho(t_{1}).
 \end{align}
-Iterating this equation:
+Iterating this relation:
 
-\begin{align}
+\begin{equation}
+\begin{split}
 \rho' =& \rho(0) +  \int_{0}^{t}dt_{1} e^{-\mathcal{L}_{0}t_{1}}Se^{\mathcal{L}_{0}t_{1}}\left(\rho(0) + \int_{0}^{t_{1}}dt_{2} e^{-\mathcal{L}_{0}t_{2}}Se^{\mathcal{L}_{0}t_{2}}\rho'(t_{2}) \right)\\
   \rho' =& \rho(0) +  \int_{0}^{t}dt_{1} e^{-\mathcal{L}_{0}t_{1}}Se^{\mathcal{L}_{0}t_{1}}\rho(0) + \int_{0}^{t}dt_{1} \int_{0}^{t_{1}}dt_{2}e^{-\mathcal{L}_{0}t_{1}}Se^{\mathcal{L}_{0}(t_{1}-t_{2})}Se^{\mathcal{L}_{0}t_{2}}\rho'(t_{2})\\
   \rho' =& \rho(0) + \sum_{n=1}^{\infty}\int_{0}^{t}dt_{n}\int_{0}^{t_{n}}dt_{n-1}...\int_{0}^{t_{2}}dt_{1}e^{-t_{n}\mathcal{L}_{0}}Se^{(t_{n}-t_{n-1})\mathcal{L}_{0}}S...e^{(t_{2}-t_{1})\mathcal{L}_{0}}Se^{t_{1}\mathcal{L}_{0}}\rho(0).
-\end{align}
+\end{split}
+\end{equation}
 Note that in the last line we inverted the order of the indexation to make it coincide with \cite{hornberger2009introduction}, so finally
 we have for the original state:
 \begin{equation}\label{eq:unraveling}
   \rho = e^{t\mathcal{L}_{0}}\rho(0) + \sum_{n=1}^{\infty}\int_{0}^{t}dt_{n}\int_{0}^{t_{n}}dt_{n-1}...\int_{0}^{t_{2}}dt_{1}e^{(t-t_{n})\mathcal{L}_{0}}Se^{(t_{n}-t_{n-1})\mathcal{L}_{0}}S...e^{(t_{2}-t_{1})\mathcal{L}_{0}}Se^{t_{1}\mathcal{L}_{0}}\rho(0).
 \end{equation}
 This has a formally identical structure to that of the Dyson series in a pertubative expansion, suggesting that one can interpret the evolution
-of the system as being given by a perturbation $S$ to the evolution $e^{t{L}_{0}}$. The main problem with this is that in general the splitting
+of the system as being given by a perturbation $S$ to the evolution $e^{t{L}_{0}}$. The main problem with this, is that in general the splitting
 superoperators do not necessarily define a dynamical semigroup e.g. they could fail to map into a traceless operator, which is a consistency
 condition. To obtain a more suitable interpretation we choose a particular decomposition, coming from the second equality of (\ref{eq:linblad})
 \cite{hornberger2009introduction}:
 
 \begin{align}
-\mathcal{L}_{0} =& -i(\tilde{H}\rho - \rho\tilde{H}^{\dagger})\\
-S =& \sum_{k}\mathcal{L}_{k}\\
-  \tilde{H} =& H - \frac{i}{2}\sum_{k}\gamma_{k}L_{k}^{\dagger}L_{k}\\
-  \mathcal{L}_{k} = & J[\sqrt{\gamma_{k}}L_{k}]\rho\
+\mathcal{L}_{0} =& -i(\tilde{H}\rho - \rho\tilde{H}^{\dagger}),\\
+S =& \sum_{k}\mathcal{L}_{k},\\
+  \tilde{H} =& H - \frac{i}{2}\sum_{k}\gamma_{k}L_{k}^{\dagger}L_{k},\\
+  \mathcal{L}_{k} = & J[\sqrt{\gamma_{k}}L_{k}]\rho\,
 \end{align}
 where we used the notation $J[A]\rho = A\rho A^{\dagger}$.
-For the evaluation we introduce the following result:
+For the evaluation we introduce the following result \footnote{This follows from taking the derivative of the exponential and inspecting for solutions}:
 \begin{lemma}
   For any superoperator of the form $\mathcal{A}\rho = A\rho+\rho A^{\dagger}$,
   \begin{equation}
-    e^{\tau\mathcal{A}}\rho=\exp(\tau A)\rho\exp(\tau A^{\dagger})
+    e^{\tau\mathcal{A}}\rho=\exp(\tau A)\rho\exp(\tau A^{\dagger}).
   \end{equation}
 \end{lemma}
-  \begin{proof}
-    Taking the derivative one forms the equation
-    \begin{equation}
-      \partial_{t}e^{\tau\mathcal{A}}\rho =  A\rho+\rho A^{\dagger}
-    \end{equation}
-    which by inspection one sees has the solution
-    $e^{\tau\mathcal{A}}\rho=\exp(\tau A)\rho\exp(\tau A^{\dagger})$.
-  \end{proof}
-  allowing us to write (\ref{eq:unraveling}) as in \cite{wiseman_quantum_2010}:
 
+Now we can write (\ref{eq:unraveling}) as:
 
   \begin{equation}\label{eq:superoperator_decomposition}
     \rho = J[e^{t \frac{1}{i}\tilde{H}}]\rho(0)  +  \sum_{n=1}^{\infty}\mathcal{K}^{(n)}_{t}\rho(0)
       \end{equation}
-\begin{align}
+\begin{equation}
+  \begin{split}
   \mathcal{K}^{(n)}_{t}=&\int_{0}^{t}dt_{n}\int_{0}^{t_{n}}dt_{n-1}...\int_{0}^{t_{2}}dt_{1}J[e^{(t-t_{n}) \frac{1}{i}\tilde{H}}]SJ[e^{(t_{n}-t_{n-1}) \frac{1}{i}\tilde{H}}]...J[e^{(t_{2}-t_{1}) \frac{1}{i}\tilde{H}}]SJ[e^{t_{1}\frac{1}{i}\tilde{H}}]\\
-  \mathcal{K}^{(n)}_{t}=&\sum_{k_{1}...k_{n}}\int_{0}^{t}dt_{n}\int_{0}^{t_{n}}dt_{n-1}...\int_{0}^{t_{2}}dt_{1}J\left[e^{(t-t_{n})\frac{1}{i}\tilde{H}}\sqrt{\gamma_{k_{n}}}L_{k_{n}}e^{(t_{n}-t_{n-1})\frac{1}{i}\tilde{H}}...e^{(t_{2}-t_{1})\frac{1}{i}\tilde{H}}\sqrt{\gamma_{k_{1}}}L_{k_{1}}e^{t_{1}\frac{1}{i}\tilde{H}}\right]
-\end{align}
-the integrands inside $\mathcal{K}_{t}^{(n)}$ are positive, and so they must be non-trace increasing for (\ref{eq:superoperator_decomposition})
+  \mathcal{K}^{(n)}_{t}=&\sum_{k_{1}...k_{n}}\int_{0}^{t}dt_{n}\int_{0}^{t_{n}}dt_{n-1}...\int_{0}^{t_{2}}dt_{1}J\left[e^{(t-t_{n})\frac{1}{i}\tilde{H}}\sqrt{\gamma_{k_{n}}}L_{k_{n}}e^{(t_{n}-t_{n-1})\frac{1}{i}\tilde{H}}...e^{(t_{2}-t_{1})\frac{1}{i}\tilde{H}}\sqrt{\gamma_{k_{1}}}L_{k_{1}}e^{t_{1}\frac{1}{i}\tilde{H}}\right].
+  \end{split}
+\end{equation}
+The integrands inside $\mathcal{K}_{t}^{(n)}$ are positive, and so they must be non-trace increasing for (\ref{eq:superoperator_decomposition})
 to have the same trace in both sides. With this we conclude that (\ref{eq:unraveling}) can be interpreted as a piecewise deterministic process,
 in which continous evolutions $\exp(\tau\mathcal{L}_{0})$ are interrupted by environment induced transformations $J[L_{k}]$ at a rate
-$\gamma_{k}$. More precesely, the probability of the systems evolving during a time $t$ without \textbf{jumps} i.e. only continously is:
+$\gamma_{k}$. More precesely, the probability of the systems evolving during a time $t$ without \textbf{jumps} i.e. only continuously is
 
 \begin{equation}
   P(R_{0}^{t}|\rho) = \Tr{e^{\mathcal{L}_{0}t}}
@@ -125,20 +128,21 @@ and the probability of having $n$ jumps $k_{n},...,k_{1}$ at respective times $t
   P(R_{n}^{t>t_{n}>...>t_{1}}|\rho) = \Tr{J\left[e^{(t-t_{n})\frac{1}{i}\tilde{H}}L_{k_{n}}e^{(t_{n}-t_{n-1})\frac{1}{i}\tilde{H}}...e^{(t_{2}-t_{1})\frac{1}{i}\tilde{H}}L_{k_{1}}e^{t_{1}\frac{1}{i}\tilde{H}}\right]\rho}.
 \end{equation}
 
-This is the interpretation of the \textbf{Quantum Trajectories} \cite{wiseman_quantum_2010,hornberger2009introduction}
+A particular realization of jumps and continuous evolution is called a \textbf{Quantum Trajectory} \cite{wiseman_quantum_2010,hornberger2009introduction}.
 
 \section{Damped Harmonic Osccilator}
 To illustrate how Linblad equations appear in practice we look at a single mode of a QED cavity coupled to many others in the exterior of it,
-we proceed with a \textbf{\textit{microscopic derivation}} in which we pose a total hamiltonian for system and bath and then introduce
-approximations to obtain a Markovian completely positive evolution. We consider the following hamiltonian \cite{wiseman_quantum_2010,walls_quantum_2008}:
+proceeding with a \textbf{\textit{microscopic derivation}} in which a total hamiltonian for system and bath is posed,  and then introduce
+approximations to obtain a Markovian completely positive evolution. We consider the following hamiltonian
+\cite{wiseman_quantum_2010,walls_quantum_2008}:
 
 \begin{equation}\label{eq:radiative_hamiltonian}
 H_{tot} = \underbrace{\overbrace{\omega_{c} a^{\dagger}a}^{H_{c}} + \overbrace{\sum_{k}\omega_{k}b^{\dagger}_{k}b_{k}}^{H_{E}} }_{H_{0}}+ \underbrace{\sum_{k}g_{k}\left( a^{\dagger}b_{k} + ab^{\dagger}_{k} \right)}_{H_{I}}.
 \end{equation}
 Where the $a$'s and $b_k$'s satisfy the bosonic commutation relation.
 \subsection{Transformation to the Interaction Picture}
-The interesting part of the dynamic lies in the coupling term of \eqref{eq:radiative_hamiltonian} and so we pass to an interaction picture; we
-denote the Schrödinger picture operators with tildes.
+The interesting part of the dynamic lies in the coupling term of \eqref{eq:radiative_hamiltonian}, and so we pass to an interaction picture. The
+Schr{\"o}dinger picture operators are denoted with tildes.
 
 \begin{align}
   \tilde{\rho}_{tot}(t) =& e^{-iH_{0}t} \rho_{tot}(t)e^{iH_{0}t}\\
@@ -146,94 +150,28 @@ denote the Schrödinger picture operators with tildes.
   -iH_{0}\tilde{\rho}_{tot} +i\tilde{\rho}_{tot}H_{0} + e^{-iH_{0}t}\partial_{t} \rho_{tot}(t)e^{iH_{0}t} =&-i[H_{0}, \tilde{\rho}_{tot}(t)] - i[H_I,\tilde{\rho}_{tot}(t) ]\\
 \partial_{t} \rho_{tot}(t) =&-i[e^{iH_{0}t}H_Ie^{-iH_{0}t},\rho_{tot}(t) ]
 \end{align}
- now obtaining the interaction hamiltonian:
-
 \begin{align}
   e^{iH_{0}t} H_{I}e^{-iH_{0}t} =& \sum_{k}g_{k}\left(e^{iH_{c}t}a^{\dagger}e^{-iH_{c}t} e^{iH_{E}t}b_{k}e^{-iH_{E}t} +
                                    e^{iH_{c}t}ae^{-iH_{c}t} e^{iH_{E}t}b_{k}^{\dagger}e^{-iH_{E}t}\right)\\
-  H\equiv & \sum_{k} g_{k} \left( e^{i(\omega_{c}-\omega_{k})t}a^{\dagger}b +   e^{-i(\omega_{c}-\omega_{k})t}ab^{\dagger} \right)
+  H\equiv & \sum_{k} g_{k} \left( e^{i(\omega_{c}-\omega_{k})t}a^{\dagger}b +   e^{-i(\omega_{c}-\omega_{k})t}ab^{\dagger} \right).
 \end{align}
-one is lead to the reduced Von-Neumann equation:
+And so the equation of motion for the reduced density operator is obtained:
 \begin{align}
   \partial_{t}\rho_{tot} =& -i[H, \rho_{tot}]\\
- \underbrace{\partial_{t}\rho}_{\Trp{E}{\partial_{t}\rho_{tot}}} =& -i\mathrm{Tr}_{E}\left\{[H(t), \rho_{tot}(0)]\right\} - \int_{0}^{t}dt'\mathrm{Tr}_{E}\left\{[H(t), [H(t'), \rho_{tot}(t')]]\right\}.\label{eq:pre_approximation}
+ \underbrace{\partial_{t}\rho}_{\Trp{E}{\partial_{t}\rho_{tot}}} =& -i\mathrm{Tr}_{E}\left\{[H(t), \rho_{tot}(0)]\right\} - \int_{0}^{t}dt'\mathrm{Tr}_{E}\left\{[H(t), [H(t'), \rho_{tot}(t')]]\right\}\label{eq:pre_approximation}
 \end{align}
-So far the treatment has been exact and general but at this point the necessity for approximations come, these are typical for most derivations
-of this type \cite{hornberger2009introduction,wiseman_quantum_2010,breuer2002theory}.
+So far the treatment has been exact and general but at this point the necessity for approximations arises, here the most typical ones for this
+type of derivation are used \cite{hornberger2009introduction,wiseman_quantum_2010,breuer2002theory}.
 \subsubsection{Initial state of the total system}
 Our first assumption will be that at $t=0$ system and bath are completely uncorrelated i.e. $\rho_{tot}(0)=\rho(0)\otimes \rho_{E}(0)$,
 physically this is reasonable if enough control over the system to prepare its initial state in isolation from the environment.
 Furthermore the first term of \eqref{eq:pre_approximation} is forced to vanish by choosing a particular initial state for the bath, in our case
-we use a thermal state $\rho_{E}(0)=Z^{-1}e^{-\beta H_{E}}$\footnote{Here $Z$ is the canonical partition function and $\beta=1/kT$.}:
+we use a thermal state $\rho_{E}(0)=Z^{-1}e^{-\beta H_{E}}$\footnote{Here $Z$ is the canonical partition function and $\beta=1/kT$.}. As a matter of fact, in general there always exists a choice of $\rho_{E}(0)$ that makes this term vanish \cite{wiseman_quantum_2010}. See appendix (\ref{appendixA}) for a detailed calculation showing this is the case.
 
-\begin{align}
-  [H, \rho_{tot}(0)] =& Z^{-1}\left[ \sum_{k} g_{k} \left( e^{i(\omega_{c}-\omega_{k})t}a^{\dagger}b +   e^{-i(\omega_{c}-\omega_{k})t}ab^{\dagger}
-                        \right),\rho(0)\otimes e^{-\beta H_{E}}\right]\\
-   [H, \rho_{tot}(0)] =& Z^{-1}\sum_{k} g_{k}\left[  e^{i(\omega_{c}-\omega_{k})t}a^{\dagger}b +   e^{-i(\omega_{c}-\omega_{k})t}ab^{\dagger}
-                        ,\rho(0)\otimes e^{-\beta H_{E}}\right]\\
-  \begin{split}
-  [H, \rho_{tot}(0)] =& Z^{-1} \sum_{k} g_{k}e^{i(\omega_{c}-\omega_{k})t}\left(a^{\dagger}\rho(0)\otimes b_{k}e^{-\beta H_{E}} -
-                        \rho(0)a^{\dagger}\otimes e^{-\beta H_{E}}b_{k} \right)\\
-                      & +Z^{-1} \sum_{k} g_{k}e^{-i(\omega_{c}-\omega_{k})t}\left(a\rho(0)\otimes b_{k}^{\dagger}e^{-\beta H_{E}} -
-                        \rho(0)a\otimes e^{-\beta H_{E}}b_{k}^{\dagger} \right)
-  \end{split}
-\end{align}
-now we marginalzie and evaluate the corresponding traces,
-\begin{equation}
-\begin{split}
-  \Trp{E}{[H, \rho_{tot}(0)]} =& Z^{-1} \sum_{k} g_{k}e^{i(\omega_{c}-\omega_{k})t}\left(a^{\dagger}\rho(0)\Tr{b_{k}e^{-\beta H_{E}}} -
-                        \rho(0)a^{\dagger}\Tr{e^{-\beta H_{E}}b_{k}} \right)\\
-                      & +Z^{-1} \sum_{k} g_{k}e^{-i(\omega_{c}-\omega_{k})t}\left(a\rho(0)\Tr{b_{k}^{\dagger}e^{-\beta H_{E}}} -
-                        \rho(0)a\Tr{e^{-\beta H_{E}}b_{k}^{\dagger}} \right)
-  \end{split}
-\end{equation}
-
-\begin{equation}
-  \Tr{b_{k}e^{-\beta H_{E}}}=\Tr{b_{k}e^{-\beta\omega_{k}b_{k}^{\dagger}b_{k}}\bigotimes_{k'\neq k}e^{-\beta\omega_{k'}b_{k'}^{\dagger}b_{k}}}= \underbrace{\Tr{b_{k}e^{-\beta\omega_{k}b_{k}^{\dagger}b_{k}}}}_{=0}\Tr{\bigotimes_{k'\neq k}e^{-\beta\omega_{k'}b_{k'}^{\dagger}b_{k}}}
-\end{equation}
-\begin{equation}
-\Tr{b_{k}e^{-\beta H_{E}}}=\Tr{b_{k}^{\dagger}e^{-\beta H_{E}}}=0.
-\end{equation}
-Hence for any $\rho(0)$ we have:
-\begin{equation}
-\Trp{E}{[H, \rho_{tot}(0)]}=0
-\end{equation}
-and as a matter of fact, in general there always exists a choice of $\rho_{E}(0)$ that makes this term vanish \cite{wiseman_quantum_2010}.
 \subsubsection{Born Approximation}
-Restricting the values of the coupling paramerets $g_{k}$ to be small, we propose that in terms of second order like integral in the equation
-above it is valid to make the approximation $\rho_{tot}(t)\approx \rho(t)\otimes\rho_{E}(0)$. This is essentially a \textbf{weak coupling}
+Restricting the values of the coupling paramerets $g_{k}$ to be small, we propose that in the integral it is valid to make the approximation $\rho_{tot}(t)\approx \rho(t)\otimes\rho_{E}(0)$. This is essentially a \textbf{weak coupling}
 assumption and is called the \textit{Born approximation}, which from the calculational point of view allows us to evaluate the double commutator in
-\eqref{eq:pre_approximation}.
-
-\begin{align}
-  [H(t'), \rho(t')\otimes\rho_{E}(0)]=&\sum_{k}g_{k}e^{i(\omega_{c}-\omega_{k})t'}[a^{\dagger}b_{k},\rho(t')\otimes\rho_{E}(0)] +
-g_{k}e^{-i(\omega_{c}-\omega_{k})t'}[ab_{k}^{\dagger},\rho(t')\otimes\rho_{E}(0)]\\
-  \begin{split}
-    [H(t'), \rho(t')\otimes\rho_{E}(0)]=&\sum_{k}g_{k}e^{i(\omega_{c}-\omega_{k})t'}\left\{a^{\dagger}\rho(t')\otimes b_{k}\rho_{E}(0) - \rho(t')a^{\dagger}\otimes\rho_{E}(0)b_{k} \right\}\\
-+&\sum_{k}g_{k}e^{-i(\omega_{c}-\omega_{k})t'}\left\{a\rho(t')\otimes b_{k}^{\dagger}\rho_{E}(0) - \rho(t')a\otimes\rho_{E}(0)b_{k}a^{\dagger} \right\}
-  \end{split}
-\end{align}
-now to evaluate the double commutator we use (NOTE: THIS GOES IN AN APPENDIX, THE CALCULATIONS ARE QUITE TEDIOUS AND LONG):
-\begin{align}
-  \Trp{E}{[H(t),a^{\dagger}\rho(t')\otimes b_{k}\rho_{E}(0)]} =& g_{k}e^{-i(\omega_{c}-\omega_{k})t}\Tr{b_{k}^{\dagger}b_{k}\rho_{E}(0)}(aa^{\dagger}\rho(t')-a^{\dagger}\rho(t')a)\\
-  \Trp{E}{[H(t),\rho(t')a^{\dagger}\otimes \rho_{E}(0)b_{k}]} =& g_{k}e^{-i(\omega_{c}-\omega_{k})t}\Tr{b_{k}b_{k}^{\dagger}\rho_{E}(0)}(a\rho(t')a^{\dagger} - \rho(t')a^{\dagger}a)\\
-\Trp{E}{[H(t),a\rho(t')\otimes b_{k}^{\dagger}\rho_{E}(0)]} =& g_{k} e^{i(\omega_{c}-\omega_{k})t}\underbrace{\Tr{b_{k}b_{k}^{\dagger}\rho_{E}(0)}}_{\overline{n}+1}(a^{\dagger}a\rho(t') - a\rho(t')a^{\dagger})\\
-\Trp{E}{[H(t),\rho(t')a\otimes \rho_{E}(0)b_{k}^{\dagger}]} =& g_{k}e^{i(\omega_{c}-\omega_{k})t}\underbrace{\Tr{b_{k}^{\dagger}b_{k}\rho_{E}(0)}}_{\overline{n}}(a^{\dagger}\rho(t')a - \rho(t')aa^{\dagger})
-\end{align}
-where $\overline{n}$ is the average number of photons in the bath at the corresponding temperature.
-\begin{equation}
-\begin{split}
-  [H(t), [H(t'), \rho(t')\otimes \rho_{E}(0)]] =& \sum_{k}g_{k}^{2}e^{i(\omega_{c}-\omega_{k})(t'-t)}\left\{\overline{n}(aa^{\dagger}\rho(t')-a^{\dagger}\rho(t')a) - (\overline{n}+1)(a\rho(t')a^{\dagger} - \rho(t')a^{\dagger}a) \right\}\\
-  &\hspace{-1cm}+\sum_{k}g_{k}^{2}e^{-i(\omega_{c}-\omega_{k})(t'-t)}\left\{(\overline{n}+1)(a^{\dagger}a\rho(t')-a\rho(t')a^{\dagger}) - (\overline{n})(a^{\dagger}\rho(t')a - \rho(t')aa^{\dagger}) \right\}
-\end{split}
-\end{equation}
-Now we define the \textit{\textbf{Bath correlation function}}\footnote{called Reservoire correlation function in \cite{wiseman_quantum_2010}} as:
-
-\begin{equation}
-  \Gamma(\tau) =\sum_{k}g_{k}^{2}e^{i(\omega_{c}-\omega_{k})\tau}\label{eq:bath_correlation}
-\end{equation}
-
-one gets
+\eqref{eq:pre_approximation}. In appendix (\ref{appendixB}) the calculation is perfomed and it is found that:
 
 \begin{equation}
   \begin{split}
@@ -242,16 +180,23 @@ one gets
     &+\Re{\Gamma(t-t')}\overline{n}\{aa^{\dagger}, \rho(t')\} -i \Im{\Gamma(t-t')}\overline{n}[aa^{\dagger},\rho(t')]
   \end{split}
 \end{equation}
-substituting this into \eqref{eq:pre_approximation} gives a non-markovian equation called a \textit{Redfield equation}.
+
+where  $\Gamma$, called the \textbf{Bath correlation function}, is
+given by:
+
+\begin{equation}
+  \Gamma(\tau) =\sum_{k}g_{k}^{2}e^{i(\omega_{c}-\omega_{k})\tau}\label{eq:bath_correlation}.
+\end{equation}
+
 \subsubsection{Markov Approximation}
-Finally, to make the equation markovian we demand the \eqref{eq:bath_correlation} be very sharp at $\tau=0$ so that the integral in
-\eqref{eq:pre_approximation} can have its lower limit extended to $-\infty$ and $\rho(t')$ be replaced by $\rho(t)$. Physically this approximatio
-n corresponds to the bath having a correlation function that decays very rapidly \cite{hornberger2009introduction}, for which we define:
+Finally, to make the equation markovian we demand the bath correlation be very sharp at $\tau=0$ so that the integral in
+\eqref{eq:pre_approximation} can have its lower limit extended to $-\infty$ and $\rho(t')$ be replaced by $\rho(t)$. Physically this
+approximation corresponds to the bath having a correlation function that decays very rapidly \cite{hornberger2009introduction}. We define:
 
 \begin{equation}
   \int_{0}^{\infty}\Gamma(\tau)=\frac{\gamma}{2} -i \Delta \omega_{c}
 \end{equation}
-and finally obtain a markovian master equation, which is already in Linblad form with the supeoperators $\mathcal{D}[A]\rho=A\rho A^{\dagger}-\frac{1}{2}\{A^{\dagger}A,\rho\}$\footnote{these are called \textit{Dissipators}}:
+and obtain a markovian master equation, which is already in Linblad form with the supeoperators $\mathcal{D}[A]\rho=A\rho A^{\dagger}-\frac{1}{2}\{A^{\dagger}A,\rho\}$\footnote{these are called \textit{Dissipators}}:
 
 \begin{equation}
   \partial_{t}\rho = \underbrace{-i\Delta\omega_{c}[(\overline{n}+1)a^{\dagger}a + \overline{n}aa^{\dagger}, \rho]}_{\text{coherent evolution}} + \underbrace{(\overline{n}+1)\gamma\mathcal{D}[a]\rho +
@@ -283,21 +228,21 @@ we find:
 \end{align}
 and so the mode tends to equilibrate in photon number with the bath when $\gamma t\gg 1$.
 \subsection{Solution to the Cavity Emission Model}
-Finally, we construct a solution to \eqref{eq:cavity_model}, the method consists in exploting the bosonic commutation relations
-to evaluate the operators $\mathcal{K}^{(n)}_{t}$. To simplify the treatment we remove the coherent term by passing to a new rotating frame
+A solution to \eqref{eq:cavity_model} can be constructed by exploting the bosonic commutation relations
+to evaluate the superoperators $\mathcal{K}^{(n)}_{t}$. To simplify the treatment we remove the coherent term by passing to a new rotating frame
 with the frequency shift times $2\overline{n}+1$, so the equation is reduced to \footnote{note that the dissipators are left unaltered thanks to the commutation relation.}:
 
 \begin{equation}
 \partial_{t}\rho = \gamma_{1}\mathcal{D}[a]\rho + \gamma_{2}\mathcal{D}[a^{\dagger}]\rho
 \end{equation}
 
-with $\gamma_{2} = \overline{n}\gamma$, $\gamma_{1} = (\overline{n}+1)\gamma$. The approach is based on finding the operators $\mathcal{K}_{t}^{(m)}$,  note that from\eqref{eq:unraveling} we have
+with $\gamma_{2} = \overline{n}\gamma$, $\gamma_{1} = (\overline{n}+1)\gamma$. From\eqref{eq:unraveling} we have
 
 \begin{equation}\label{eq:kn_operators}
   \mathcal{K}_{t}^{(m)}=e^{\mathcal{L}_{0}t}\int_{0}^{t}dt_{m}e^{-t_{m}\mathcal{L}_{0}}Se^{t_{m}\mathcal{L}_{0}}\int_{0}^{t_{m}}dt_{m-1}e^{-t_{m-1}\mathcal{L}_{0}}Se^{t_{m-1}\mathcal{L}_{0}}...\int_{0}^{t_{2}}dt_{1}e^{-t_{1}\mathcal{L}_{0}}Se^{t_{1}\mathcal{L}_{0}},
 \end{equation}
 
-so it will suffice to evaluate the integrads as express them in terms of the canonical operators. For this case:
+so it will suffice to evaluate the integrals and express them in terms of the canonical operators.
 
 \begin{equation}
   \tilde{H} = -i\gamma\left((\overline{n}+1)a^{\dagger}a + \overline{n}aa^{\dagger} \right) = -i\gamma\left((2\overline{n}+1)a^{\dagger}a +\overline{n}  \right)
@@ -310,17 +255,16 @@ so it will suffice to evaluate the integrads as express them in terms of the can
 \begin{equation}
   e^{\mathcal{L}_{0}\tau} = e^{-\gamma\tau\overline{n}}J[e^{-\frac{1}{2}\gamma'a^{\dagger}a}]
 \end{equation}
-with $\gamma' = (2\overline{n}+1)$. Using the commutations relations:
-
+with $\gamma' = (2\overline{n}+1)$. Using the commutations relations
+and substituing into the expression for the $\mathcal{K}^{(n)}$:
 \begin{align}
   e^{-\mathcal{L}_{0}\tau}Se^{\mathcal{L}_{0}\tau} =& e^{-\mathcal{L}_{0}\tau}\left(\gamma_{1}J[a]+\gamma_{2}J[a^{\dagger}] \right)e^{\mathcal{L}_{0}\tau}\\
  e^{-\mathcal{L}_{0}\tau}Se^{\mathcal{L}_{0}\tau} =& e^{-\tau\gamma'}\gamma_{1}J[a]+e^{\tau\gamma'}\gamma_{2}J[a^{\dagger}],
 \end{align}
-and substituing into \eqref{eq:kn_operators} we obtain the sought result:
 \begin{equation}
-\mathcal{K}_{t}^{(m)}=e^{\mathcal{L}_{0}t}\int_{0}^{t}e^{-t_{m}\gamma'}\gamma_{1}J[a]+e^{t_{m}\gamma'}\gamma_{2}J[a^{\dagger}]dt_{m}\int_{0}^{t_{m}\mathcal{L}_{0}}dt_{m-1}e^{-t_{m-1}\mathcal{L}_{0}}Se^{t_{m-1}\mathcal{L}_{0}}...\int_{0}^{t_{2}\mathcal{L}_{0}}dt_{1}e^{-t_{1}\mathcal{L}_{0}}Se^{t_{1}\mathcal{L}_{0}}.
+\mathcal{K}_{t}^{(m)}=e^{\mathcal{L}_{0}t}\int_{0}^{t}e^{-t_{m}\gamma'}\gamma_{1}J[a]+e^{t_{m}\gamma'}\gamma_{2}J[a^{\dagger}]dt_{m}\int_{0}^{t_{m}}dt_{m-1}e^{-t_{m-1}\mathcal{L}_{0}}Se^{t_{m-1}\mathcal{L}_{0}}...\int_{0}^{t_{2}}dt_{1}e^{-t_{1}\mathcal{L}_{0}}Se^{t_{1}\mathcal{L}_{0}}.
 \end{equation}
-Particularly in the zero temperature limit ($\overline{n}=0$) it is reduced to:
+Particularly, in the zero temperature limit ($\overline{n}=0$) it simplifies to:
 \begin{align}
 \mathcal{K}_{t}^{(m)}=&J[e^{-\frac{1}{2}\gamma t a^{\dagger}a}]\int_{0}^{t}e^{-t_{m}\gamma'}\gamma J[a]dt_{m}\int_{0}^{t_{m}}dt_{m-1}e^{-t_{m}\gamma'}\gamma J[a]...\int_{0}^{t_{2}}dt_{1}e^{-t_{1}\gamma'}\gamma J[a]\\
 \mathcal{K}_{t}^{(m)}=& \frac{(1-e^{-\gamma t})^{m}}{m!}J[e^{-\frac{1}{2}\gamma t a^{\dagger}a}]J[a^{m}]
