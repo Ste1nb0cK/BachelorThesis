@@ -1,9 +1,21 @@
 \chapter{The Language of Quantum Information Theory}
+This chapter constructs the formalism for the study of open quantum systems we use in the rest of the thesis, in analogy with the
+Quantum Mechanics (QM) postulates we demand that it must stablish two things: how this class of systems evolve and how to obtain its measurement
+statistics, furthermore, it must follow from the postulates. To achieve the first one we introduce the notions of \textbf{system-enviroment scheme}, \textbf{marginalization}, and
+\textbf{mixed state} by modeling them via Hilbert Spaces with tensor product structure, the partial trace and density operators, then these
+are coupled with the unitary evolution postulate and lead us to the idea that all possible physical transformation in QM can be understood as a
+special class of superoperators called \textbf{Quantum Operations} for which a few key results are presented.
+\\\\
+The second point is
+obtained by realizing that measurements as precribed in the postulates are a valid type of quantum operation and when considered
+as acting only on a subsystem lead to the notion of \textbf{generalized measurement}, which resembles much more how an actual measurement is
+performed in a laboratory, and eventually allows us to show that all the information about the statistics is captured by
+a set of positive operators called a \textbf{Positive Operator Valued Measure}.
 % Section on density operator
 \section{Density Operators}
 %%%%%%%%%%Postulates of Quantum Mechanics
 \subsection{Postulates of Quantum Mechanics}
-We begin by stating the a common axiomatization of Quantum Mechanics (QM) based on Hilbert Spaces following \cite{ballentine_quantum_2014}, we choose it for mathematical simplicity; for alternatives see e.g. \cite{reyes-lega_aspects_2015}.
+We begin by stating the a common axiomatization of QM based on Hilbert Spaces following \cite{ballentine_quantum_2014}, we choose it for mathematical simplicity; for alternatives see e.g. \cite{reyes-lega_aspects_2015}.
 \begin{enumerate}
         \item To each physical system $\mathcal{S}$ there corresponds a separable Hilbert Space $\mathcal{H}$ such that states of the system are described by positive and unit trace operators on it. The Hilbert Space of a composite system made up of $\mathcal{S}$ and $\mathcal{S}'$
         is given by the tensor product of the Hilbert spaces $\mathcal{H}\otimes\mathcal{H}'$.
@@ -112,14 +124,16 @@ to prescend from it. Any
 observable $\Gamma$ that we decide to measure must be of the form $\Gamma=\Lambda \otimes I$ so that it describes only actions on
 $\mathcal{H}_{A}$; in this sense we say it is \textit{\textbf{local}}. We want to obtain the probability distribution describing the statistics
 of $\Lambda$, by definition:
-\begin{align}
-  \wp(\lambda)=&\Tr{\rho (\ketbra{\lambda^{A}}\otimes I)}\\
-  \wp(\lambda)=& \sum_{\lambda'k}\bra{\psi_{k}^{B}}\bra{\lambda'^{A}}\rho (\ketbra{\lambda}\otimes I)\ket{\lambda'^{A}}\ket{\psi_{k}^{B}}\\
-  \wp(\lambda)=& \sum_{\lambda'k}\bra{\psi_{k}^{B}}\bra{\lambda'^{A}}\rho \ket{\lambda'^{A}}\ket{\psi_{k}^{B}} \delta_{\lambda\lambda'}\\
-  \wp(\lambda)=& \sum_{k}\bra{\psi_{k}^{B}}\bra{\lambda^{A}}\rho \ket{\lambda^{A}}\ket{\psi_{k}^{B}} \\
-  \wp(\lambda)=&\bra{\lambda^{A}} \left(\sum_{k}\bra{\psi_{k}^{B}}\rho\ket{\psi_{k}^{B}}\right)\ket{\lambda^{A}}\\
-  \wp(\lambda)=& \Tr{\ketbra{\lambda^{A}}\sum_{k}\bra{\psi_{k}^{B}}\rho\ket{\psi_{k}^{B}}} \label{eq:partial_trace}.
-\end{align}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%HEREEEEEEE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{align}
+   \wp(\lambda)=&\Tr{\rho (\ketbra{\lambda^{A}}\otimes I)}\\
+   \wp(\lambda)=& \sum_{\lambda'k}\bra{\psi_{k}^{B}}\bra{\lambda^{'A}}\rho (\ketbra{\lambda}\otimes I)\ket{\lambda^{'A}}\ket{\psi_{k}^{B}}\\
+    \wp(\lambda)=& \sum_{\lambda'k}\bra{\psi_{k}^{B}}\bra{\lambda^{'A}}\rho \ket{\lambda^{'A}}\ket{\psi_{k}^{B}} \delta_{\lambda\lambda'}\\
+    \wp(\lambda)=& \sum_{k}\bra{\psi_{k}^{B}}\bra{\lambda^{A}}\rho \ket{\lambda^{A}}\ket{\psi_{k}^{B}} \\
+    \wp(\lambda)=& \bra{\lambda^{A}} \left(\sum_{k}\bra{\psi_{k}^{B}}\rho\ket{\psi_{k}^{B}}\right)\ket{\lambda^{A}}\\
+    \wp(\lambda)=& \Tr{\ketbra{\lambda^{A}}\sum_{k}\bra{\psi_{k}^{B}}\rho\ket{\psi_{k}^{B}}} \label{eq:partial_trace}.
+ \end{align}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%HEREEEEEEE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Equation \eqref{eq:partial_trace} suggest that there exists a state in $\mathcal{H}_{A}$ whose statistics  coincide
 with those of $\rho$ and that it should be given by the sum in \eqref{eq:partial_trace}, in this sense we have a marginalization i.e.
 an assignement of states of in $\mathcal{H}_{A}\otimes\mathcal{H}_{B}$ to states in $\mathcal{H}_{A}$ such that it has the correct statistics
@@ -333,23 +347,6 @@ From here comes the definition we have been trying to construct all along:
 \end{definition}
 The importance of POVMs is that in many cases, like the determination of a precision bound in  quantum estimation, only the probabilities of the outcomes are of interest; then defining a measurement scheme for this cases is not necessary as a POVM already induces the probabily distribution and describes them.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Von Neumann Entropu
-% \subsection{The Von Neumann Entropy}
-% As can be seen in the study of Bell's inequalities in a two qubit system, not all entangled states show the same amount of violation of the
-% inequalities, and it is not even true that non-separability is sufficient to violate them \cite{ballentine_quantum_2014}, thus not all entangled
-% states are made equal and classifying them is a relevant task; to achieve this we introduce \textit{\textbf{Entanglement Measures}}, which
-% quantify how strong this non-classical correlations is in a bipartite state.
-% Following \cite{vedral1997quantifying} we demand from any proper measure:
-
-% \begin{enumerate}
-%         \item it is a map $\mathcal{E}:\mathcal{L}(\mathcal{H}_{A}\otimes\mathcal{H}_{B}) \to \mathds{R}^{+}$.
-%         \item $\mathcal{E}(\rho)=0$ if and only if $\rho$ is separable.
-%         \item Local unitary operations preserve $\mathcal{E}(\rho)=\mathcal{E}(U_{A}\otimes U_{B} \rho U_{A}^{\dagger}\otimes U_{B}^{\dagger} )$.
-%   \item The entanglement can not be increased via classical communication or local measurements \footnote{for proper definitions of
-%         these see \cite{diosi_short_2011, vedral1997quantifying}}.
-% \end{enumerate}
-% The first condition is just the basic requirement for a figure of merit, the second assures the measure identifies the absence of entanglement,
-% and the last two that the two systems can not become correlated via operations that pertain to only one of them.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
