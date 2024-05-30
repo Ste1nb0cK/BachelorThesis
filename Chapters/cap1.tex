@@ -10,12 +10,13 @@ The second point is
 obtained by realizing that measurements as precribed in the postulates are a valid type of quantum operation and when considered
 as acting only on a subsystem lead to the notion of \textbf{generalized measurement}, which resembles much more how an actual measurement is
 performed in a laboratory, and eventually allows us to show that all the information about the statistics is captured by
-a set of positive operators called a \textbf{Positive Operator Valued Measure}.
+a set of positive operators called a \textbf{Positive Operator Valued Measure}. The name of the chapter comes from the fact that all
+of these ideas are at the heart of Quantum Information.
 % Section on density operator
 \section{Density Operators}
 %%%%%%%%%%Postulates of Quantum Mechanics
 \subsection{Postulates of Quantum Mechanics}
-We begin by stating the a common axiomatization of QM based on Hilbert Spaces following \cite{ballentine_quantum_2014}, we choose it for mathematical simplicity; for alternatives see e.g. \cite{reyes-lega_aspects_2015}.
+We begin by stating a common axiomatization of QM based on Hilbert Spaces following \cite{ballentine_quantum_2014}, it is chosen for mathematical simplicity; for alternatives see e.g. \cite{reyes-lega_aspects_2015}.
 \begin{enumerate}
         \item To each physical system $\mathcal{S}$ there corresponds a separable Hilbert Space $\mathcal{H}$ such that states of the system are described by positive and unit trace operators on it. The Hilbert Space of a composite system made up of $\mathcal{S}$ and $\mathcal{S}'$
         is given by the tensor product of the Hilbert spaces $\mathcal{H}\otimes\mathcal{H}'$.
@@ -23,21 +24,21 @@ We begin by stating the a common axiomatization of QM based on Hilbert Spaces fo
         values are given by its eigenvalues.
         \item Given a system in  state $\rho$ and some observable $A$ of it, the probability of measuring $A$ and obtaining the result
         $\lambda$ is given by $\mathrm{Tr}[\rho P_{\lambda}]$ where $P_{\lambda}$ is the eigen-projector into the subspace associated with
-        $\lambda$. Furthermore the expectation value is $\mathrm{Tr}[\rho A]$.
+        $\lambda$. Furthermore the expectation value of $A$ is $\mathrm{Tr}[\rho A]$.
         \item After a measurement with result $\lambda$ the state of the system becomes $\frac{P_{\lambda}\rho P_{\lambda}}{\mathrm{Tr}[P_{\lambda}\rho
         P_{\lambda}]}$.
         \item The time evolution of the system in a time interval $(0,t)$ in which no measurement is done is given by some unitary operator
         $U_{t}$ according to $\rho_{t}=U_{t}\rho U_{t}^{\dagger}$ where $\rho$ is the state of the system at time $t=0$.
 \end{enumerate}
-Operators satisfying the properties required for a state are called \textit{\textbf{Density Operators}} and in contrast to frameworks
-whose treatment of quantum states is merely as rays in $\mathcal{H}$, they describe statistical mixtures so imperfect state preparation
-can be handled. To see this consider the spectral resolution of some density operator:
+Operators satisfying the properties required for a state are called \textit{\textbf{Density Operators}} and, in contrast to frameworks
+whose treatment of quantum states is merely as rays in $\mathcal{H}$, they describe statistical mixtures, so imperfect state preparation
+can be handled. To see this, consider the spectral resolution of some density operator:
 \begin{equation}
   \rho = \sum_{n}p_{n}\ketbra{\psi_{n}}
 \end{equation}
-by definition we have $p_{n}\geq 0, \sum_{n}p_{n}=1$  any density operator can be seen as a convex sum of rays in $\mathcal{H}$ (provided we
-identify each one with its associated projector $\ketbra{\psi}$) and from it an  interpretation of $\rho$ as an statistical mixture of rays is
-suggested: given a preparation process, there is a probability $p_{n}$ for the system to be in the state $\ketbra{\psi_{n}}$ after it, for this
+we have $p_{n}\geq 0, \sum_{n}p_{n}=1$ and hence any density operator can be seen as a convex sum of rays in $\mathcal{H}$ (provided we
+identify each one with its associated projector $\ketbra{\psi}$). An interpretation of $\rho$ as an statistical mixture of rays is
+suggested: given a preparation process, there is a probability $p_{n}$ for the system to be in the state $\ketbra{\psi_{n}}$, for this
 reason states of the form $\ketbra{\psi}$ are called \textbf{\textit{Pure}} while those who are not we refer to as \textbf{\textit{Mixed}}.
 This \textbf{\textit{Ensemble Interpretation}} has serious conceptual challenges when one tries to use it outside a
 fixed preparation procedure due to the non-uniqueness of the decomposition into pure states \cite{nielsen_quantum_2010},
@@ -45,7 +46,7 @@ but is good enough for the porposes of the present work, for a comprehensive dis
 topic the reader is refered to \cite{schlosshauer_decoherence_2007}.
 %%%%%%%%%%%%%%Time evolution
 \subsection{Time Evolution}
-Assuming the evolution to be differentiable in time, we have that there exists a self-adjoint operator $H$ such that $U_{t} = \mathrm{exp}(-itH)$
+Assuming the evolution to be differentiable in time, there exists a self-adjoint operator $H$ such that $U_{t} = \mathrm{exp}(-itH)$
 \footnote{Unless otherwise stated, from here on we assume $\hbar=1$}, called the \textbf{\textit{Hamiltonian}} of the systems and which
 acts as the generator of the dynamics. It is straightforward now to construct a differential equation for $\rho_{t}$ by taking the derivative
 of it:
@@ -55,23 +56,24 @@ of it:
   \partial_{t}\rho_{t} =& -iH\rho_{t} + \rho_{t}iH\\
   \partial_{t}\rho_{t} =& -i[H, \rho_{t}]\label{eq:Liouville-VonNeumann}.
 \end{align}
-Equation \eqref{eq:Liouville-VonNeumann} is called the Liouville-Von Neumann equation, it generalizes the  Schr\"{o}dinger equation
-to mixed states and can be interpreted as the quantum analog of the Liouville equation in classical mechanics (with the Poisson braket) through
-the quantization rule $\{\bullet,\bullet\} \to -i[\bullet,\bullet]$. As will be seen in later chapters, this type of evolution is characteristic
-of closed quantum systems.
+Equation \eqref{eq:Liouville-VonNeumann} is called the Liouville-Von Neumann equation, it reduced to the Schr\"{o}dinger equation
+when pure states are considered and can be interpreted as the quantum analog of the Liouville equation in classical mechanics (with the Poisson
+braket) through
+the quantization rule $\{\bullet,\bullet\} \to -i[\bullet,\bullet]$. As will be seen in the second chapter, this type of evolution is
+characteristic of closed quantum systems.
 %%%%%%%%%%Purity
 \subsection{Purity}
 Say we got a particular state production processes whose product $\rho$ we characterize via say tomography \cite{nielsen_quantum_2010}, it
-becomes immedeatley important to quantify to which extent we can regard the product as being composed of only one pure states
-(hopefully the one we wanted to prepare) i.e. we want to define the purity of the state, with this motivation one look for a map
+becomes immedeatley important to quantify to which extent we can regard the product as being composed of a single pure state
+(hopefully the one we wanted to prepare) i.e. we want to define the purity of the state, this motivates to look for a map
 $\mathcal{E}$ from the space of density operators to the reals such that:
 \begin{itemize}
         \item $\mathcal{E}(\rho)$ is maximal if and only if $\rho$ is pure.
-        \item it is conserved under unitary evolution.
+        \item is conserved under unitary evolution.
 \end{itemize}
-The first one makes this map a figure of merit one can try to maximize and the second one is imposed to assure that it doesn't changes in a
-closed system unless a measurement is made, as allowing the free evolution of the system should not improve the knowledge of the
-experimenter about the system. The standard choiche (altough not the only one) is the \textit{\textbf{Purity}},
+The first makes this map a figure of merit one can try to maximize, and the second is imposed to assure that it doesn't change in a
+closed system unless a measurement is made, the free evolution of the system should not improve the knowledge of the
+experimenter about the system. The standard choice (altough not the only one) is the \textit{\textbf{Purity}},
 defined as \cite{nielsen_quantum_2010, ballentine_quantum_2014}:
 \begin{definition}
 The purity $\gamma$ of a state $\rho$ is:
@@ -81,25 +83,25 @@ The purity $\gamma$ of a state $\rho$ is:
 \end{definition}
 The requirements are quickly checked:
 \begin{align}
-  \Tr{\rho^{2}_{t}} =& \Tr{(U_{t}\rho_{0}U_{t}^{\dagger})(U_{t}\rho_{0}U_{t}^{\dagger})} = \Tr{\rho_{0}^{2}}\\
-  \Tr{\rho^{2}} =& \sum_{n}p_{n}^{2} \leq 1
+  \Tr{\rho^{2}_{t}} =& \Tr{(U_{t}\rho_{0}U_{t}^{\dagger})(U_{t}\rho_{0}U_{t}^{\dagger})} = \Tr{\rho_{0}^{2}},\\
+  \Tr{\rho^{2}} =& \sum_{n}p_{n}^{2} \leq 1,
 \end{align}
-in the second line the inequality is saturated if and only if $\rho=\ketbra{\psi}$.
+the second line is saturated if and only if $\rho=\ketbra{\psi}$.
 \section{Entanglement}
 One of the key differences between the structure of the state space of classical and quantum systems is the existance
-of non-separable states when considering multipartite systems \cite{reyes-lega_aspects_2015,diosi_short_2011,nielsen_quantum_2010} which allows
+of non-separable states when considering multipartite systems \cite{reyes-lega_aspects_2015, diosi_short_2011,nielsen_quantum_2010,buchleitner2008entanglement} which allows
 the latter to have new a new type of correlations. Here we define entanglement for mixed states following \cite{diosi_short_2011}:
 
 \begin{definition}
-  Given a state $\rho$ in a system composed of two subsystems $A$ and $B$ with total Hilbert space $\mathcal{H}_{A}\otimes \mathcal{H}_{B}\}$, we say it is
-  an \textbf{\textit{entangled}} or \textit{\textbf{non-separable}} if there doesn't exists a set states $\{\rho_{j}\otimes \sigma_{j}\}_{j}$ and coefficients
+  Given a state $\rho$ in a system composed of two subsystems $A$ and $B$ with total Hilbert space $\mathcal{H}_{A}\otimes \mathcal{H}_{B}$, we say it is
+  an \textbf{\textit{entangled}} or \textit{\textbf{non-separable}} if there is no set of states $\{\rho_{j}\otimes \sigma_{j}\}_{j}$ and coefficients
   $\{p_{j}\}_{j},  \sum_{j}p_{j}=1, \hspace{0.1cm} p_{j}\geq 0$ such that:
   \begin{equation}
     \rho = \sum_{j}p_{j}\rho_{j}\otimes \sigma_{j}
   \end{equation}
   if it does exists, the state is called \textbf{\textit{separable}}.
 \end{definition}
-For the case of pure state this definition coincides with the usually given one \cite{nielsen_quantum_2010}: say $\rho=\ketbra{\psi}$ is pure and separable, then:
+For the case of pure states, this definition coincides with the usually given one \cite{nielsen_quantum_2010}: say $\rho=\ketbra{\psi}$ is pure and separable, then:
 \begin{equation}
   \Tr{\rho^{2}} = \sum_{jk}p_{j}p_{k}\Tr{\rho_{j}\rho_{k}}\Tr{\sigma_{j}\sigma_{k}}
 \end{equation}
@@ -114,7 +116,7 @@ in $\mathcal{H}_{A}$ and $\mathcal{H}_{B}$ such that:
   \ketbra{\psi} = \ketbra{\alpha}\otimes\ketbra{\beta}.
 \end{equation}
 For a classical system all states are separable thanks to the representation via $\delta$ functions
-of probability densities \cite{diosi_short_2011} and in this sense entanglement is a purely non-classical phenomena, in fact for pure states
+of probability densities \cite{diosi_short_2011} and in this sense entanglement is a purely non-classical phenomenon, in fact for pure states
 this completely exhaust all the possible non-classical correlations. For mixed states the characterization is considerably richer
 and allows for bipartite states that despite being separable show non-classical correlations \cite{adesso2016introduction}.
 \subsection{Marginalization}
@@ -136,7 +138,7 @@ of $\Lambda$, by definition:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%HEREEEEEEE%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Equation \eqref{eq:partial_trace} suggest that there exists a state in $\mathcal{H}_{A}$ whose statistics  coincide
 with those of $\rho$ and that it should be given by the sum in \eqref{eq:partial_trace}, in this sense we have a marginalization i.e.
-an assignement of states of in $\mathcal{H}_{A}\otimes\mathcal{H}_{B}$ to states in $\mathcal{H}_{A}$ such that it has the correct statistics
+an assignement of states of $\mathcal{H}_{A}\otimes\mathcal{H}_{B}$ to states in $\mathcal{H}_{A}$ such that it has the correct statistics
 i.e. $\Tr{\rho^{AB}(\Lambda \otimes I)}=\Tr{\rho^{A}\Lambda}$ for any observable $\Lambda$ of $A$. It is desirable for this map to be unique
 for the following: assume an experimentalist has an infinite ensemble of copies of the system in state $\rho$ but can only measure local
 observables in $A$, although any and as many time as wanted, i.e. it is possible to fully characterize the statistics of any local observable,
@@ -145,14 +147,13 @@ exists as local experiments are always possible, hence uniqueness is important t
 assure it suffices to demand linearity. This map is called the \textit{\textbf{Partial Trace}}:
 
 \begin{definition}
-  Given two vector spaces $V$ and $W$, for simplicity assumed of finite dimension\footnote{although we will use it too for infinite dimensions without inquiring wheter the operators are even traceclass}, the partial trace taken over $W$ is the map\cite{nielsen_quantum_2010}:
+  Given two vector spaces $V$ and $W$, for simplicity assumed of finite dimension\footnote{although we will use it too for infinite dimensions without inquiring wheter the operators are even traceclass}, the partial trace taken over $W$ is the map \cite{nielsen_quantum_2010}:
 \[
 \mathrm{Tr}_{W}: \begin{array}{rcl}
 A\otimes B \in \mathcal{L}(V\otimes W)& \mapsto & A \Tr{B} \in \mathcal{L}(V)
 \end{array}
 \]
-where the $\mathcal{L}$ denotes the space of operator, and the map is  linearly extended to all of $\mathcal{L}(V\otimes W)$
-.
+where the $\mathcal{L}$ denotes the space of operator, and the map is  linearly extended to all of $\mathcal{L}(V\otimes W)$.
 \end{definition}
 The linear extension makes the partial trace coincide with the sum in \eqref{eq:partial_trace} and the non-manifestly base invariant definition
 usually given in sources like \cite{maziero2017computing}. Next we prove this is in fact the only linear map with the correct statistics:
@@ -195,55 +196,59 @@ of transformation a quantum system can undergo, the so called \textbf{\textit{Qu
 sense to take the following view: there exists a system whose evolution if of interest  ($S$), called from here on simply \textbf{\textit{the
     system}}, the rest of the universe is called \textbf{\textit{the environment}} ($E$) and its degrees of freedom are undesirable
 in the description of the $S$; this scheme is called \textit{\textbf{S+E}} and the total hamiltonian is generically of the form
-$H = H_{S}\otimes I + I\otimes H_{E} + V$ where the coupling between the two is given by the last term \cite{wiseman_quantum_2010} and
+$H = H_{S}\otimes I + I\otimes H_{E} + V$ where the coupling between the two is given by the last term \cite{wiseman_quantum_2010}, and
 for simplicity it is assumed the environment and the system are distinguishable \cite{breuer2002theory}. The whole point
-is to construct a map describing the evolution of $S$ solely with its degrees of freedom, this is achieved simply by evolving unitarily the
-whole and tracing over the environment:
+is to construct a map describing the evolution of $S$ solely with its degrees of freedom, achieved simply by evolving unitarily the
+whole and tracing over the environment. Consider a particular preparation of the system into a state $\rho$ and assume it was done in complete
+isolation from the environment, such that we can consider it initally decorrelated from it, which begins in state $\sigma$, the marginal state we assing to the system after the evolution is then:
 
 \begin{equation} \label{eq:SE_map}
- \mathcal{E}_{t}(\rho_{0}) \equiv \Trp{E}{U_{t}\left(\rho_{0}\otimes \sigma\right)U_{t}^{\dagger}} = \rho_{t}
+ \mathcal{E}_{t}(\rho_{0}) \equiv \Trp{E}{U_{t}\left(\rho_{0}\otimes \sigma\right)U_{t}^{\dagger}} = \rho_{t}.
 \end{equation}
+
+Admittedly as it stands this is not yet the most general type of transformation, as the Hilbert Space of the \textbf{input} coincides with that
+of the \textbf{output} and we are furthermore demanding that the total system begins in a product state. These assumptions are justified
+by the system-environment scheme we have adopted, that we are limiting ourselves to processes in which the input is the same system as the output, and that later in chapter 2 when we introduce markovian master equations the initial separability condition becomes of paramount
+importance, below we discuss why one might want to abandon this assumptions and how to put \eqref{eq:SE_map} into a more generic form.
 \input{Chapters/figure1.tex}
-In figure (\ref{fig:SE_Diagrams}) two diagrams representing  the scheme are presented. On an intuitive level is true that any non-unitary
-evolution should be of this form, nevertheless we provide a more axiomatic point of view to allow for a slight generalization and because in
-practice it is not rarely possible to make progress with analytical methods using \eqref{eq:SE_map}. We demand from any physically aceptable
-transformation the following:
+\\
+In figure (\ref{fig:SE_Diagrams}) two diagrams representing the scheme are presented. At first glance one might think that any non-unitary
+evolution should be of this form, nevertheless as anticipated above this is not the case and so we provide a more axiomatic point of view to
+allow for a generalization and because in practice one needs more ways to treat these transformations than just \eqref{eq:SE_map}. We demand from any physically aceptable transformation the following:
 
 \begin{itemize}
-  \item Valid states are mapped into valid states.
+  \item Valid states are mapped into valid states i.e. positive operators with trace 1.
   \item It is convex linear.
-  \item  It should preserve the trace
 \end{itemize}
-The last two can be well motivated by considering a proper mixture of two ensembles of pure states i.e. with $N$ total copies, $\rho =
+The second one can be well motivated by considering a proper mixture of two ensembles of pure states i.e. with $N$ total copies, $\rho =
 p_{1}\rho_{1} + p_{2}\rho_{2}$, applaying the given transformation $\mathcal{E}$ to the copies of  $\ketbra{\psi_{1}}$ and $\ketbra{\psi_{2}}$  must produce a new total ensemble with $p_{1}N$ copies of $\mathcal{E}(\ketbra{\psi_{1}})$ and $p_{2}N$ copies of
-$\mathcal{E}(\ketbra{\psi_{2}})$ and the trace cannot change because then the state would be invalid. From this we introduce
-\textit{\textbf{Completely Positive and Trace Preserving (CPTP)}} maps:
+$\mathcal{E}(\ketbra{\psi_{2}})$. From this we introduce the \textit{\textbf{Completely Positive and Trace Preserving (CPTP)}} maps:
 
 \begin{definition}
   Given two Hilbert Spaces $\mathcal{H}$ and $\mathcal{H}'$, a map $\mathcal{E}:\mathcal{L}(\mathcal{H})\to\mathcal{L}(\mathcal{H}')$ such that:
   \begin{enumerate}
-          \item $\Tr{\mathcal{E}(\rho)}=\Tr{\rho}$ for all trace-class operators $\rho \in \mathcal{L}(\mathcal{H})$ (trace preserving)
-          \item $\mathcal{E}(p_{1}\rho_{1}+p_{2}\rho_{2}) =p_{1}\mathcal{E}(\rho_{1})+p_{2}\mathcal{E}(\rho_{2}) $ for all $\rho_{1} \rho_{2} \in \mathcal{L}(\mathcal{H})$ and $p_{1}, p_{2} \geq 0$ s.t. $p_{1}+p_{2}=1$ (Convex linearity)
-    \item if $\rho \in \mathcal{L}(\mathcal{H})$ is positive, then so is $\mathcal{L}(\rho)$ is also positive (positivity) and furthermore,
+          \item $\Tr{\mathcal{E}(\rho)}=\Tr{\rho}$ for all trace-class operators $\rho \in \mathcal{L}(\mathcal{H})$ (trace preserving).
+          \item $\mathcal{E}(p_{1}\rho_{1}+p_{2}\rho_{2}) =p_{1}\mathcal{E}(\rho_{1})+p_{2}\mathcal{E}(\rho_{2}) $ for all $\rho_{1} \rho_{2} \in \mathcal{L}(\mathcal{H})$ and $p_{1}, p_{2} \geq 0$ s.t. $p_{1}+p_{2}=1$ (Convex linearity).
+    \item if $\rho \in \mathcal{L}(\mathcal{H})$ is positive, then so is $\mathcal{E}(\rho)$ (positivity) and furthermore,
           for any linear extension to $\mathcal{L}(\mathcal{H}\otimes \mathcal{H}'')$ of the form $\mathcal{E}\otimes I''$ we have that
           $\mathcal{E}(\rho \otimes I)$ is also positive (complete positivity), where $\mathcal{H}''$ is any separable Hilbert space
           and $I''$ the identity on it.
   \end{enumerate}
   is called a \textbf{\textit{Quantum Channel}}.
 \end{definition}
-The last condition deserves a discussion as it did not appear directly in our motivation: mathematically it is a well known fact that there
-exists maps $\mathcal{E}$ that send positive operator into positive operator yet their extensions fail to do so e.g. the transpose, so
+The last condition deserves a discussion as it did not appear directly in our motivation. Mathematicaly it is a well known fact that there
+exists maps $\mathcal{E}$ that send positive operator into positive operator, and that yet their extensions fail to do so e.g. the transpose, so
 to be consistent with the idea of \textit{sending states to states} one needs complete positivity;
-to this one might argue that changing Hilbert Spaces is meaningless as it implies changing the underlying system of study, but there are of situations in which this is desirable e.g. initially a two level from which we will measure the energy of the photons produced in the energy
-transitions, so it do is meaningful. A few key results for the manipulation of quantum channels are the following \cite{nielsen_quantum_2010,wiseman_quantum_2010, ,strasberg2022quantum}:
+to this one might argue that changing Hilbert Spaces is meaningless as it implies changing the underlying system of study, but there are situations in which this is desirable e.g. initially a two level from which we will measure the energy of the photons produced in the energy
+transitions, so it do is meaningful. A few key results for the manipulation of quantum channels are the following \cite{nielsen_quantum_2010,wiseman_quantum_2010, watrous2018theory, ,strasberg2022quantum}:
 
 \begin{enumerate}
-  \item There exists a Hilbert space $\mathcal{H}_{E}$, a state $\sigma$ in it and a unitary operator $U \in\mathcal{L}(\mathcal{H}_{S}\otimes\mathcal{H}_{E})$ such that $\mathcal{E}(\rho) = \Trp{E}{U\left(\rho\otimes\sigma\right)U^{\dagger}}$.
-  \item There exists a set of operators $\{K_{j} \}_{j}$ such that $\mathcal{E}(\rho) = \sum_{j}\rho K_{j}^{\dagger}K_{j}$ and $\sum_{j}K_{j}K_{j}^{\dagger}=I$. These are called \textit{\textbf{Kraus Operators}}.
+  \item There exists a Hilbert space $\mathcal{Z}$,  and an isometry $U \in U(\mathcal{H}, \mathcal{H}'\otimes \mathcal{Z})$ such that\\ $\mathcal{E}(\rho) = \Trp{\mathcal{Z}}{U\rho U^{\dagger}}$.
+  \item There exists a set of operators $\{K_{j} \}_{j} \subset \mathcal{L}(\mathcal{H}, \mathcal{H}')$ such that $\mathcal{E}(\rho) = \sum_{j}K_{j}\rho K_{j}^{\dagger}$ and $\sum_{j}K_{j}^{\dagger}K_{j}=I_{\mathcal{H}}$. These are called \textit{\textbf{Kraus Operators}}.
   \item Any map of the above forms is a quantum channel.
   \item The Kraus Operators representation of a quantum channel is not unique; any unitary combination is also a valid representation.
 \end{enumerate}
-The first one is what we already anticipated with the caveat that given an operation generically there is no unique way to implement it as
+The first one is extension of \eqref{eq:SE_map} we anticipated with the caveat that given an operation generically there is no unique way to implement it as
 a $S+E$ scheme, the Kraus operators are in a lot of situations the main tool to manipulate these maps and suggest that we can
 always implement a channel via the application of \textbf{\textit{Completely Positive Non-Trace Increasing (CP)}} maps  defined as $\mathcal{E}_{j}(\rho)=K_{j}\rho K_{j}^{\dagger}$ such that $\mathcal{E} = \sum_{j}\mathcal{E}_{j}$. This can be interpreted as an \textbf{\textit{stochastic map}} \cite{nielsen_quantum_2010} by the following
 rewriting of the image of $\rho$:
@@ -252,9 +257,9 @@ rewriting of the image of $\rho$:
   \mathcal{E}(\rho) = \sum_{j}\mathcal{E}_{j}(\rho) = \sum_{j}\Tr{\mathcal{E}_{j}(\rho)}\frac{\mathcal{E}_{j}(\rho)}{\Tr{\mathcal{E}_{j}(\rho)}},
 \end{equation}
 
-each $\frac{\mathcal{E}_{j}(\rho)}{\Tr{\mathcal{E}_{j}(\rho)}}$ is a valid density operator and $\Tr{\mathcal{E}_{j}(\rho)}\geq 0,
+each $\frac{\mathcal{E}_{j}(\rho)}{\Tr{\mathcal{E}_{j}(\rho)}}$ is a valid density operator, and $\Tr{\mathcal{E}_{j}(\rho)}\geq 0,
 \sum_{j}\Tr{\mathcal{E}_{j}(\rho)}=1$ so we can say that when we apply the channel $\mathcal{E}$ there is a probability
-$\Tr{\mathcal{E}_{j}(\rho)}$ of the output state being $\frac{\mathcal{E}_{j}(\rho)}{\Tr{\mathcal{E}_{j}(\rho)}}$. The main inconveniente
+$\Tr{\mathcal{E}_{j}(\rho)}$ of the output state being $\frac{\mathcal{E}_{j}(\rho)}{\Tr{\mathcal{E}_{j}(\rho)}}$. The main inconvenient
 with this interpretation is the non-uniqueness of the possible output states unless one is using a particular physical platform that
 defines them, nevertheless this is no surprise as in general we can not select such set of states from only a density operator. In figure
 \ref{fig:stochastic_map_diagram} a drawing representing the idea is presented.
@@ -266,7 +271,7 @@ From here it is clear that weakening the trace preservation condition is desirab
 \begin{definition}
   Given two Hilbert Spaces $\mathcal{H}$ and $\mathcal{H}'$, a map $\mathcal{E}:\mathcal{L}(\mathcal{H})\to\mathcal{L}(\mathcal{H}')$ such that:
   \begin{enumerate}
-          \item $\Tr{\mathcal{E}(\rho)}\geq\Tr{\rho}$ for all trace-class operators $\rho \in \mathcal{L}(\mathcal{H})$
+          \item $\Tr{\mathcal{E}(\rho)}\leq\Tr{\rho}$ for all trace-class operators $\rho \in \mathcal{L}(\mathcal{H})$
           \item $\mathcal{E}(p_{1}\rho_{1}+p_{2}\rho_{2}) =p_{1}\mathcal{E}(\rho_{1})+p_{2}\mathcal{E}(\rho_{2}) $ for all $\rho_{1} \rho_{2} \in \mathcal{L}(\mathcal{H})$ and $p_{1}, p_{2} \geq 0$ s.t. $p_{1}+p_{2}=1$ (Convex linearity)
           \item is completely positive
   \end{enumerate}
@@ -274,13 +279,12 @@ From here it is clear that weakening the trace preservation condition is desirab
 \end{definition}
 The results regarding equivalent representations can be generalized \cite{strasberg2022quantum,wiseman_quantum_2010}:
 \begin{enumerate}
-  \item There exists a Hilbert space $\mathcal{H}_{E}$, a state $\sigma$ in it, a unitary operator $U \in\mathcal{L}(\mathcal{H}_{S}\otimes\mathcal{H}_{E})$ and a  projector $P_{r}$ acting in $\mathcal{H}_{E}$ such that $\mathcal{E}(\rho) = \Trp{E}{P_{r}U\left(\rho\otimes\sigma\right)U^{\dagger}}$.
-  \item There exists a set of operators $\{K_{j} \}_{j}$ such that $\mathcal{E}(\rho) = \sum_{j}\rho K_{j}^{\dagger}K_{j}$ and $\sum_{j}K_{j}K_{j}^{\dagger}\geq I$
+  \item There exists a set of operators $\{K_{j} \}_{j}$ such that $\mathcal{E}(\rho) = \sum_{j}K_{j}\rho K_{j}^{\dagger}$ and $\sum_{j}K_{j}^{\dagger}K_{j}\leq I$
   \item Any map of the above forms is a quantum operation.
   \item The Kraus Operators representation of a quantum operation is not unique; any unitary combination is also a valid representation.
 \end{enumerate}
 Conceptually operations are somewhat more desirable than channels yet they do not offer any considerable generalization as a set of operations
-can always be completed into a channel \cite{nielsen_quantum_2010}. One last remark: due to the non-uniqueness of the decomposition into operations in a sense quantum channels are somewhat like black-boxes,
+can always be completed into a channel \cite{nielsen_quantum_2010}. One last remark: due to the non-uniqueness of the decomposition into operations quantum channels  like black-boxes,
 you know what goes in and what comes out yet unless you have extra information it is not possible to pin down exactly what happens inside the
 channel.
 \section{Generalized Measurements}
@@ -288,36 +292,35 @@ We have not addresed an important consistency question: are measurement collapse
 in fact they are by defining the operation $\mathcal{E}_{r}(\rho)=P_{r}\rho P_{r}$ where $r$ is the eigenvalue of some observable and $P_{r}$ its
 associated projector, this means that our formalism can really accomodate all the transformations required by the postulates. Without entering
 directly into the phenomenology of measurements we can understand them with the following generic scheme: say we are perfoming an experiment
-with $N$ possible outcomes indexed by ${r=1,..,N}$ just like in figure \ref{fig:stochastic_map_diagram}, each possible outcome corresponds to a
+with $N$ possible outcomes indexed by ${r=1,..,N}$ like in figure \ref{fig:stochastic_map_diagram}, each possible outcome corresponds to a
 different collapse described by maps of the form $\mathcal{E}_{r}$ with a corresponding probability $\Tr{\mathcal{E}_{r}(\rho)}$ (Born rule).
-It is possible to idenfity two different types of measurements: one when we known a measurement happend and which collapsed occured i.e.
-the outcome of the experiment is known, this is  called  \textit{\textbf{a Selective Measurement}} \cite{diosi_short_2011}
+It is possible to idenfity two different types of measurements: when we known a measurement happend and which collapsed occured i.e.
+the outcome of the experiment is known (this is  called  \textit{\textbf{a Selective Measurement}} \cite{diosi_short_2011})
 and is described by:
 \begin{equation}
-\rho \to \mathcal{E}_{r}(\rho);
+\rho \to \mathcal{E}_{r}(\rho)/{\Tr{\mathcal{E}_{r}(\rho)}};
 \end{equation}
-and one in which all we known is that the experiment happened but not the outcome, this is called \textit{\textbf{a non-Selective Measurement}}
+and another in which all we known is that the experiment happened but not the outcome, this is called \textit{\textbf{a non-Selective Measurement}}
 \cite{diosi_short_2011} and is described by
 
 \begin{equation}
 \rho \to \sum_{r}\mathcal{E}_{r}(\rho).
 \end{equation}
-So far the main physical assumption we have made is that our measurements are \textbf{\textit{Projective}} i.e. the post-measurement state
+So far, the main physical assumption we have made is that our measurements are \textbf{\textit{Projective}}, i.e. the post-measurement state
 of a selective measuremente is given by projectors
 \begin{equation}
 \rho_{r} = \frac{P_{r}\rho P_{r}}{\Tr{P_{r}\rho}},
 \end{equation}
-but this doesn't have to be the case. Consider the following: no physical system $S$ might be directly measured as any measurement apparatus is
+but this condition can be weakened. Consider the following: no physical system $S$ might be directly measured as any measurement apparatus is
 also a physical system $A$ which couples unitarily to $S$ in order to get correlated with it, and so it is debatable whether using the collapse postulate and the Born rule on $S$ is valid as the
-result of the measurement really is read from the apparatus ... which itself must be measured by a second apparatus $A'$ and so on; this
-potentially infinite chain of systems is called \textbf{\textit{a Von Neumann Chain}} and leaves us with the question of to which one should the
-collapse postulate be applaied to; here we accept that using it on $A$ is already valid, hence the operation giving a selective measurement
-should really be $\mathcal{E}_{r}(\rho) = \Trp{A}{P_{r} U\left(\rho\otimes\sigma \right)U^{\dagger}}$ where $U$ is the unitary evolution during
-the coupling and $P_{r}$ a projector not on the Hilbert space of $S$ but of $A$ as the result is being read from it. We summarize this disscusion
-in the following definition:
+result of the measurement is actually read from the apparatus ... which itself must be measured by a second apparatus $A'$ and so on; this
+infinite chain of systems is called \textbf{\textit{a Von Neumann Chain}} and leaves us with the question of to which should the
+collapse postulate be applaied to; here we accept that using it on $A$ is already valid, and thus the operation giving a selective measurement
+should really be $\mathcal{E}_{r}(\rho) = \Trp{A}{P_{r} U\left(\rho\otimes\sigma \right)U^{\dagger}}$ where $\sigma$ is the intial state of $A$,
+$U$ is the unitary evolution operator describing the coupling and $P_{r}$ a projector not on the Hilbert space of $S$ but of $A$ as the result is being read from it. We summarize this disscusion in the following definition:
 
 \begin{definition}
-  Given a set of outcomes $r=1,2,3..$ and set of quantum operations  mapping the system to itself indexed by them $\{\mathcal{O}_{r}\}_{r=1}$  such that $\mathcal{O}=\sum_{r}\mathcal{O}_{r}$ is trace-preserving, we say that this is a \textit{\textbf{Generalized Measurement Scheme}}.
+  Given a set of outcomes $r=1,2,3..$ and set of quantum operations $\{\mathcal{O}_{r}\}_{r=1}$ mapping the system to itself such that $\mathcal{O}=\sum_{r}\mathcal{O}_{r}$ is trace-preserving, we say that this is a \textit{\textbf{Generalized Measurement Scheme}}.
   We also define the following:
   \begin{enumerate}
     \item The probability of obtaining the result $r$ from a state $\rho$ is $\wp(r) = \Tr{\mathcal{O}_{r}(\rho)}$.
@@ -326,21 +329,22 @@ in the following definition:
   \end{enumerate}
 \end{definition}
 For a comprehensive treatment of generalized quantum measurements and its phenomenology the reader is refered to \cite{wiseman_quantum_2010}.
+\\\\
 Finally, we analyze the expansion in Kraus operators of the probabilities in a generalized measurement scheme, the relevant concept
 we will employ to study quantum estimation will come from this. Consider the operation associated with the result $r$, $\mathcal{O}_{r}$
-and some set of Kraus operators associated with it $\{K\}_{rj}$, the probability of obtaining this outcome is from some state $\rho$ is:
+and some set of Kraus operators associated with it $\{K_{rj}\}_{j}$, the probability of obtaining this outcome from $\rho$ is:
 \begin{equation}
-  \wp(r) = \Tr{\left(\sum_{rj}K_{rj}^{\dagger}K_{j}\right)\rho}
+  \wp(r) = \Tr{\left(\sum_{j}K_{rj}^{\dagger}K_{j}\right)\rho}
 \end{equation}
 this tells us that really the probability is described by a single positive operator:
 \begin{equation}\label{eq:sum_POVM}
-\Pi_{r} = \sum_{rj}K_{rj}^{\dagger}K_{j},
+\Pi_{r} = \sum_{j}K_{rj}^{\dagger}K_{rj},
 \end{equation}
 and it is clear that the trace-preserving condition imposes:
 \begin{equation}\label{eq:sum_POVM}
 \sum_{r}\Pi_{r} = I.
 \end{equation}
-From here comes the definition we have been trying to construct all along:
+This motivates the introduction of a set of operators describing the statistics of the outcomes as proposed at the beginning of the chapter.
 
 \begin{definition}
   A set of positive operators $\{\Pi_{r}\}_{r}$ such that $\sum_{r}\Pi_{r}=I$ is called \textit{\textbf{a Positive Operator Valued Measure (POVM)}}.
