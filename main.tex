@@ -1,27 +1,33 @@
 \input{preamble}
+%% Print the bibliography with the desired fields and order:
+\bibliography{Bibliography.bib}
+\nocite{*}
+% \bibliographystyle{plaindin_esp}
+
+
 % \includeonly{Chapters/cap3}
 \begin{document}
-\pagenumbering{arabic}
-% \include{FrontPage/FrontPage}
+% \pagenumbering{arabic}
+\include{FrontPage/FrontPage}
 
 %Make some headers appear in spanish
-%\renewcommand{\tablename}{\textbf{Tabla}}
+% \renewcommand{\tablename}{\textbf{Tabla}}
 
-%\renewcommand{\figurename}{\textbf{Figura}}
-%\renewcommand{\listtablename}{Lista de Tablas}
-%\renewcommand{\listfigurename}{Lista de Figuras}
-%\renewcommand{\contentsname}{Contenido}
+% \renewcommand{\figurename}{\textbf{Figura}}
+% \renewcommand{\listtablename}{Lista de Tablas}
+% \renewcommand{\listfigurename}{Lista de Figuras}
+% \renewcommand{\contentsname}{Contenido}
 
 
 \newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
-% \tableofcontents
+\tableofcontents
 % \include{Tab_Simbolos/TabSimbolosMSc}
 % \include{Summary}
-% \pagenumbering{arabic}
-% \include{Chapters/cap1}
-% \include{Chapters/cap2}
+\pagenumbering{arabic}
+\include{Chapters/cap1}
+\include{Chapters/cap2}
 \include{Chapters/cap3}
-% \chapter*{Bibliography}
+\chapter*{Bibliography}
 % \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
 
